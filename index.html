@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shabd AI — Outreach CRM</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c8f06e'/><text y='.9em' font-size='80'>S</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="shell">
+
+<!-- ── SIDEBAR ─────────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="logo-wrap">
+    <img id="app-logo" class="logo-img" src="" alt="Shabd AI logo">
+    <div>
+      <div class="logo-main">Shabd<span>.</span>AI</div>
+      <div class="logo-sub">Outreach CRM</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nlbl">Views</div>
+    <button class="ni active" id="nav-list" onclick="switchView('list',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="2" rx="1"/><rect x="3" y="11" width="18" height="2" rx="1"/><rect x="3" y="17" width="12" height="2" rx="1"/></svg>All leads
+    </button>
+    <button class="ni" id="nav-pipe" onclick="switchView('pipeline',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="5" height="18" rx="1.5"/><rect x="9.5" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="5" height="8" rx="1.5"/></svg>Pipeline
+    </button>
+    <button class="ni" id="nav-tmpl" onclick="switchView('templates',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Email templates
+    </button>
+    <div class="nlbl" style="margin-top:6px">By stage</div>
+    <button class="ni" onclick="filterStage('New',this)"><span class="sdot" style="background:var(--bl)"></span>New</button>
+    <button class="ni" onclick="filterStage('Contacted',this)"><span class="sdot" style="background:var(--am)"></span>Contacted</button>
+    <button class="ni" onclick="filterStage('Replied',this)"><span class="sdot" style="background:var(--gn)"></span>Replied</button>
+    <button class="ni" onclick="filterStage('Follow-up',this)"><span class="sdot" style="background:var(--pu)"></span>Follow-up</button>
+    <button class="ni" onclick="filterStage('Closed',this)"><span class="sdot" style="background:var(--mu)"></span>Closed</button>
+    <div class="nlbl" style="margin-top:6px">Alerts</div>
+    <button class="ni" id="nav-ov" onclick="filterOverdue(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--rd)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <span style="color:var(--rd)">Overdue reminders</span>
+    </button>
+  </nav>
+  <div class="sf-foot">
+    <button class="sf-btn" onclick="openImport()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import CSV
+    </button>
+    <button class="sf-btn" onclick="exportCSV()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export CSV
+    </button>
+  </div>
+</aside>
+
+<!-- ── MAIN ────────────────────────────────────────────────── -->
+<div class="main">
+  <div class="topbar">
+    <div class="page-title" id="page-title">All leads</div>
+    <div class="tr">
+      <button id="db-status" class="db-status" title="Database connection status">
+        <span class="db-dot"></span> Connecting...
+      </button>
+      <div class="sw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="si" id="search" placeholder="Search leads..." oninput="renderView()">
+      </div>
+      <select class="fsel" id="filter-sector" onchange="renderView()"><option value="">All sectors</option></select>
+      <button class="ab" onclick="openAdd()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add lead
+      </button>
+    </div>
+  </div>
+  <div class="stats-row" id="stats-row"></div>
+  <div class="content" id="content"></div>
+</div>
+
+</div><!-- end .shell -->
+
+<!-- ── ADD/EDIT MODAL ──────────────────────────────────────── -->
+<div class="ov" id="form-modal">
+<div class="modal">
+  <div class="mh">
+    <div class="mt" id="form-title">Add lead</div>
+    <button class="xb" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="fr">
+    <div class="f"><label>Name *</label><input id="f-name" placeholder="Pallavi Jadhav"></div>
+    <div class="f"><label>Company</label><input id="f-company" placeholder="CRY India"></div>
+  </div>
+  <div class="f"><label>Email</label><input id="f-email" type="email" placeholder="pallavi@cry.org"></div>
+  <div class="fr">
+    <div class="f"><label>Sector</label>
+      <select id="f-sector">
+        <option>NGO &amp; Social Impact</option><option>E-commerce</option><option>SaaS</option>
+        <option>Healthcare</option><option>Education</option><option>Finance</option>
+        <option>Media &amp; Publishing</option><option>Manufacturing</option><option>Legal</option>
+        <option>Real Estate</option><option>Retail</option><option>Logistics</option>
+        <option>Travel &amp; Hospitality</option><option>Government</option><option>Other</option>
+      </select>
+    </div>
+    <div class="f"><label>Stage</label>
+      <select id="f-stage">
+        <option>New</option><option>Contacted</option><option>Replied</option><option>Follow-up</option><option>Closed</option>
+      </select>
+    </div>
+  </div>
+  <div class="f">
+    <label>Date email sent (auto-calculates Day 5 / 10 / 20 reminders)</label>
+    <input id="f-sent" type="date" oninput="autoReminders()">
+  </div>
+  <div class="fr">
+    <div class="f"><label>Reminder 1 — Day 5</label><input id="f-r1" type="date"></div>
+    <div class="f"><label>Reminder 2 — Day 10</label><input id="f-r2" type="date"></div>
+  </div>
+  <div class="fr">
+    <div class="f"><label>Reminder 3 — Day 20</label><input id="f-r3" type="date"></div>
+    <div class="f"><label>Last contacted</label><input id="f-lc" type="date"></div>
+  </div>
+  <div class="f"><label>Notes</label><textarea id="f-notes" placeholder="What was discussed, next action..."></textarea></div>
+  <div class="mf">
+    <button class="bg" onclick="closeForm()">Cancel</button>
+    <button class="bs" onclick="saveLead()">Save lead</button>
+  </div>
+</div>
+</div>
+
+<!-- ── DETAIL MODAL ─────────────────────────────────────────── -->
+<div class="ov" id="detail-modal">
+<div class="modal w">
+  <div class="mh">
+    <div class="mt" id="d-name"></div>
+    <button class="xb" onclick="closeDetail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div id="d-content"></div>
+  <div class="mf sp">
+    <button class="bd-btn" onclick="doDeleteLead()">Delete</button>
+    <div style="display:flex;gap:8px">
+      <button class="bb" onclick="openEmailFromDetail()">✉ Draft email</button>
+      <button class="bg" onclick="editFromDetail()">Edit</button>
+      <button class="bs" onclick="closeDetail()">Done</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ── EMAIL MODAL ──────────────────────────────────────────── -->
+<div class="ov" id="email-modal">
+<div class="modal xl">
+  <div class="mh">
+    <div class="mt">Draft email for Titan</div>
+    <button class="xb" onclick="closeEmail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div style="font-size:12px;color:var(--mu);margin-bottom:10px">Auto-personalized with this lead's details. Copy and paste into Titan mail.</div>
+  <div class="ttabs" id="email-ttabs"></div>
+  <div class="subp" id="email-subp"></div>
+  <div class="ep" id="email-body"></div>
+  <div class="cpn">Copy above → paste into Titan. Subject line is ready too.</div>
+  <div class="mf">
+    <button class="bg" onclick="closeEmail()">Close</button>
+    <button class="bb" onclick="copyBody()">Copy email body</button>
+    <button class="bs" onclick="copySubj()">Copy subject</button>
+  </div>
+</div>
+</div>
+
+<!-- ── TEMPLATE MODAL ───────────────────────────────────────── -->
+<div class="ov" id="tmpl-modal">
+<div class="modal w">
+  <div class="mh">
+    <div class="mt" id="tmpl-form-title">New template</div>
+    <button class="xb" onclick="closeTmpl()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="tokbar">
+    <strong style="color:var(--ac)">Tokens:</strong>
+    <code>{name}</code> contact name &nbsp;·&nbsp;
+    <code>{company}</code> company &nbsp;·&nbsp;
+    <code>{sector}</code> sector &nbsp;·&nbsp;
+    <code>{sender}</code> your name
+  </div>
+  <div class="fr">
+    <div class="f"><label>Template name</label><input id="tn" placeholder="NGO outreach — general"></div>
+    <div class="f"><label>Sector tag</label>
+      <select id="ts">
+        <option value="All sectors">All sectors</option>
+        <option>NGO &amp; Social Impact</option><option>E-commerce</option><option>SaaS</option>
+        <option>Healthcare</option><option>Education</option><option>Finance</option>
+        <option>Media &amp; Publishing</option><option>Manufacturing</option><option>Legal</option>
+        <option>Real Estate</option><option>Retail</option><option>Logistics</option>
+        <option>Travel &amp; Hospitality</option><option>Government</option><option>Other</option>
+      </select>
+    </div>
+  </div>
+  <div class="f"><label>Subject line</label><input id="tsu" placeholder="Localisation support for {company} — Shabd AI"></div>
+  <div class="f"><label>Email body</label><textarea id="tb" style="min-height:240px" placeholder="Hi {name},&#10;&#10;I'm reaching out from Shabd AI..."></textarea></div>
+  <div class="mf">
+    <button class="bg" onclick="closeTmpl()">Cancel</button>
+    <button class="bs" onclick="saveTmpl()">Save template</button>
+  </div>
+</div>
+</div>
+
+<!-- ── CSV IMPORT MODAL ─────────────────────────────────────── -->
+<div class="ov" id="import-modal">
+<div class="modal w">
+  <div class="mh">
+    <div class="mt">Import CSV</div>
+    <button class="xb" onclick="closeImport()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div id="import-step1">
+    <div class="col-hint" style="margin-bottom:12px">
+      Upload your CSV from RocketReach or Google Sheets.<br>
+      Expected columns: <code>name</code> <code>company</code> <code>email</code> <code>sector</code> <code>stage</code> <code>notes</code> <code>sent</code>
+    </div>
+    <div class="drop-zone" id="drop-zone">
+      <input type="file" accept=".csv" id="csv-file-input" onchange="handleCSVFile(this.files[0])">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <p>Click to upload or drag &amp; drop CSV</p>
+      <small>Max 5 MB · UTF-8 recommended</small>
+    </div>
+    <div id="csv-map-section" style="display:none;margin-top:14px">
+      <div style="font-size:13px;font-weight:500;color:var(--tx);margin-bottom:10px">Map columns</div>
+      <div id="csv-map-rows"></div>
+      <div class="csv-preview" id="csv-preview"></div>
+    </div>
+  </div>
+  <div id="import-result" style="display:none;text-align:center;padding:20px 0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--gn)" stroke-width="1.5" style="width:40px;height:40px;margin:0 auto 10px;display:block"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+    <div style="font-size:16px;color:var(--tx);margin-bottom:5px" id="import-result-msg"></div>
+    <div style="font-size:12px;color:var(--mu)" id="import-result-sub"></div>
+  </div>
+  <div class="mf" id="import-footer">
+    <button class="bg" onclick="closeImport()">Cancel</button>
+    <button class="bs" id="import-btn" onclick="doImport()" disabled style="opacity:.5">Import leads</button>
+  </div>
+</div>
+</div>
+
+<!-- ── TOAST ────────────────────────────────────────────────── -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-msg">Saved</span>
+</div>
+
+<!-- ── Scripts (ES modules) ─────────────────────────────────── -->
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>
