@@ -106,6 +106,15 @@ code { background: var(--sf2); padding: 1px 5px; border-radius: 5px; color: var(
 .ib { background: none; border: 1px solid var(--bd); border-radius: 7px; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--mu); transition: all .15s; flex-shrink: 0; }
 .ib:hover { border-color: var(--bd2); color: var(--tx); }
 .ib svg { width: 12px; height: 12px; stroke-width: 1.5; }
+.cb-cell { width: 36px; padding: 9px 6px 9px 14px !important; }
+input[type=checkbox] { width: 15px; height: 15px; accent-color: var(--ac); cursor: pointer; }
+.bulk-bar { display: flex; align-items: center; gap: 10px; padding: 9px 14px; background: var(--sf2); border: 1px solid var(--bd2); border-radius: var(--r); margin-bottom: 12px; font-size: 13px; }
+.bulk-bar strong { color: var(--ac); }
+.bulk-bar span { color: var(--mu); flex: 1; }
+.bulk-del { background: var(--rdd); border: 1px solid rgba(248,113,113,.5); border-radius: var(--r); padding: 6px 14px; font-size: 12px; color: var(--rd); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.bulk-del:hover { background: rgba(248,113,113,.2); }
+.bulk-clear { background: none; border: 1px solid var(--bd2); border-radius: var(--r); padding: 6px 12px; font-size: 12px; color: var(--mu); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.bulk-clear:hover { color: var(--tx); }
 .mb { border-color: rgba(74,158,255,.4) !important; color: var(--bl) !important; }
 .mb:hover { background: var(--bld) !important; border-color: var(--bl) !important; }
 
@@ -624,6 +633,7 @@ let leads=[],templates=[],editId=null,detailId=null,emailLeadId=null,editTmplId=
 let currentView='list',stageFilter='',overdueFilter=false,activeTmplId=null;
 let senderName=localStorage.getItem('sai_sender')||'Shabd AI Team';
 let csvParsed=[],csvHeaders=[],csvColMap={};
+let selectedIds=new Set();
 
 // ── Init ─────────────────────────────────────────────────────
 async function init() {
@@ -707,7 +717,10 @@ function renderList() {
   let banner='';
   if(oc>0&&!overdueFilter)banner=`<div class="remind-banner" onclick="filterOverdue(document.getElementById('nav-ov'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><strong>${oc} lead${oc>1?'s have':' has'} overdue reminders</strong> <span>— click to view</span></div></div>`;
   if(!list.length){el.innerHTML=banner+`<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>No leads found</p><small>Add your first lead or import CSV</small></div>`;return;}
-  el.innerHTML=banner+`<div style="overflow-x:auto"><table class="lt"><thead><tr><th>Name</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Sent</th><th>Reminders</th><th>Last contacted</th><th>Notes</th><th></th></tr></thead><tbody>${list.map(l=>{const nd=nextDue(l);return`<tr onclick="openDetail('${l.id}')"><td style="font-weight:400">${esc(l.name)}</td><td>${esc(l.company)}</td><td style="font-size:12px;color:var(--mu)">${esc(l.email)}</td><td><span class="spill">${esc(l.sector)}</span></td><td>${pill(l.stage)}</td><td class="dc">${l.sent?new Date(l.sent).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td><td><div class="r3">${r3dots(l)}</div>${nd?`<div style="margin-top:3px"><span class="rb ${nd.cls}">${nd.label}</span></div>`:''}</td><td class="dc">${l.lc?new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td><td class="nc" title="${esc(l.notes)}">${esc(l.notes)||'—'}</td><td class="ac" onclick="event.stopPropagation()"><button class="ib mb" onclick="openEmail('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button><button class="ib" onclick="openEdit('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="ib" onclick="confirmDelete('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button></td></tr>`;}).join('')}</tbody></table></div>`;
+  const selCount=selectedIds.size;
+  const bulkBar=selCount>0?`<div class="bulk-bar"><strong>${selCount}</strong><span>lead${selCount>1?'s':''} selected</span><button class="bulk-clear" onclick="clearSelection()">Clear</button><button class="bulk-del" onclick="deleteSelected()">🗑 Delete selected</button></div>`:'';
+  const allChecked=list.length>0&&list.every(l=>selectedIds.has(l.id));
+  el.innerHTML=banner+bulkBar+`<div style="overflow-x:auto"><table class="lt"><thead><tr><th class="cb-cell"><input type="checkbox" title="Select all" ${allChecked?'checked':''} onchange="toggleSelectAll(this,${JSON.stringify(list.map(l=>l.id))})"></th><th>Name</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Sent</th><th>Reminders</th><th>Last contacted</th><th>Notes</th><th></th></tr></thead><tbody>${list.map(l=>{const nd=nextDue(l);const chk=selectedIds.has(l.id);return`<tr onclick="openDetail('${l.id}')" style="${chk?'background:var(--acd)':''}"><td class="cb-cell" onclick="event.stopPropagation()"><input type="checkbox" ${chk?'checked':''} onchange="toggleSelect('${l.id}',this)"></td><td style="font-weight:400">${esc(l.name)}</td><td>${esc(l.company)}</td><td style="font-size:12px;color:var(--mu)">${esc(l.email)}</td><td><span class="spill">${esc(l.sector)}</span></td><td>${pill(l.stage)}</td><td class="dc">${l.sent?new Date(l.sent).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td><td><div class="r3">${r3dots(l)}</div>${nd?`<div style="margin-top:3px"><span class="rb ${nd.cls}">${nd.label}</span></div>`:''}</td><td class="dc">${l.lc?new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td><td class="nc" title="${esc(l.notes)}">${esc(l.notes)||'—'}</td><td class="ac" onclick="event.stopPropagation()"><button class="ib mb" onclick="openEmail('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button><button class="ib" onclick="openEdit('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="ib" onclick="confirmDelete('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button></td></tr>`;}).join('')}</tbody></table></div>`;
 }
 
 function renderPipeline() {
@@ -787,6 +800,22 @@ function showToast(msg){const t=document.getElementById('toast');document.getEle
 ['form-modal','detail-modal','email-modal','tmpl-modal','import-modal'].forEach(id=>{document.getElementById(id)?.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')['form-modal','detail-modal','email-modal','tmpl-modal','import-modal'].forEach(id=>document.getElementById(id)?.classList.remove('open'));});
 
+window.toggleSelect=function(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);renderList();};
+window.toggleSelectAll=function(cb,ids){if(cb.checked)ids.forEach(id=>selectedIds.add(id));else ids.forEach(id=>selectedIds.delete(id));renderList();};
+window.clearSelection=function(){selectedIds.clear();renderList();};
+window.deleteSelected=async function(){
+  const count=selectedIds.size;
+  if(!count)return;
+  if(!confirm(`Delete ${count} lead${count>1?'s':''}? This cannot be undone.`))return;
+  const ids=[...selectedIds];
+  try{
+    for(const id of ids)await dbDeleteLead(id);
+    leads=leads.filter(l=>!ids.includes(l.id));
+    selectedIds.clear();
+    renderStats();renderSectorFilter();renderView();
+    showToast(`${count} lead${count>1?'s':''} deleted`);
+  }catch(e){showToast('Error: '+e.message);}
+};
 init();
 </script>
 </body>
