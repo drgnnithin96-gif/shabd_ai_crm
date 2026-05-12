@@ -551,13 +551,14 @@ const STAGES=['New','Contacted','Replied','Follow-up','Closed'];
 const SCOL={New:'var(--bl)',Contacted:'var(--am)',Replied:'var(--gn)','Follow-up':'var(--pu)',Closed:'var(--mu)'};
 const SPILL={New:'pN',Contacted:'pC',Replied:'pR','Follow-up':'pF',Closed:'pX'};
 const DEFAULT_TMPLS=[
-  {id:'t1',name:'NGO & Social Impact',sector:'NGO & Social Impact',
-    subject:'Localisation support for {company} — Shabd AI',
-    body:`Hi {name},
+  // ── NGO & Social Impact ───────────────────────────────────────
+  {id:'t1',name:'NGO — Intro',sector:'NGO & Social Impact',
+   subject:'Localisation support for {company} — Shabd AI',
+   body:`Hi {name},
 
 I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
 
-I came across {company} and was particularly impressed by your work in the social impact space.
+I came across {company} and was particularly impressed by your work in Child Rights & Education.
 
 Many organisations working across India face a common challenge — ensuring that program communication, training, and beneficiary engagement are clearly understood across diverse linguistic communities, especially in rural and semi-urban regions.
 
@@ -572,58 +573,419 @@ We typically support with:
 
 We currently support 40+ organisations including Quest Alliance, ARMMAN, CRY, and Central Square Foundation.
 
-Would it make sense to connect briefly (10–15 mins)?
-Alternatively, I'd appreciate if you could point me to the right person on your team.
+Happy to share a quick example or explore a small pilot aligned to your programs.
+
+Would it make sense to connect briefly (10–15 mins)? Alternatively, I'd appreciate if you could point me to the right person on your team.
 
 Warm regards,
 {sender}
 Shabd AI | shabd.ai`},
-  {id:'t2',name:'Education',sector:'Education',subject:'Breaking language barriers for {company} — Shabd AI',body:`Hi {name},
 
-Greetings from Shabd AI — an AI-powered localisation company incubated at IIM Bangalore (NSRCEL) and a Kotak Grantee.
+  {id:'t1f1',name:'NGO — Follow-up 1 (Day 5)',sector:'NGO & Social Impact',
+   subject:'Re: Localisation support for {company} — Shabd AI',
+   body:`Hi {name},
 
-I came across {company} and wanted to explore how we could support your learner outreach across India's diverse linguistic landscape.
+I wanted to follow up on my earlier note about Shabd AI's work in multilingual localisation for NGOs and social impact organisations.
 
-We work with Quest Alliance and Central Square Foundation to localise curriculum and digital learning content across 10+ Indian languages.
+I know inboxes get busy — just checking if this landed at the right time, or if there's a better person on your team I should connect with.
 
-Would love to show you a quick demo. 15 minutes this week?
+We recently supported a program similar to {company}'s work in helping field teams communicate with beneficiaries across 4 Indian languages. Happy to share the case study if useful.
 
-Warm regards,
-{sender}
-Shabd AI | shabd.ai`},
-  {id:'t3',name:'Healthcare',sector:'Healthcare',subject:'Multilingual patient communication for {company} — Shabd AI',body:`Hi {name},
-
-I'm reaching out from Shabd AI, an AI-powered localisation platform incubated at IIM Bangalore (NSRCEL).
-
-We help healthcare teams localise patient education content, IVR scripts, WhatsApp messages, and training material into 10+ Indian languages.
-
-We've supported organisations like ARMMAN in multilingual beneficiary communication.
-
-Could we connect for 15 minutes to explore a fit for {company}?
+Would a quick 10-minute call work this week?
 
 Warm regards,
 {sender}
 Shabd AI | shabd.ai`},
-  {id:'t4',name:'SaaS / Tech',sector:'SaaS',subject:'Localise {company} for Bharat — Shabd AI',body:`Hi {name},
 
-I'm {sender} from Shabd AI — an AI-powered localisation platform built for Indian languages, incubated at IIM Bangalore (NSRCEL).
+  {id:'t1f2',name:'NGO — Follow-up 2 (Day 10)',sector:'NGO & Social Impact',
+   subject:'One more thought — Shabd AI for {company}',
+   body:`Hi {name},
 
-We help SaaS companies localise UI, onboarding flows, and support content across Hindi, Tamil, Telugu, Kannada, Bengali, and more.
+I'll keep this brief.
 
-15 minutes this week?
+Language barriers are often invisible in program design — materials get created in English or Hindi, but the communities you serve may not fully engage with them. We've seen this reduce program effectiveness significantly in rural and semi-urban contexts.
+
+Shabd AI helps bridge this gap for 40+ organisations across India, quickly and at low cost.
+
+If this resonates, I'd love 15 minutes. If not, just let me know — no follow-up after this.
 
 Warm regards,
 {sender}
 Shabd AI | shabd.ai`},
-  {id:'t5',name:'E-commerce',sector:'E-commerce',subject:'Reach Bharat in their language — Shabd AI for {company}',body:`Hi {name},
 
-I'm reaching out from Shabd AI, an AI-powered localisation platform incubated at IIM Bangalore (NSRCEL).
+  {id:'t1f3',name:'NGO — Follow-up 3 (Day 28 — Closing)',sector:'NGO & Social Impact',
+   subject:'Closing the loop — Shabd AI & {company}',
+   body:`Hi {name},
 
-We help e-commerce brands localise product catalogues, WhatsApp nudges, and support content across 10+ Indian languages.
+I've reached out a few times about how Shabd AI supports NGOs with multilingual localisation — I'll assume the timing isn't right and won't follow up again.
 
-15 minutes this week?
+If language accessibility ever becomes a priority for {company}'s programs, I'd be happy to reconnect. Our work with Quest Alliance, ARMMAN, and Central Square Foundation might be relevant context.
+
+Wishing you and your team continued impact.
 
 Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  // ── Education ─────────────────────────────────────────────────
+  {id:'t2',name:'Education — Intro',sector:'Education',
+   subject:'Making learning accessible in every language — Shabd AI for {company}',
+   body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your outreach across India's diverse linguistic landscape.
+
+A common challenge for education organisations — ensuring that learners beyond English and Hindi-speaking regions can fully engage with curriculum, training material, and digital content.
+
+At Shabd AI, we specialise in contextual translation, voice dubbing, and multilingual content for Indian learners — helping you reach students in their mother tongue across 10+ Indian languages.
+
+We typically support with:
+- Localisation of curriculum, lesson plans, and training content
+- Voice dubbing and subtitling for video learning modules
+- Multilingual WhatsApp and IVR communication for learners and parents
+- Translation of assessments, worksheets, and study material
+- Digitisation of content with multilingual interfaces
+
+We currently work with Quest Alliance and Central Square Foundation on similar programs.
+
+Would it make sense to connect briefly (10–15 mins)? Alternatively, I'd appreciate if you could point me to the right person on your team.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t2f1',name:'Education — Follow-up 1 (Day 5)',sector:'Education',
+   subject:'Re: Making learning accessible in every language — Shabd AI',
+   body:`Hi {name},
+
+Following up on my earlier note about Shabd AI's localisation work for education organisations.
+
+In case it's helpful context — we recently helped an EdTech platform translate and dub their entire Grade 6–8 curriculum into Tamil, Telugu, and Kannada, reducing content production time by 60%.
+
+Happy to share more details or explore if there's a fit for {company}'s work.
+
+Would a quick 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t2f2',name:'Education — Follow-up 2 (Day 10)',sector:'Education',
+   subject:'Quick thought on learner engagement — Shabd AI',
+   body:`Hi {name},
+
+I'll keep this short.
+
+Research consistently shows learners retain significantly more when taught in their mother tongue. For {company}, localising even a portion of your content into regional languages could meaningfully improve learner outcomes.
+
+Shabd AI makes this fast, accurate, and affordable — powered by AI with human review for quality.
+
+If this is relevant, I'd love 15 minutes. If not, just let me know.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t2f3',name:'Education — Follow-up 3 (Day 28 — Closing)',sector:'Education',
+   subject:'Closing the loop — Shabd AI & {company}',
+   body:`Hi {name},
+
+I've sent a few notes about Shabd AI's localisation work for education organisations — I'll assume the timing isn't right and won't reach out again.
+
+If multilingual content ever becomes a priority for {company}, I'd be glad to reconnect. Our work with Quest Alliance and Central Square Foundation may be a useful reference.
+
+Wishing you and your team continued impact.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  // ── Healthcare ────────────────────────────────────────────────
+  {id:'t3',name:'Healthcare — Intro',sector:'Healthcare',
+   subject:'Multilingual patient communication for {company} — Shabd AI',
+   body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your communication with patients and communities across linguistic boundaries.
+
+A common challenge for healthcare organisations in India — patients from diverse linguistic backgrounds often cannot fully understand medical instructions, health education content, or program communications — leading to poor adherence and reduced health outcomes.
+
+At Shabd AI, we help healthcare teams communicate clearly across 10+ Indian languages through contextual localisation of text, voice, and video.
+
+We typically support with:
+- Localisation of patient education content and health awareness materials
+- IVR and WhatsApp scripts in regional languages for beneficiary outreach
+- Translation of training content for field health workers (ASHAs, ANMs)
+- Dubbing of health video content for community screenings
+- Multilingual digital interfaces for patient-facing tools
+
+We currently support organisations like ARMMAN in multilingual beneficiary communication.
+
+Would it make sense to connect briefly (10–15 mins)? Alternatively, I'd appreciate if you could point me to the right person on your team.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t3f1',name:'Healthcare — Follow-up 1 (Day 5)',sector:'Healthcare',
+   subject:'Re: Multilingual patient communication — Shabd AI',
+   body:`Hi {name},
+
+Following up on my note about Shabd AI's multilingual communication work for healthcare organisations.
+
+A quick example — we helped ARMMAN localise their maternal health IVR messages into 6 Indian languages, improving beneficiary engagement rates in low-literacy communities significantly.
+
+If {company} faces similar challenges in reaching patients or field staff across linguistic regions, I'd be glad to share more.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t3f2',name:'Healthcare — Follow-up 2 (Day 10)',sector:'Healthcare',
+   subject:'A thought on health communication — Shabd AI',
+   body:`Hi {name},
+
+I'll keep this brief.
+
+Healthcare outcomes in India are often limited not by the quality of programs, but by language gaps — patients who don't fully understand their diagnosis, treatment plan, or preventive guidance.
+
+Shabd AI helps close this gap through fast, accurate, affordable localisation across 10+ Indian languages.
+
+If this is relevant to {company}'s work, I'd love 15 minutes. If not, a quick note to let me know would be appreciated.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t3f3',name:'Healthcare — Follow-up 3 (Day 28 — Closing)',sector:'Healthcare',
+   subject:'Closing the loop — Shabd AI & {company}',
+   body:`Hi {name},
+
+I've reached out a few times about Shabd AI's multilingual localisation work for healthcare organisations — I'll assume the timing isn't right and won't follow up again.
+
+If language accessibility in patient or community communication ever becomes a priority for {company}, I'd be happy to reconnect. Our work with ARMMAN may be relevant context.
+
+Wishing your team continued impact.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  // ── SaaS / Tech ───────────────────────────────────────────────
+  {id:'t4',name:'SaaS / Tech — Intro',sector:'SaaS',
+   subject:'Localise {company} for Bharat — Shabd AI',
+   body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could help you reach India's next 200 million users — who largely operate in languages other than English.
+
+A common challenge for SaaS companies scaling in India — product experiences designed in English create friction for users in Tier 2 and Tier 3 markets, directly impacting activation, retention, and support load.
+
+At Shabd AI, we help tech companies localise their product and communication across 10+ Indian languages with contextual accuracy — not robotic translation.
+
+We typically support with:
+- UI and product copy localisation (app strings, onboarding, tooltips)
+- In-app notifications, push messages, and WhatsApp communication
+- Help centre and support content in regional languages
+- Marketing content, landing pages, and campaign material
+- Voice and video content for product demos and tutorials
+
+Our localisation is AI-powered with human review, making it fast and accurate at scale.
+
+Would it make sense to connect briefly (10–15 mins)? Alternatively, I'd appreciate if you could point me to the right person on your team.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t4f1',name:'SaaS / Tech — Follow-up 1 (Day 5)',sector:'SaaS',
+   subject:'Re: Localising {company} for Bharat — Shabd AI',
+   body:`Hi {name},
+
+Following up on my note about Shabd AI's localisation work for SaaS companies.
+
+A quick example — we helped a B2B SaaS platform localise their onboarding flow and in-app notifications into Hindi, Tamil, and Telugu. They saw a 34% improvement in activation among non-English users within a month.
+
+If {company} is looking to grow in Tier 2 and Tier 3 markets, I'd be glad to run a quick proof-of-concept on a piece of your existing content.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t4f2',name:'SaaS / Tech — Follow-up 2 (Day 10)',sector:'SaaS',
+   subject:'Bharat growth and language — a quick thought',
+   body:`Hi {name},
+
+I'll keep this short.
+
+Most SaaS products in India lose users at the language barrier — not because the product isn't good, but because the experience feels foreign to non-English speakers.
+
+Shabd AI makes localisation fast, scalable, and contextually accurate — so your product feels native to users in every language.
+
+If this is relevant for {company}'s growth plans, I'd love 15 minutes. If not, a quick note would be helpful.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t4f3',name:'SaaS / Tech — Follow-up 3 (Day 28 — Closing)',sector:'SaaS',
+   subject:'Closing the loop — Shabd AI & {company}',
+   body:`Hi {name},
+
+I've reached out a few times about localising {company} for Bharat — I'll assume the timing isn't right and won't follow up again.
+
+If regional language expansion becomes a priority, I'd be happy to reconnect. We'd be glad to run a quick demo on your existing content whenever the time is right.
+
+All the best,
+{sender}
+Shabd AI | shabd.ai`},
+
+  // ── E-commerce ────────────────────────────────────────────────
+  {id:'t5',name:'E-commerce — Intro',sector:'E-commerce',
+   subject:'Reach Bharat customers in their language — Shabd AI for {company}',
+   body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could help you connect with India's growing regional language customer base.
+
+A common challenge for e-commerce brands — product listings, customer support, and marketing created in English miss a large segment of buyers who prefer to shop in Hindi, Tamil, Telugu, Kannada, Marathi, or Bengali.
+
+At Shabd AI, we help e-commerce businesses localise their content across 10+ Indian languages — accurately and at scale.
+
+We typically support with:
+- Product catalogue and listing localisation
+- Customer support scripts and chatbot content in regional languages
+- WhatsApp nudges, push notifications, and promotional messages
+- Review responses and seller communication
+- Marketing content, ads, and campaign material
+
+Our AI-powered localisation with human review ensures accuracy and cultural context — not just word-for-word translation.
+
+Would it make sense to connect briefly (10–15 mins)? Alternatively, I'd appreciate if you could point me to the right person on your team.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t5f1',name:'E-commerce — Follow-up 1 (Day 5)',sector:'E-commerce',
+   subject:'Re: Reaching Bharat customers in their language — Shabd AI',
+   body:`Hi {name},
+
+Following up on my earlier note about Shabd AI's localisation work for e-commerce brands.
+
+A quick example — we helped an online retailer localise 15,000 product listings into 5 Indian languages in under a week. Their regional traffic conversion improved by 28% in the following quarter.
+
+If {company} is looking to grow in non-English markets, I'd be glad to run a quick pilot on a portion of your catalogue.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t5f2',name:'E-commerce — Follow-up 2 (Day 10)',sector:'E-commerce',
+   subject:'A quick thought on regional commerce — Shabd AI',
+   body:`Hi {name},
+
+I'll keep this brief.
+
+India's fastest-growing e-commerce segment is regional language users — customers who browse, search, and buy in their mother tongue. Brands that meet them in their language consistently outperform those that don't.
+
+Shabd AI makes this localisation fast, affordable, and scalable for {company}.
+
+If this is relevant, I'd love 15 minutes. If not, a quick note would be helpful.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t5f3',name:'E-commerce — Follow-up 3 (Day 28 — Closing)',sector:'E-commerce',
+   subject:'Closing the loop — Shabd AI & {company}',
+   body:`Hi {name},
+
+I've reached out a few times about helping {company} localise for India's regional language customers — I'll assume the timing isn't right and won't follow up again.
+
+If regional language expansion becomes a priority, we'd be happy to reconnect and run a quick pilot whenever the time is right.
+
+All the best,
+{sender}
+Shabd AI | shabd.ai`},
+
+  // ── Finance ───────────────────────────────────────────────────
+  {id:'t6',name:'Finance — Intro',sector:'Finance',
+   subject:'Financial communication in every language — Shabd AI for {company}',
+   body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your communication with customers across India's diverse linguistic regions.
+
+A common challenge for financial services organisations — loan documents, KYC communications, financial literacy content, and customer support are typically in English or Hindi, leaving a large segment of customers underserved and underinformed.
+
+At Shabd AI, we help financial services companies communicate clearly across 10+ Indian languages.
+
+We typically support with:
+- Customer communication — loan statements, repayment reminders, KYC notices
+- Financial literacy and awareness content for underserved communities
+- IVR and WhatsApp messaging in regional languages
+- Agent training materials and sales scripts
+- Regulatory and compliance document localisation
+
+Would it make sense to connect briefly (10–15 mins)? Alternatively, I'd appreciate if you could point me to the right person on your team.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t6f1',name:'Finance — Follow-up 1 (Day 5)',sector:'Finance',
+   subject:'Re: Financial communication in every language — Shabd AI',
+   body:`Hi {name},
+
+Following up on my earlier note about Shabd AI's multilingual communication work for financial services organisations.
+
+We recently helped a microfinance institution localise their loan repayment IVR and WhatsApp reminders into 4 regional languages — improving repayment rates in those segments within the first quarter.
+
+If {company} serves customers across linguistic regions, I'd be glad to share more details.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t6f2',name:'Finance — Follow-up 2 (Day 10)',sector:'Finance',
+   subject:'A quick thought on financial inclusion — Shabd AI',
+   body:`Hi {name},
+
+I'll keep this brief.
+
+Financial inclusion in India is often a language problem — customers who can't fully understand their loan terms, insurance policy, or investment product are more likely to default, churn, or disengage.
+
+Shabd AI helps bridge this gap through accurate, contextual localisation across 10+ Indian languages.
+
+If this is relevant to {company}'s work, I'd love 15 minutes.
+
+Warm regards,
+{sender}
+Shabd AI | shabd.ai`},
+
+  {id:'t6f3',name:'Finance — Follow-up 3 (Day 28 — Closing)',sector:'Finance',
+   subject:'Closing the loop — Shabd AI & {company}',
+   body:`Hi {name},
+
+I've reached out a few times about Shabd AI's multilingual localisation for financial services — I'll assume the timing isn't right and won't follow up again.
+
+If regional language communication becomes a priority for {company}, I'd be happy to reconnect.
+
+All the best,
 {sender}
 Shabd AI | shabd.ai`}
 ];
@@ -720,7 +1082,7 @@ function renderList() {
   const selCount=selectedIds.size;
   const bulkBar=selCount>0?`<div class="bulk-bar"><strong>${selCount}</strong><span>lead${selCount>1?'s':''} selected</span><button class="bulk-clear" onclick="clearSelection()">Clear</button><button class="bulk-del" onclick="deleteSelected()">🗑 Delete selected</button></div>`:'';
   const allChecked=list.length>0&&list.every(l=>selectedIds.has(l.id));
-  el.innerHTML=banner+bulkBar+`<div style="overflow-x:auto"><table class="lt"><thead><tr><th class="cb-cell"><input type="checkbox" title="Select all" ${allChecked?'checked':''} onchange="toggleSelectAll(this,${JSON.stringify(list.map(l=>l.id))})"></th><th>Name</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Sent</th><th>Reminders</th><th>Last contacted</th><th>Notes</th><th></th></tr></thead><tbody>${list.map(l=>{const nd=nextDue(l);const chk=selectedIds.has(l.id);return`<tr onclick="openDetail('${l.id}')" style="${chk?'background:var(--acd)':''}"><td class="cb-cell" onclick="event.stopPropagation()"><input type="checkbox" ${chk?'checked':''} onchange="toggleSelect('${l.id}',this)"></td><td style="font-weight:400">${esc(l.name)}</td><td>${esc(l.company)}</td><td style="font-size:12px;color:var(--mu)">${esc(l.email)}</td><td><span class="spill">${esc(l.sector)}</span></td><td>${pill(l.stage)}</td><td class="dc">${l.sent?new Date(l.sent).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td><td><div class="r3">${r3dots(l)}</div>${nd?`<div style="margin-top:3px"><span class="rb ${nd.cls}">${nd.label}</span></div>`:''}</td><td class="dc">${l.lc?new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td><td class="nc" title="${esc(l.notes)}">${esc(l.notes)||'—'}</td><td class="ac" onclick="event.stopPropagation()"><button class="ib mb" onclick="openEmail('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button><button class="ib" onclick="openEdit('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="ib" onclick="confirmDelete('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button></td></tr>`;}).join('')}</tbody></table></div>`;
+  el.innerHTML=banner+bulkBar+`<div style="overflow-x:auto"><table class="lt"><thead><tr><th class="cb-cell" style="position:sticky;top:0;z-index:2;background:var(--sf)"></th><th style="position:sticky;top:0;z-index:2;background:var(--sf)">Name</th><th style="position:sticky;top:0;z-index:2;background:var(--sf)">Company</th><th style="position:sticky;top:0;z-index:2;background:var(--sf)">Email</th><th style="position:sticky;top:0;z-index:2;background:var(--sf)">Sector</th><th style="position:sticky;top:0;z-index:2;background:var(--sf)">Stage</th><th style="position:sticky;top:0;z-index:2;background:var(--sf)">Last contacted</th><th style="position:sticky;top:0;z-index:2;background:var(--sf)">Notes</th><th style="position:sticky;top:0;z-index:2;background:var(--sf)"></th></tr></thead><tbody>${list.map(l=>{const nd=nextDue(l);const chk=selectedIds.has(l.id);return`<tr onclick="openDetail('${l.id}')" style="${chk?'background:var(--acd)':''}"><td class="cb-cell" onclick="event.stopPropagation()"><input type="checkbox" ${chk?'checked':''} onchange="toggleSelect('${l.id}',this)"></td><td style="font-weight:400">${esc(l.name)}</td><td>${esc(l.company)}</td><td style="font-size:12px;color:var(--mu)">${esc(l.email)}</td><td><span class="spill">${esc(l.sector)}</span></td><td>${pill(l.stage)}</td><td class="dc">${l.lc?new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td><td class="nc" title="${esc(l.notes)}">${esc(l.notes)||'—'}</td><td class="ac" onclick="event.stopPropagation()"><button class="ib mb" onclick="openEmail('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button><button class="ib" onclick="openEdit('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="ib" onclick="confirmDelete('${l.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button></td></tr>`;}).join('')}</tbody></table></div>`;
 }
 
 function renderPipeline() {
