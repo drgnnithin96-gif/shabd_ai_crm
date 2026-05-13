@@ -227,11 +227,18 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
   <div class="f"><label>Email</label><input id="f-email" type="email" placeholder="pallavi@cry.org"></div>
   <div class="fr">
     <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>NBFC</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option><option>Real Estate</option><option>Retail</option><option>Logistics</option><option>Other</option></select></div>
-    <div class="f"><label>Stage</label><select id="f-stage"><option>New</option><option>Contacted</option><option>Replied</option><option>Follow-up</option><option>Closed</option></select></div>
+    <div class="f"><label>Stage</label><select id="f-stage" onchange="toggleDateFields()"><option>New</option><option>Contacted</option><option>Replied</option><option>Follow-up</option><option>Closed</option></select></div>
   </div>
-  <div class="f"><label>Date email sent (auto-sets Day 5 / 10 / 28 reminders)</label><input id="f-sent" type="date" oninput="autoReminders()"></div>
-  <div class="fr"><div class="f"><label>Reminder 1 — Day 5</label><input id="f-r1" type="date"></div><div class="f"><label>Reminder 2 — Day 10</label><input id="f-r2" type="date"></div></div>
-  <div class="fr"><div class="f"><label>Reminder 3 — Day 28 (closing)</label><input id="f-r3" type="date"></div><div class="f"><label>Last contacted</label><input id="f-lc" type="date"></div></div>
+  <!-- Date fields for New/Contacted — shown by default -->
+  <div id="date-fields-outreach">
+    <div class="f"><label>Date email sent (auto-sets Day 5 / 10 / 28 reminders)</label><input id="f-sent" type="date" oninput="autoReminders()"></div>
+    <div class="fr"><div class="f"><label>Reminder 1 — Day 5</label><input id="f-r1" type="date"></div><div class="f"><label>Reminder 2 — Day 10</label><input id="f-r2" type="date"></div></div>
+    <div class="fr"><div class="f"><label>Reminder 3 — Day 28 (closing)</label><input id="f-r3" type="date"></div><div class="f"><label>Last contacted</label><input id="f-lc" type="date"></div></div>
+  </div>
+  <!-- Single date for Replied/Follow-up/Closed -->
+  <div id="date-fields-simple" style="display:none">
+    <div class="f"><label>Date</label><input id="f-simple-date" type="date"></div>
+  </div>
   <div class="f"><label>Notes</label><textarea id="f-notes" placeholder="What was discussed, next action..."></textarea></div>
   <div class="mf"><button class="bg" onclick="closeForm()">Cancel</button><button class="bs" onclick="saveLead()">Save lead</button></div>
 </div>
@@ -1191,9 +1198,15 @@ async function init(){
   setDbStatus(ok?'connected':'local');
   try{
     leads=await dbGetLeads();
+    // Always sync all default templates to Supabase
+    // This ensures new templates added to code appear for all users
     const td=await dbGetTmpls();
-    templates=td||JSON.parse(JSON.stringify(DEFAULT_TMPLS));
-    if(!td){for(const t of templates)await dbUpsertTmpl(t).catch(()=>{});}
+    const defaultTmpls=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+    // Upsert all default templates (adds new ones, updates existing)
+    for(const t of defaultTmpls) await dbUpsertTmpl(t).catch(()=>{});
+    // Fetch again to get any user-custom templates too
+    const allTmpls=await dbGetTmpls();
+    templates=allTmpls||defaultTmpls;
   }catch(e){
     leads=lsG('sai_leads')||[];
     templates=lsG('sai_tmpls')||JSON.parse(JSON.stringify(DEFAULT_TMPLS));
@@ -1217,6 +1230,16 @@ const fmtDate=s=>s?new Date(s).toLocaleDateString('en-IN',{day:'numeric',month:'
 const personalize=(text,lead)=>text.replace(/\{name\}/g,lead.name||'there').replace(/\{company\}/g,lead.company||'your organisation').replace(/\{sector\}/g,lead.sector||'your sector').replace(/\{sender\}/g,senderName);
 function autoReminders(){const s=document.getElementById('f-sent').value;if(!s)return;document.getElementById('f-r1').value=addDays(s,5);document.getElementById('f-r2').value=addDays(s,10);document.getElementById('f-r3').value=addDays(s,28);}
 window.autoReminders=autoReminders;
+
+// Toggle date fields based on stage selection
+function toggleDateFields(){
+  const stage=document.getElementById('f-stage').value;
+  const outreach=['New','Contacted'];
+  const isOutreach=outreach.includes(stage);
+  document.getElementById('date-fields-outreach').style.display=isOutreach?'':'none';
+  document.getElementById('date-fields-simple').style.display=isOutreach?'none':'';
+}
+window.toggleDateFields=toggleDateFields;
 const calcRem=s=>s?{r1:addDays(s,5),r2:addDays(s,10),r3:addDays(s,28)}:{r1:null,r2:null,r3:null};
 function remStatus(ds){
   if(!ds)return{cls:'rb-nn',label:'—'};
@@ -1295,12 +1318,22 @@ function renderPipeline(){
 }
 
 // ── Lead CRUD ─────────────────────────────────────────────────
-window.openAdd=function(){editId=null;document.getElementById('form-title').textContent='Add lead';['name','company','email','notes'].forEach(f=>document.getElementById('f-'+f).value='');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-sector').value='NGO & Social Impact';document.getElementById('f-stage').value='New';document.getElementById('form-modal').classList.add('open');};
-window.openEdit=function(id){const l=leads.find(x=>x.id===id);if(!l)return;editId=id;document.getElementById('form-title').textContent='Edit lead';['name','company','email','notes'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');document.getElementById('f-sector').value=l.sector||'NGO & Social Impact';document.getElementById('f-stage').value=l.stage||'New';document.getElementById('form-modal').classList.add('open');};
+window.openAdd=function(){editId=null;document.getElementById('form-title').textContent='Add lead';['name','company','email','notes'].forEach(f=>document.getElementById('f-'+f).value='');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-simple-date').value='';document.getElementById('f-sector').value='NGO & Social Impact';document.getElementById('f-stage').value='New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
+window.openEdit=function(id){const l=leads.find(x=>x.id===id);if(!l)return;editId=id;document.getElementById('form-title').textContent='Edit lead';['name','company','email','notes'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');document.getElementById('f-simple-date').value=l.lc||'';document.getElementById('f-sector').value=l.sector||'NGO & Social Impact';document.getElementById('f-stage').value=l.stage||'New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
 window.closeForm=function(){document.getElementById('form-modal').classList.remove('open');};
 window.saveLead=async function(){
   const name=document.getElementById('f-name').value.trim();if(!name){document.getElementById('f-name').focus();return;}
-  const data={id:editId||uid(),name,company:nd('f-company'),email:nd('f-email'),sector:document.getElementById('f-sector').value,stage:document.getElementById('f-stage').value,sent:nd('f-sent'),r1:nd('f-r1'),r2:nd('f-r2'),r3:nd('f-r3'),lc:nd('f-lc'),notes:nd('f-notes'),updated:new Date().toISOString(),created:editId?(leads.find(l=>l.id===editId)?.created||new Date().toISOString()):new Date().toISOString()};
+  const stage=document.getElementById('f-stage').value;
+  const isOutreach=['New','Contacted'].includes(stage);
+  // For Replied/Follow-up/Closed use the single date field as lc
+  const simpleDate=nd('f-simple-date');
+  const data={id:editId||uid(),name,company:nd('f-company'),email:nd('f-email'),sector:document.getElementById('f-sector').value,stage,
+    sent:isOutreach?nd('f-sent'):null,
+    r1:isOutreach?nd('f-r1'):null,
+    r2:isOutreach?nd('f-r2'):null,
+    r3:isOutreach?nd('f-r3'):null,
+    lc:isOutreach?nd('f-lc'):simpleDate,
+    notes:nd('f-notes'),updated:new Date().toISOString(),created:editId?(leads.find(l=>l.id===editId)?.created||new Date().toISOString()):new Date().toISOString()};
   try{await dbUpsert(data);const i=leads.findIndex(l=>l.id===data.id);if(i>=0)leads[i]=data;else leads.unshift(data);closeForm();renderStats();renderSectorFilter();renderView();showToast(editId?'Lead updated':'Lead added');}catch(e){showToast('Error: '+e.message);}
 };
 
