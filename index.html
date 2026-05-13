@@ -226,7 +226,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
   <div class="fr"><div class="f"><label>Name *</label><input id="f-name" placeholder="Pallavi Jadhav"></div><div class="f"><label>Company</label><input id="f-company" placeholder="CRY India"></div></div>
   <div class="f"><label>Email</label><input id="f-email" type="email" placeholder="pallavi@cry.org"></div>
   <div class="fr">
-    <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>Media &amp; Publishing</option><option>Manufacturing</option><option>Legal</option><option>Real Estate</option><option>Retail</option><option>Logistics</option><option>Travel &amp; Hospitality</option><option>Government</option><option>Other</option></select></div>
+    <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>NBFC</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option><option>Real Estate</option><option>Retail</option><option>Logistics</option><option>Other</option></select></div>
     <div class="f"><label>Stage</label><select id="f-stage"><option>New</option><option>Contacted</option><option>Replied</option><option>Follow-up</option><option>Closed</option></select></div>
   </div>
   <div class="f"><label>Date email sent (auto-sets Day 5 / 10 / 28 reminders)</label><input id="f-sent" type="date" oninput="autoReminders()"></div>
@@ -267,7 +267,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 <div class="modal w">
   <div class="mh"><div class="mt" id="tmpl-form-title">New template</div><button class="xb" onclick="closeTmpl()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   <div class="tokbar"><strong style="color:var(--ac)">Tokens:</strong> <code>{name}</code> <code>{company}</code> <code>{sector}</code> <code>{sender}</code></div>
-  <div class="fr"><div class="f"><label>Template name</label><input id="tn" placeholder="NGO — Follow-up 1"></div><div class="f"><label>Sector tag</label><select id="ts"><option value="All sectors">All sectors</option><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>Media &amp; Publishing</option><option>Manufacturing</option><option>Legal</option><option>Real Estate</option><option>Retail</option><option>Logistics</option><option>Travel &amp; Hospitality</option><option>Government</option><option>Other</option></select></div></div>
+  <div class="fr"><div class="f"><label>Template name</label><input id="tn" placeholder="NGO — Follow-up 1"></div><div class="f"><label>Sector tag</label><select id="ts"><option value="All sectors">All sectors</option><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>NBFC</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option><option>Real Estate</option><option>Retail</option><option>Logistics</option><option>Other</option></select></div></div>
   <div class="f"><label>Subject line</label><input id="tsu" placeholder="Re: Localisation support for {company}"></div>
   <div class="f"><label>Email body</label><textarea id="tb" style="min-height:260px"></textarea></div>
   <div class="mf"><button class="bg" onclick="closeTmpl()">Cancel</button><button class="bs" onclick="saveTmpl()">Save template</button></div>
@@ -732,6 +732,425 @@ If regional language communication becomes a priority for {company}, I'd be happ
 All the best,
 {sender}
 Shabd AI | shabd.ai`}
+
+// ── NBFC ──────────────────────────────────────────────────────
+,{id:'t7',name:'NBFC — Intro',sector:'NBFC',
+subject:'Multilingual borrower communication for {company} — Shabd AI',
+body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your borrower communication across India's diverse linguistic communities.
+
+A common challenge for NBFCs — loan agreements, repayment schedules, KYC processes, and collection communication are in English or Hindi, leaving a significant portion of borrowers confused or underserved, especially in rural and semi-urban markets.
+
+At Shabd AI, we help NBFCs communicate clearly with borrowers across 10+ Indian languages.
+
+We typically support with:
+- Loan agreement and repayment schedule localisation
+- KYC and onboarding communication in regional languages
+- IVR and WhatsApp reminders for EMI collections
+- Field agent training content in local languages
+- Regulatory disclosure localisation
+
+Would it make sense to connect briefly (10–15 mins)?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t7f1',name:'NBFC — Follow-up 1 (Day 5)',sector:'NBFC',
+subject:'Re: Multilingual borrower communication — Shabd AI',
+body:`Hi {name},
+
+Following up on my note about Shabd AI's multilingual work for NBFCs.
+
+We helped a microfinance NBFC localise their loan repayment IVR and WhatsApp nudges into 5 regional languages — improving on-time repayment rates in rural segments within the first quarter.
+
+If {company} serves borrowers across linguistic regions, I'd be glad to share more details.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t7f2',name:'NBFC — Follow-up 2 (Day 10)',sector:'NBFC',
+subject:'Borrower communication and language — a quick thought',
+body:`Hi {name},
+
+I'll keep this brief.
+
+For NBFCs operating in rural and semi-urban India, the gap between what's communicated to borrowers and what they actually understand can directly impact repayment behaviour and default rates.
+
+Shabd AI helps close this gap through accurate, contextual localisation across 10+ Indian languages — fast and at scale.
+
+If this is relevant to {company}'s portfolio, I'd love 15 minutes.
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t7f3',name:'NBFC — Follow-up 3 (Day 28 — Closing)',sector:'NBFC',
+subject:'Closing the loop — Shabd AI & {company}',
+body:`Hi {name},
+
+I've reached out a few times about Shabd AI's multilingual localisation for NBFCs — I'll assume the timing isn't right and won't follow up again.
+
+If borrower communication in regional languages ever becomes a priority for {company}, I'd be happy to reconnect.
+
+All the best,
+{sender}
+Shabd AI | shabdai.com`},
+
+// ── Legal ─────────────────────────────────────────────────────
+,{id:'t8',name:'Legal — Intro',sector:'Legal',
+subject:'Legal communication in every language — Shabd AI for {company}',
+body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your communication with clients across India's diverse linguistic communities.
+
+A common challenge for legal firms — contracts, notices, agreements, and client communication in English are inaccessible to a large segment of clients, especially in regional and rural contexts where legal literacy is already a barrier.
+
+At Shabd AI, we help legal organisations communicate accurately across 10+ Indian languages.
+
+We typically support with:
+- Contract and agreement localisation into regional languages
+- Legal notice and summons translation
+- Client communication in preferred languages
+- Court document preparation support in regional languages
+- Legal awareness content for community outreach
+
+Would it make sense to connect briefly (10–15 mins)?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t8f1',name:'Legal — Follow-up 1 (Day 5)',sector:'Legal',
+subject:'Re: Legal communication in every language — Shabd AI',
+body:`Hi {name},
+
+Following up on my note about Shabd AI's multilingual localisation work for legal firms.
+
+We recently supported a legal aid organisation in translating client intake forms and grievance documents into Tamil, Telugu, and Marathi — significantly improving client comprehension and case completion rates.
+
+If {company} works with clients across linguistic regions, I'd be glad to explore a fit.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t8f2',name:'Legal — Follow-up 2 (Day 10)',sector:'Legal',
+subject:'A thought on legal accessibility — Shabd AI',
+body:`Hi {name},
+
+I'll keep this short.
+
+Legal documents are already complex. When they're also in a language a client doesn't fully understand, the risk of miscommunication — and its consequences — grows significantly.
+
+Shabd AI helps legal firms bridge this gap through accurate, contextual localisation across 10+ Indian languages.
+
+If this is relevant to {company}'s practice, I'd love 15 minutes.
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t8f3',name:'Legal — Follow-up 3 (Day 28 — Closing)',sector:'Legal',
+subject:'Closing the loop — Shabd AI & {company}',
+body:`Hi {name},
+
+I've reached out a few times about Shabd AI's multilingual localisation for legal firms — I'll assume the timing isn't right and won't follow up again.
+
+If multilingual client communication ever becomes a priority for {company}, I'd be happy to reconnect.
+
+All the best,
+{sender}
+Shabd AI | shabdai.com`},
+
+// ── Government ────────────────────────────────────────────────
+,{id:'t9',name:'Government — Intro',sector:'Government',
+subject:'Citizen communication in every language — Shabd AI for {company}',
+body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your citizen outreach across India's diverse linguistic communities.
+
+A common challenge for government departments and agencies — schemes, notifications, application processes, and public communications often don't reach citizens in their preferred language, reducing scheme uptake and civic participation.
+
+At Shabd AI, we help government organisations communicate clearly across 10+ Indian languages.
+
+We typically support with:
+- Scheme and policy communication in regional languages
+- Application form localisation and citizen guidance
+- IVR and WhatsApp helpline scripts in local languages
+- Training content for frontline government workers
+- Public awareness campaign material and video dubbing
+
+Would it make sense to connect briefly (10–15 mins)?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t9f1',name:'Government — Follow-up 1 (Day 5)',sector:'Government',
+subject:'Re: Citizen communication in every language — Shabd AI',
+body:`Hi {name},
+
+Following up on my note about Shabd AI's multilingual localisation for government organisations.
+
+We recently supported a state government initiative in localising scheme awareness content into 6 Indian languages — improving reach in tribal and rural communities significantly.
+
+If {company} is looking to improve citizen outreach, I'd be glad to share more.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t9f2',name:'Government — Follow-up 2 (Day 10)',sector:'Government',
+subject:'A thought on citizen outreach — Shabd AI',
+body:`Hi {name},
+
+I'll keep this brief.
+
+Government schemes often don't reach the communities they're designed for — not because of lack of intent, but because communication isn't in the citizen's language.
+
+Shabd AI helps bridge this gap across 10+ Indian languages, quickly and at low cost.
+
+If this is relevant to {company}'s work, I'd love 15 minutes.
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t9f3',name:'Government — Follow-up 3 (Day 28 — Closing)',sector:'Government',
+subject:'Closing the loop — Shabd AI & {company}',
+body:`Hi {name},
+
+I've reached out a few times about Shabd AI's multilingual localisation for government citizen communication — I'll assume the timing isn't right and won't follow up again.
+
+If multilingual outreach ever becomes a priority, I'd be happy to reconnect.
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+// ── Manufacturing ─────────────────────────────────────────────
+,{id:'t10',name:'Manufacturing — Intro',sector:'Manufacturing',
+subject:'Multilingual workforce communication for {company} — Shabd AI',
+body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your communication with your workforce across India's diverse linguistic communities.
+
+A common challenge for manufacturing companies — safety manuals, SOPs, training content, and HR communication in English or Hindi are inaccessible to a large portion of the shop floor workforce, creating safety risks and reducing productivity.
+
+At Shabd AI, we help manufacturing companies communicate clearly with their workforce across 10+ Indian languages.
+
+We typically support with:
+- Safety manual and SOP localisation
+- Shop floor training content and induction material
+- HR policy and compliance documents in regional languages
+- Multilingual signage and visual instruction content
+- Vendor and supplier communication
+
+Would it make sense to connect briefly (10–15 mins)?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t10f1',name:'Manufacturing — Follow-up 1 (Day 5)',sector:'Manufacturing',
+subject:'Re: Multilingual workforce communication — Shabd AI',
+body:`Hi {name},
+
+Following up on my note about Shabd AI's multilingual localisation for manufacturing companies.
+
+We recently helped a factory localise their safety training and SOP content into Hindi, Tamil, and Telugu — improving compliance rates and reducing on-floor incidents.
+
+If {company} faces similar challenges with a multilingual workforce, I'd be glad to share more.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t10f2',name:'Manufacturing — Follow-up 2 (Day 10)',sector:'Manufacturing',
+subject:'Workforce safety and language — a quick thought',
+body:`Hi {name},
+
+I'll keep this brief.
+
+In manufacturing, a worker who doesn't fully understand a safety procedure is a liability. Language barriers on the shop floor are a real risk — and one that's entirely solvable.
+
+Shabd AI makes safety and training content accessible in the languages your workforce actually speaks.
+
+If this is relevant for {company}, I'd love 15 minutes.
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t10f3',name:'Manufacturing — Follow-up 3 (Day 28 — Closing)',sector:'Manufacturing',
+subject:'Closing the loop — Shabd AI & {company}',
+body:`Hi {name},
+
+I've reached out a few times about Shabd AI's multilingual localisation for manufacturing companies — I'll assume the timing isn't right and won't follow up again.
+
+If multilingual workforce communication ever becomes a priority, I'd be happy to reconnect.
+
+All the best,
+{sender}
+Shabd AI | shabdai.com`},
+
+// ── Media & Publishing ────────────────────────────────────────
+,{id:'t11',name:'Media — Intro',sector:'Media & Publishing',
+subject:'Regional language content at scale — Shabd AI for {company}',
+body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your regional language content strategy.
+
+India's regional language media audience is growing faster than English — but creating quality content at scale in multiple languages remains expensive and time-consuming for most publishers and media companies.
+
+At Shabd AI, we help media and publishing companies scale their regional language content through contextual localisation, dubbing, and translation.
+
+We typically support with:
+- Article and editorial translation into regional languages
+- Video dubbing and subtitling for regional audiences
+- Social media content localisation
+- Podcast and audio content in Indian languages
+- Newsletter and email communication in regional languages
+
+Would it make sense to connect briefly (10–15 mins)?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t11f1',name:'Media — Follow-up 1 (Day 5)',sector:'Media & Publishing',
+subject:'Re: Regional language content at scale — Shabd AI',
+body:`Hi {name},
+
+Following up on my note about Shabd AI's multilingual content work for media companies.
+
+We recently helped a digital publisher localise 500+ articles into 4 Indian languages in under two weeks, with contextual accuracy that maintained editorial quality.
+
+If {company} is looking to grow its regional language audience, I'd be glad to share more.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t11f2',name:'Media — Follow-up 2 (Day 10)',sector:'Media & Publishing',
+subject:'A thought on regional media growth — Shabd AI',
+body:`Hi {name},
+
+I'll keep this brief.
+
+The next 100 million readers and viewers for Indian media will come from regional language markets. Publishers who build regional content pipelines now are well positioned for this shift.
+
+Shabd AI makes this fast and cost-effective — AI-powered with human editorial review.
+
+If this fits {company}'s strategy, I'd love 15 minutes.
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t11f3',name:'Media — Follow-up 3 (Day 28 — Closing)',sector:'Media & Publishing',
+subject:'Closing the loop — Shabd AI & {company}',
+body:`Hi {name},
+
+I've reached out a few times about Shabd AI's regional language content work — I'll assume the timing isn't right and won't follow up again.
+
+If scaling regional content ever becomes a priority for {company}, I'd be happy to reconnect.
+
+All the best,
+{sender}
+Shabd AI | shabdai.com`},
+
+// ── Travel & Hospitality ──────────────────────────────────────
+,{id:'t12',name:'Travel — Intro',sector:'Travel & Hospitality',
+subject:'Multilingual guest communication for {company} — Shabd AI',
+body:`Hi {name},
+
+I'm reaching out from Shabd AI (NSRCEL, IIM Bangalore incubated, Kotak Grantee), and a Top 30 finalist at the India AI Impact Summit 2026.
+
+I came across {company} and wanted to explore how we could support your communication with guests across India's diverse linguistic regions.
+
+With domestic tourism growing rapidly, travellers from Tier 2 and Tier 3 markets increasingly prefer communication in their regional language — from booking confirmations to in-property signage to customer support.
+
+At Shabd AI, we help travel and hospitality companies create seamless multilingual guest experiences.
+
+We typically support with:
+- Booking confirmation and pre-arrival communication in regional languages
+- In-property signage, menus, and guest guides localisation
+- Customer support scripts in Hindi, Tamil, Telugu, and more
+- Travel content, itineraries, and promotional material
+- WhatsApp guest communication in preferred languages
+
+Would it make sense to connect briefly (10–15 mins)?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t12f1',name:'Travel — Follow-up 1 (Day 5)',sector:'Travel & Hospitality',
+subject:'Re: Multilingual guest communication — Shabd AI',
+body:`Hi {name},
+
+Following up on my note about Shabd AI's multilingual localisation for travel and hospitality companies.
+
+We recently helped a hotel chain localise their guest communication — booking confirmations, WhatsApp messages, and in-room guides — into 5 regional languages, improving guest satisfaction scores among domestic travellers.
+
+Would a 10–15 minute call work this week?
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t12f2',name:'Travel — Follow-up 2 (Day 10)',sector:'Travel & Hospitality',
+subject:'A thought on the domestic travel boom — Shabd AI',
+body:`Hi {name},
+
+I'll keep this brief.
+
+India's domestic tourism is booming — but most of this growth is coming from non-English-speaking travellers. Properties and operators who communicate in their guests' language consistently earn better reviews and repeat visits.
+
+Shabd AI makes multilingual guest communication affordable and fast for {company}.
+
+If this fits your plans, I'd love 15 minutes.
+
+Warm regards,
+{sender}
+Shabd AI | shabdai.com`},
+
+{id:'t12f3',name:'Travel — Follow-up 3 (Day 28 — Closing)',sector:'Travel & Hospitality',
+subject:'Closing the loop — Shabd AI & {company}',
+body:`Hi {name},
+
+I've reached out a few times about Shabd AI's multilingual guest communication work — I'll assume the timing isn't right and won't follow up again.
+
+If regional language guest experience ever becomes a priority for {company}, I'd be happy to reconnect.
+
+All the best,
+{sender}
+Shabd AI | shabdai.com`}
+
 ];
 
 // ── Supabase ──────────────────────────────────────────────────
