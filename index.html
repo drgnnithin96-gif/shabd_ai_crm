@@ -87,6 +87,9 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 .bulk-del:hover{background:rgba(248,113,113,.2)}
 .bulk-clear{background:none;border:1px solid var(--bd2);border-radius:var(--r);padding:6px 12px;font-size:12px;color:var(--mu);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
 .bulk-clear:hover{color:var(--tx)}
+.mark-done-btn{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid rgba(74,222,128,.4);background:rgba(74,222,128,.08);color:var(--gn);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;margin-left:4px}
+.mark-done-btn:hover{background:rgba(74,222,128,.2)}
+.rtl-step .mark-done-btn{display:block;margin:6px auto 0;font-size:10px}
 .pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .stcol{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden}
 .sthd{padding:10px 12px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
@@ -225,6 +228,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
   <div class="mh"><div class="mt" id="form-title">Add lead</div><button class="xb" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   <div class="fr"><div class="f"><label>Name *</label><input id="f-name" placeholder="Pallavi Jadhav"></div><div class="f"><label>Company</label><input id="f-company" placeholder="CRY India"></div></div>
   <div class="f"><label>Email</label><input id="f-email" type="email" placeholder="pallavi@cry.org"></div>
+  <div class="f"><label>Website <span style="font-size:10px;color:var(--hn);text-transform:none;letter-spacing:0">(used for company research)</span></label><input id="f-website" type="url" placeholder="https://cry.org"></div>
   <div class="fr">
     <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>NBFC</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option><option>Real Estate</option><option>Retail</option><option>Logistics</option><option>Other</option></select></div>
     <div class="f"><label>Stage</label><select id="f-stage" onchange="toggleDateFields()"><option>New</option><option>Contacted</option><option>Replied</option><option>Follow-up</option><option>Closed</option></select></div>
@@ -1318,8 +1322,8 @@ function renderPipeline(){
 }
 
 // ── Lead CRUD ─────────────────────────────────────────────────
-window.openAdd=function(){editId=null;document.getElementById('form-title').textContent='Add lead';['name','company','email','notes'].forEach(f=>document.getElementById('f-'+f).value='');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-simple-date').value='';document.getElementById('f-sector').value='NGO & Social Impact';document.getElementById('f-stage').value='New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
-window.openEdit=function(id){const l=leads.find(x=>x.id===id);if(!l)return;editId=id;document.getElementById('form-title').textContent='Edit lead';['name','company','email','notes'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');document.getElementById('f-simple-date').value=l.lc||'';document.getElementById('f-sector').value=l.sector||'NGO & Social Impact';document.getElementById('f-stage').value=l.stage||'New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
+window.openAdd=function(){editId=null;document.getElementById('form-title').textContent='Add lead';['name','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value='');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-simple-date').value='';document.getElementById('f-sector').value='NGO & Social Impact';document.getElementById('f-stage').value='New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
+window.openEdit=function(id){const l=leads.find(x=>x.id===id);if(!l)return;editId=id;document.getElementById('form-title').textContent='Edit lead';['name','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');document.getElementById('f-simple-date').value=l.lc||'';document.getElementById('f-sector').value=l.sector||'NGO & Social Impact';document.getElementById('f-stage').value=l.stage||'New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
 window.closeForm=function(){document.getElementById('form-modal').classList.remove('open');};
 window.saveLead=async function(){
   const name=document.getElementById('f-name').value.trim();if(!name){document.getElementById('f-name').focus();return;}
@@ -1327,7 +1331,7 @@ window.saveLead=async function(){
   const isOutreach=['New','Contacted'].includes(stage);
   // For Replied/Follow-up/Closed use the single date field as lc
   const simpleDate=nd('f-simple-date');
-  const data={id:editId||uid(),name,company:nd('f-company'),email:nd('f-email'),sector:document.getElementById('f-sector').value,stage,
+  const data={id:editId||uid(),name,company:nd('f-company'),email:nd('f-email'),website:nd('f-website'),sector:document.getElementById('f-sector').value,stage,
     sent:isOutreach?nd('f-sent'):null,
     r1:isOutreach?nd('f-r1'):null,
     r2:isOutreach?nd('f-r2'):null,
@@ -1340,11 +1344,11 @@ window.saveLead=async function(){
 window.openDetail=function(id){
   const l=leads.find(x=>x.id===id);if(!l)return;detailId=id;
   document.getElementById('d-name').textContent=l.name;
-  const rs=(ds,label)=>{const r=remStatus(ds);let cls='';if(!ds)return`<div class="rtl-step"><div class="rtl-day">${label}</div><div class="rtl-date" style="color:var(--hn)">Not set</div></div>`;if(r.cls==='rb-ov')cls='overdue';else if(r.cls==='rb-sn')cls='due-soon';else cls='done';const col=cls==='overdue'?'var(--rd)':cls==='due-soon'?'var(--or)':'var(--gn)';return`<div class="rtl-step ${cls}"><div class="rtl-day">${label}</div><div class="rtl-date">${ds}</div><div class="rtl-status" style="color:${col}">${r.label}</div></div>`;};
+  const rs=(ds,label,field,sentFlag)=>{const r=remStatus(ds);if(!ds)return`<div class="rtl-step pending"><div class="rtl-day">${label}</div><div class="rtl-date" style="color:var(--hn)">Not set</div></div>`;let cls='';if(sentFlag)cls='done';else if(r.cls==='rb-ov')cls='overdue';else if(r.cls==='rb-sn')cls='due-soon';else cls='done';const col=sentFlag?'var(--gn)':cls==='overdue'?'var(--rd)':cls==='due-soon'?'var(--or)':'var(--gn)';const statusTxt=sentFlag?'Sent ✓':r.label;const doneBtn=(cls==='overdue'||cls==='due-soon')&&!sentFlag?`<button class="mark-done-btn" onclick="markReminderDone('${l.id}','${field}')">✓ Mark done</button>`:'';return`<div class="rtl-step ${cls}"><div class="rtl-day">${label}</div><div class="rtl-date">${ds}</div><div class="rtl-status" style="color:${col}">${statusTxt}</div>${doneBtn}</div>`;};
   document.getElementById('d-content').innerHTML=`
-    <div><div class="dr"><span class="dl">Company</span><span class="dv">${esc(l.company)||'—'}</span></div><div class="dr"><span class="dl">Email</span><span class="dv"><a href="mailto:${esc(l.email)}">${esc(l.email)||'—'}</a></span></div><div class="dr"><span class="dl">Sector</span><span class="dv"><span class="spill">${esc(l.sector)}</span></span></div><div class="dr"><span class="dl">Stage</span><span class="dv">${pill(l.stage)}</span></div><div class="dr"><span class="dl">Email sent</span><span class="dv" style="color:var(--mu)">${fmtDate(l.sent)}</span></div><div class="dr"><span class="dl">Last contacted</span><span class="dv" style="color:var(--mu)">${fmtDate(l.lc)}</span></div><div class="dr"><span class="dl">Added</span><span class="dv" style="color:var(--mu)">${fmtDate(l.created)}</span></div></div>
+    <div><div class="dr"><span class="dl">Company</span><span class="dv">${esc(l.company)||'—'}</span></div><div class="dr"><span class="dl">Email</span><span class="dv"><a href="mailto:${esc(l.email)}">${esc(l.email)||'—'}</a></span></div><div class="dr"><span class="dl">Website</span><span class="dv">${l.website?`<a href="${esc(l.website)}" target="_blank" style="color:var(--bl)">${esc(l.website)}</a>`:'—'}</span></div><div class="dr"><span class="dl">Sector</span><span class="dv"><span class="spill">${esc(l.sector)}</span></span></div><div class="dr"><span class="dl">Stage</span><span class="dv">${pill(l.stage)}</span></div><div class="dr"><span class="dl">Email sent</span><span class="dv" style="color:var(--mu)">${fmtDate(l.sent)}</span></div><div class="dr"><span class="dl">Last contacted</span><span class="dv" style="color:var(--mu)">${fmtDate(l.lc)}</span></div><div class="dr"><span class="dl">Added</span><span class="dv" style="color:var(--mu)">${fmtDate(l.created)}</span></div></div>
     <div class="slbl">Follow-up reminders</div>
-    <div class="rtl">${rs(l.r1,'Day 5')}${rs(l.r2,'Day 10')}${rs(l.r3,'Day 28 — Close')}</div>
+    <div class="rtl">${rs(l.r1,'Day 5','r1',l.r1_sent)}${rs(l.r2,'Day 10','r2',l.r2_sent)}${rs(l.r3,'Day 28 — Close','r3',l.r3_sent)}</div>
     <div class="slbl">Notes</div>
     <div class="dn">${esc(l.notes)||'No notes added.'}</div>
     <div class="slbl">Move stage</div>
@@ -1447,12 +1451,29 @@ dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)handleCSVFile(f);});
 
 // ── Export ────────────────────────────────────────────────────
-window.exportCSV=function(){const h=['Name','Company','Email','Sector','Stage','Date Sent','Reminder 1 (Day 5)','Reminder 2 (Day 10)','Reminder 3 (Day 28)','Last Contacted','Notes','Date Added'];const rows=leads.map(l=>[l.name,l.company,l.email,l.sector,l.stage,l.sent||'',l.r1||'',l.r2||'',l.r3||'',l.lc||'',l.notes,l.created?new Date(l.created).toLocaleDateString('en-IN'):''].map(v=>`"${(v||'').replace(/"/g,'""')}"`));const csv=[h.join(','),...rows.map(r=>r.join(','))].join('\n');const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='shabd-ai-leads-'+new Date().toISOString().slice(0,10)+'.csv';a.click();showToast('CSV exported');};
+window.exportCSV=function(){const h=['Name','Company','Email','Website','Sector','Stage','Date Sent','Reminder 1 (Day 5)','Reminder 2 (Day 10)','Reminder 3 (Day 28)','Last Contacted','Notes','Date Added'];const rows=leads.map(l=>[l.name,l.company,l.email,l.website||'',l.sector,l.stage,l.sent||'',l.r1||'',l.r2||'',l.r3||'',l.lc||'',l.notes,l.created?new Date(l.created).toLocaleDateString('en-IN'):''].map(v=>`"${(v||'').replace(/"/g,'""')}"`));const csv=[h.join(','),...rows.map(r=>r.join(','))].join('\n');const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='shabd-ai-leads-'+new Date().toISOString().slice(0,10)+'.csv';a.click();showToast('CSV exported');};
 
 // ── Toast + close ─────────────────────────────────────────────
 function showToast(msg){const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 ['form-modal','detail-modal','email-modal','tmpl-modal','import-modal'].forEach(id=>{document.getElementById(id)?.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')['form-modal','detail-modal','email-modal','tmpl-modal','import-modal'].forEach(id=>document.getElementById(id)?.classList.remove('open'));});
+
+// ── Mark reminder as done ────────────────────────────────────
+window.markReminderDone=async function(leadId, field){
+  const l=leads.find(x=>x.id===leadId);if(!l)return;
+  // Mark the reminder field as sent/done so it stops showing overdue
+  const updates={[field+'_sent']:true, lc:new Date().toISOString().slice(0,10)};
+  // Also move stage to Follow-up if still Contacted
+  if(l.stage==='Contacted' && field==='r1') updates.stage='Follow-up';
+  try{
+    await dbUpsertLead({...l,...updates,updated:new Date().toISOString()});
+    const i=leads.findIndex(x=>x.id===leadId);
+    if(i>=0)leads[i]={...leads[i],...updates};
+    renderStats();renderView();showToast('Reminder marked as done');
+    // Refresh detail if open
+    if(detailId===leadId)openDetail(leadId);
+  }catch(e){showToast('Error: '+e.message);}
+};
 
 init();
 </script>
