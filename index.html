@@ -1206,35 +1206,24 @@ Shabd AI | shabdai.com`}
 // ── Supabase ──────────────────────────────────────────────────
 let sb=null,useLocal=false;
 async function initDB(){
-  // Try Supabase - if blocked (allowlist), fall back to localStorage gracefully
   try{
     const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2');
-    sb=createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
-    // Quick test with 3s timeout
-    const result=await Promise.race([
-      sb.from('leads').select('id').limit(1),
-      new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),3000))
-    ]);
-    if(result.error)throw result.error;
+    sb=createClient(SUPA_URL,SUPA_KEY);
+    const {error}=await sb.from('leads').select('id').limit(1);
+    if(error)throw error;
     return true;
-  }catch(e){
-    console.warn('Supabase not available from browser (allowlist restriction). Using local storage.');
-    useLocal=true;
-    return false;
-  }
+  }catch(e){console.error('Supabase:',e.message);useLocal=true;return false;}
 }
+
 const lsG=k=>{try{return JSON.parse(localStorage.getItem(k));}catch{return null;}};
 const lsS=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 async function dbGetLeads(){if(useLocal)return lsG('sai_leads')||[];const{data,error}=await sb.from('leads').select('*').order('created',{ascending:false});if(error)throw error;return data||[];}
 async function dbUpsertLead(l){return dbUpsert(l);}
 async function dbUpsert(l){if(useLocal){const a=lsG('sai_leads')||[];const i=a.findIndex(x=>x.id===l.id);if(i>=0)a[i]=l;else a.unshift(l);lsS('sai_leads',a);return l;}const{data,error}=await sb.from('leads').upsert(l,{onConflict:'id'}).select().single();if(error)throw error;return data;}
-async function dbUpsertMany(arr){if(useLocal){const a=lsG('sai_leads')||[];const m=new Map(a.map(l=>[l.id,l]));arr.forEach(l=>m.set(l.id,l));lsS('sai_leads',[...m.values()]);return arr;}const{data,error}=await sb.from('leads').upsert(arr,{onConflict:'id'}).select();if(error)throw error;return data;}
 async function dbDelete(id){if(useLocal){lsS('sai_leads',(lsG('sai_leads')||[]).filter(l=>l.id!==id));return;}const{error}=await sb.from('leads').delete().eq('id',id);if(error)throw error;}
 async function dbGetTmpls(){if(useLocal)return lsG('sai_tmpls')||null;const{data,error}=await sb.from('templates').select('*').order('created',{ascending:true});if(error)throw error;return data&&data.length?data:null;}
 async function dbBatchUpsertTmpls(arr){
   if(useLocal){const existing=lsG('sai_tmpls')||[];const m=new Map(existing.map(t=>[t.id,t]));arr.forEach(t=>m.set(t.id,t));lsS('sai_tmpls',[...m.values()]);return;}
-  const{error}=await sb.from('templates').upsert(arr,{onConflict:'id'});
-  if(error)throw error;
 }
 async function dbUpsertTmpl(t){if(useLocal){const a=lsG('sai_tmpls')||[];const i=a.findIndex(x=>x.id===t.id);if(i>=0)a[i]=t;else a.push(t);lsS('sai_tmpls',a);return t;}const{data,error}=await sb.from('templates').upsert(t,{onConflict:'id'}).select().single();if(error)throw error;return data;}
 async function dbDeleteTmpl(id){if(useLocal){lsS('sai_tmpls',(lsG('sai_tmpls')||[]).filter(t=>t.id!==id));return;}const{error}=await sb.from('templates').delete().eq('id',id);if(error)throw error;}
@@ -1252,29 +1241,17 @@ let senderName=localStorage.getItem('sai_sender')||'Shabd AI Team';
 // ── Init ─────────────────────────────────────────────────────
 async function init(){
   setDbStatus('connecting');
-  // Show local data immediately, try Supabase in background
-  leads=lsG('sai_leads')||[];
-  templates=lsG('sai_tmpls')||[];
-  if(templates.length<10) templates=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
-  renderStats();renderSectorFilter();renderView();
-  // Now try Supabase in background
   const ok=await initDB();
   setDbStatus(ok?'connected':'local');
   try{
-    if(ok){
-      // Supabase connected — load from there
-      leads=await dbGetLeads();
-      const td=await dbGetTmpls();
-      const defaultTmpls=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
-      if(!td||td.length<10){
-        await dbBatchUpsertTmpls(defaultTmpls).catch(()=>{});
-        templates=defaultTmpls;
-      } else {
-        templates=td;
-      }
+    leads=await dbGetLeads();
+    const td=await dbGetTmpls();
+    const defaultTmpls=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+    if(!td||td.length<10){
+      await dbBatchUpsertTmpls(defaultTmpls).catch(()=>{});
+      templates=defaultTmpls;
     } else {
-      // Local mode — already loaded above, just use defaults if no templates
-      if(templates.length<10) templates=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+      templates=td;
     }
   }catch(e){
     leads=lsG('sai_leads')||[];
@@ -1282,20 +1259,13 @@ async function init(){
   }
   renderStats();renderSectorFilter();renderView();
 }
+
 function setDbStatus(s){
   const el=document.getElementById('db-status');if(!el)return;
   el.className='db-status';
-  if(s==='connected'){
-    el.classList.add('connected');
-    el.innerHTML='<span class="db-dot"></span> Supabase connected';
-  } else if(s==='local'){
-    el.classList.add('connected');
-    el.innerHTML='<span class="db-dot"></span> CRM ready';
-    el.title='Data saved locally in browser. Automation script syncs to Supabase in background.';
-    el.style.cursor='help';
-  } else {
-    el.innerHTML='<span class="spinner"></span>&nbsp;Loading...';
-  }
+  if(s==='connected'){el.classList.add('connected');el.innerHTML='<span class="db-dot"></span> Supabase connected';}
+  else if(s==='local'){el.innerHTML='<span class="db-dot" style="background:var(--or)"></span> Local mode';el.title='Supabase unavailable — data saved locally in browser';}
+  else{el.innerHTML='<span class="spinner"></span>&nbsp;Connecting...';}
 }
 
 // ── Helpers ───────────────────────────────────────────────────
@@ -1706,4 +1676,4 @@ window.markReminderDone=async function(leadId, field){
 init();
 </script>
 </body>
-</html>
+</html>async function dbUpsertMany(arr){if(useLocal){const a=lsG('sai_leads')||[];const m=new Map(a.map(l=>[l.id,l]));arr.forEach(l=>m.set(l.id,l));lsS('sai_leads',[...m.values()]);return arr;}const{data,error}=await sb.from('leads').upsert(arr,{onConflict:'id'}).select();if(error)throw error;return data;}
