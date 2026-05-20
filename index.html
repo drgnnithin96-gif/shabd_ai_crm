@@ -354,8 +354,8 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 
 <script type="module">
 // ── Config ────────────────────────────────────────────────────
-const SUPA_URL='https://sggysmqfontrymswxewq.supabase.co';
-const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNnZ3lzbXFmb250cnltc3d4ZXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0NDUzMDAsImV4cCI6MjA5NDAyMTMwMH0.mXaMKUsKVWeJb6Tec8hG3xl6WbkJrVbpUm1UGpEL0XE';
+const SUPA_URL='https://onzotxeiitaiiowmmavz.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9uem90eGVpaXRhaWlvd21tYXZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNTc1MzAsImV4cCI6MjA5NDgzMzUzMH0.PNy4X4xjTGs6yMCrFzVZ07gm1ATLfxEV62nHbeMCoig';
 
 // ── Default templates (6 sectors × 4 emails = 24) ─────────────
 const DEFAULT_TMPLS=[
@@ -1208,11 +1208,26 @@ let sb=null,useLocal=false;
 async function initDB(){
   try{
     const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2');
-    sb=createClient(SUPA_URL,SUPA_KEY);
-    const {error}=await sb.from('leads').select('id').limit(1);
-    if(error)throw error;
+    sb=createClient(SUPA_URL,SUPA_KEY,{
+      global:{
+        fetch:(url,options={})=>fetch(url,{...options,mode:'cors',credentials:'omit'})
+      },
+      auth:{persistSession:false,autoRefreshToken:false}
+    });
+    const {data,error}=await sb.from('leads').select('id').limit(1);
+    if(error){
+      // If allowlist error, switch to local mode silently
+      if(error.message&&(error.message.includes('allowlist')||error.message.includes('403'))){
+        useLocal=true;return false;
+      }
+      throw error;
+    }
     return true;
-  }catch(e){console.error('Supabase:',e.message);useLocal=true;return false;}
+  }catch(e){
+    // Network or CORS error - use local storage
+    console.warn('Supabase unavailable, using local storage:',e.message);
+    useLocal=true;return false;
+  }
 }
 const lsG=k=>{try{return JSON.parse(localStorage.getItem(k));}catch{return null;}};
 const lsS=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
@@ -1269,7 +1284,11 @@ function setDbStatus(s){
   const el=document.getElementById('db-status');if(!el)return;
   el.className='db-status';
   if(s==='connected'){el.classList.add('connected');el.innerHTML='<span class="db-dot"></span> Supabase connected';}
-  else if(s==='local'){el.innerHTML='<span class="db-dot" style="background:var(--or)"></span> Offline mode (local)';el.title='Supabase unavailable — data saved locally in browser';}
+  else if(s==='local'){
+    el.innerHTML='<span class="db-dot" style="background:var(--am)"></span> Local mode';
+    el.title='Working offline — data saved in this browser. Your automation script syncs to Supabase.';
+    el.style.cursor='help';
+  }
   else{el.innerHTML='<span class="spinner"></span>&nbsp;Connecting...';}
 }
 
