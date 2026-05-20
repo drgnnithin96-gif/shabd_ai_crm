@@ -1245,21 +1245,15 @@ async function init(){
   setDbStatus('connecting');
   const ok=await initDB();
   setDbStatus(ok?'connected':'local');
+  // Always load DEFAULT_TMPLS immediately so templates tab always works
+  templates=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
   try{
     leads=await dbGetLeads();
     const td=await dbGetTmpls();
-    const defaultTmpls=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
-    if(!td||td.length<10){
-      // Push all default templates to Supabase and use them
-      templates=defaultTmpls;
-      dbBatchUpsertTmpls(defaultTmpls).catch(e=>console.warn('Template sync:',e.message));
-    } else {
-      templates=td;
-    }
+    if(td&&td.length>=10){templates=td;}
+    else{dbBatchUpsertTmpls(JSON.parse(JSON.stringify(DEFAULT_TMPLS))).catch(()=>{});}
   }catch(e){
     leads=lsG('sai_leads')||[];
-    templates=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
-    console.warn('Using default templates:',e.message);
   }
   renderStats();renderSectorFilter();renderView();
 }
@@ -1670,3 +1664,4 @@ init();
 </script>
 </body>
 </html>async function dbUpsertMany(arr){if(useLocal){const a=lsG('sai_leads')||[];const m=new Map(a.map(l=>[l.id,l]));arr.forEach(l=>m.set(l.id,l));lsS('sai_leads',[...m.values()]);return arr;}const{data,error}=await sb.from('leads').upsert(arr,{onConflict:'id'}).select();if(error)throw error;return data;}
+
