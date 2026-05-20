@@ -1217,10 +1217,16 @@ async function initDB(){
 const lsG=k=>{try{return JSON.parse(localStorage.getItem(k));}catch{return null;}};
 const lsS=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 async function dbGetLeads(){if(useLocal)return lsG('sai_leads')||[];const{data,error}=await sb.from('leads').select('*').order('created',{ascending:false});if(error)throw error;return data||[];}
+async function dbUpsertLead(l){return dbUpsert(l);}
 async function dbUpsert(l){if(useLocal){const a=lsG('sai_leads')||[];const i=a.findIndex(x=>x.id===l.id);if(i>=0)a[i]=l;else a.unshift(l);lsS('sai_leads',a);return l;}const{data,error}=await sb.from('leads').upsert(l,{onConflict:'id'}).select().single();if(error)throw error;return data;}
 async function dbUpsertMany(arr){if(useLocal){const a=lsG('sai_leads')||[];const m=new Map(a.map(l=>[l.id,l]));arr.forEach(l=>m.set(l.id,l));lsS('sai_leads',[...m.values()]);return arr;}const{data,error}=await sb.from('leads').upsert(arr,{onConflict:'id'}).select();if(error)throw error;return data;}
 async function dbDelete(id){if(useLocal){lsS('sai_leads',(lsG('sai_leads')||[]).filter(l=>l.id!==id));return;}const{error}=await sb.from('leads').delete().eq('id',id);if(error)throw error;}
 async function dbGetTmpls(){if(useLocal)return lsG('sai_tmpls')||null;const{data,error}=await sb.from('templates').select('*').order('created',{ascending:true});if(error)throw error;return data&&data.length?data:null;}
+async function dbBatchUpsertTmpls(arr){
+  if(useLocal){const existing=lsG('sai_tmpls')||[];const m=new Map(existing.map(t=>[t.id,t]));arr.forEach(t=>m.set(t.id,t));lsS('sai_tmpls',[...m.values()]);return;}
+  const{error}=await sb.from('templates').upsert(arr,{onConflict:'id'});
+  if(error)throw error;
+}
 async function dbUpsertTmpl(t){if(useLocal){const a=lsG('sai_tmpls')||[];const i=a.findIndex(x=>x.id===t.id);if(i>=0)a[i]=t;else a.push(t);lsS('sai_tmpls',a);return t;}const{data,error}=await sb.from('templates').upsert(t,{onConflict:'id'}).select().single();if(error)throw error;return data;}
 async function dbDeleteTmpl(id){if(useLocal){lsS('sai_tmpls',(lsG('sai_tmpls')||[]).filter(t=>t.id!==id));return;}const{error}=await sb.from('templates').delete().eq('id',id);if(error)throw error;}
 
@@ -1241,15 +1247,18 @@ async function init(){
   setDbStatus(ok?'connected':'local');
   try{
     leads=await dbGetLeads();
-    // Always sync all default templates to Supabase
-    // This ensures new templates added to code appear for all users
+    // Load templates — only sync defaults if Supabase has none yet
     const td=await dbGetTmpls();
     const defaultTmpls=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
-    // Upsert all default templates (adds new ones, updates existing)
-    for(const t of defaultTmpls) await dbUpsertTmpl(t).catch(()=>{});
-    // Fetch again to get any user-custom templates too
-    const allTmpls=await dbGetTmpls();
-    templates=allTmpls||defaultTmpls;
+    if(!td||td.length<10){
+      // Batch upsert all defaults in one call instead of 48 sequential calls
+      await dbBatchUpsertTmpls(defaultTmpls).catch(()=>{
+        for(const t of defaultTmpls) dbUpsertTmpl(t).catch(()=>{}); // fallback
+      });
+      templates=defaultTmpls;
+    } else {
+      templates=td;
+    }
   }catch(e){
     leads=lsG('sai_leads')||[];
     templates=lsG('sai_tmpls')||JSON.parse(JSON.stringify(DEFAULT_TMPLS));
@@ -1260,7 +1269,7 @@ function setDbStatus(s){
   const el=document.getElementById('db-status');if(!el)return;
   el.className='db-status';
   if(s==='connected'){el.classList.add('connected');el.innerHTML='<span class="db-dot"></span> Supabase connected';}
-  else if(s==='local'){el.innerHTML='<span class="db-dot"></span> Local storage';}
+  else if(s==='local'){el.innerHTML='<span class="db-dot" style="background:var(--or)"></span> Offline mode (local)';el.title='Supabase unavailable — data saved locally in browser';}
   else{el.innerHTML='<span class="spinner"></span>&nbsp;Connecting...';}
 }
 
