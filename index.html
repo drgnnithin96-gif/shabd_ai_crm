@@ -1418,7 +1418,8 @@ function renderComposeView(){
   const smtp=getSmtpSettings();
   const smtpOk=smtp.email&&smtp.password;
   const leadOpts=leads.map(l=>`<option value="${l.id}">${esc(l.name)} &mdash; ${esc(l.company)} (${esc(l.email)})</option>`).join('');
-  const tmplOpts=templates.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('');
+  const safeTmpls=(templates&&templates.length>=1)?templates:JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+  const tmplOpts=safeTmpls.filter(t=>t&&t.id).map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('');
   el.innerHTML=`
     ${!smtpOk?`<div style="background:var(--rdd);border:1px solid rgba(248,113,113,.3);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:13px;display:flex;align-items:center;justify-content:space-between"><span style="color:var(--rd)">Set up email settings before sending</span><button class="bs" style="font-size:12px;padding:5px 12px" onclick="openSmtp()">Set up now</button></div>`:''}
     <div class="compose-wrap">
@@ -1482,7 +1483,9 @@ window.onLeadPick=function(id){
   if(subj&&subj.value)subj.value=applyTokens(subj.value,l);
 };
 window.loadComposeTemplate=function(tid){
-  if(!tid)return;const t=templates.find(x=>x.id===tid);if(!t)return;
+  if(!tid)return;
+  const allTmpls=(templates&&templates.length>=1)?templates:JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+  const t=allTmpls.find(x=>x.id===tid);if(!t)return;
   const lead=composeLeadId?leads.find(x=>x.id===composeLeadId):null;
   document.getElementById('c-subject').value=lead?applyTokens(t.subject,lead):t.subject;
   document.getElementById('c-body').value=lead?applyTokens(t.body,lead):t.body;
@@ -1561,10 +1564,11 @@ window.deleteSel=async function(){
 window.openEmail=function(id){
   emailLeadId=id;
   const lead=leads.find(x=>x.id===id);if(!lead)return;
+  const allTmpls=(templates&&templates.length>=1)?templates:JSON.parse(JSON.stringify(DEFAULT_TMPLS));
   // Sort: matching sector first (intro + followups), then others
-  const mine=templates.filter(t=>t.sector===lead.sector);
-  const rest=templates.filter(t=>t.sector!==lead.sector&&t.sector!=='All sectors');
-  const all=templates.filter(t=>t.sector==='All sectors');
+  const mine=allTmpls.filter(t=>t&&t.sector===lead.sector);
+  const rest=allTmpls.filter(t=>t&&t.sector!==lead.sector&&t.sector!=='All sectors');
+  const all=allTmpls.filter(t=>t&&t.sector==='All sectors');
   const sorted=[...mine,...all,...rest];
   document.getElementById('email-ttabs').innerHTML=sorted.map((t,i)=>`<button class="tt${i===0?' active':''}" data-tid="${t.id}" data-lid="${id}" onclick="selTmpl(this)">${esc(t.name)}</button>`).join('');
   if(sorted.length>0)renderEmailPrev(sorted[0].id,lead);
@@ -1590,7 +1594,11 @@ window.copySubj=function(){const tx=document.getElementById('email-subp').textCo
 // ── Templates view ────────────────────────────────────────────
 function renderTemplatesView(){
   const el=document.getElementById('content');
-  const byS={};templates.forEach(t=>{if(!byS[t.sector])byS[t.sector]=[];byS[t.sector].push(t);});
+  // Always ensure templates are loaded - use DEFAULT_TMPLS if empty
+  if(!templates||templates.length<1){
+    templates=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+  }
+  const byS={};templates.filter(t=>t&&t.sector).forEach(t=>{if(!byS[t.sector])byS[t.sector]=[];byS[t.sector].push(t);});
   el.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
     <div style="font-size:13px;color:var(--mu)">${templates.length} templates across ${Object.keys(byS).length} sectors</div>
     <div style="display:flex;gap:8px">
