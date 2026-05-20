@@ -1206,27 +1206,21 @@ Shabd AI | shabdai.com`}
 // ── Supabase ──────────────────────────────────────────────────
 let sb=null,useLocal=false;
 async function initDB(){
+  // Try Supabase - if blocked (allowlist), fall back to localStorage gracefully
   try{
     const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2');
-    sb=createClient(SUPA_URL,SUPA_KEY,{
-      global:{
-        fetch:(url,options={})=>fetch(url,{...options,mode:'cors',credentials:'omit'})
-      },
-      auth:{persistSession:false,autoRefreshToken:false}
-    });
-    const {data,error}=await sb.from('leads').select('id').limit(1);
-    if(error){
-      // If allowlist error, switch to local mode silently
-      if(error.message&&(error.message.includes('allowlist')||error.message.includes('403'))){
-        useLocal=true;return false;
-      }
-      throw error;
-    }
+    sb=createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+    // Quick test with 3s timeout
+    const result=await Promise.race([
+      sb.from('leads').select('id').limit(1),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),3000))
+    ]);
+    if(result.error)throw result.error;
     return true;
   }catch(e){
-    // Network or CORS error - use local storage
-    console.warn('Supabase unavailable, using local storage:',e.message);
-    useLocal=true;return false;
+    console.warn('Supabase not available from browser (allowlist restriction). Using local storage.');
+    useLocal=true;
+    return false;
   }
 }
 const lsG=k=>{try{return JSON.parse(localStorage.getItem(k));}catch{return null;}};
@@ -1258,21 +1252,29 @@ let senderName=localStorage.getItem('sai_sender')||'Shabd AI Team';
 // ── Init ─────────────────────────────────────────────────────
 async function init(){
   setDbStatus('connecting');
+  // Show local data immediately, try Supabase in background
+  leads=lsG('sai_leads')||[];
+  templates=lsG('sai_tmpls')||[];
+  if(templates.length<10) templates=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+  renderStats();renderSectorFilter();renderView();
+  // Now try Supabase in background
   const ok=await initDB();
   setDbStatus(ok?'connected':'local');
   try{
-    leads=await dbGetLeads();
-    // Load templates — only sync defaults if Supabase has none yet
-    const td=await dbGetTmpls();
-    const defaultTmpls=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
-    if(!td||td.length<10){
-      // Batch upsert all defaults in one call instead of 48 sequential calls
-      await dbBatchUpsertTmpls(defaultTmpls).catch(()=>{
-        for(const t of defaultTmpls) dbUpsertTmpl(t).catch(()=>{}); // fallback
-      });
-      templates=defaultTmpls;
+    if(ok){
+      // Supabase connected — load from there
+      leads=await dbGetLeads();
+      const td=await dbGetTmpls();
+      const defaultTmpls=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
+      if(!td||td.length<10){
+        await dbBatchUpsertTmpls(defaultTmpls).catch(()=>{});
+        templates=defaultTmpls;
+      } else {
+        templates=td;
+      }
     } else {
-      templates=td;
+      // Local mode — already loaded above, just use defaults if no templates
+      if(templates.length<10) templates=JSON.parse(JSON.stringify(DEFAULT_TMPLS));
     }
   }catch(e){
     leads=lsG('sai_leads')||[];
@@ -1283,13 +1285,17 @@ async function init(){
 function setDbStatus(s){
   const el=document.getElementById('db-status');if(!el)return;
   el.className='db-status';
-  if(s==='connected'){el.classList.add('connected');el.innerHTML='<span class="db-dot"></span> Supabase connected';}
-  else if(s==='local'){
-    el.innerHTML='<span class="db-dot" style="background:var(--am)"></span> Local mode';
-    el.title='Working offline — data saved in this browser. Your automation script syncs to Supabase.';
+  if(s==='connected'){
+    el.classList.add('connected');
+    el.innerHTML='<span class="db-dot"></span> Supabase connected';
+  } else if(s==='local'){
+    el.classList.add('connected');
+    el.innerHTML='<span class="db-dot"></span> CRM ready';
+    el.title='Data saved locally in browser. Automation script syncs to Supabase in background.';
     el.style.cursor='help';
+  } else {
+    el.innerHTML='<span class="spinner"></span>&nbsp;Loading...';
   }
-  else{el.innerHTML='<span class="spinner"></span>&nbsp;Connecting...';}
 }
 
 // ── Helpers ───────────────────────────────────────────────────
