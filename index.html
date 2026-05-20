@@ -1498,15 +1498,7 @@ window.insertToken=function(tok){
 };
 window.insertSignature=function(){
   const ta=document.getElementById('c-body');if(!ta)return;
-  ta.value+='
-
-Warm regards,
-Nithin G N
-Founder's Office, Shabd AI
-Top 30 Finalist, India AI Impact Summit 2026
-Incubated at NSRCEL, IIM Bangalore
-+91-7204147925
-https://shabdai.com';
+  ta.value+='\n\nWarm regards,\nNithin G N\nFounder\'s Office, Shabd AI\nTop 30 Finalist, India AI Impact Summit 2026\nIncubated at NSRCEL, IIM Bangalore\n+91-7204147925\nhttps://shabdai.com';
   ta.focus();
 };
 window.clearCompose=function(){
@@ -1537,10 +1529,7 @@ window.sendCompose=async function(){
   statusEl.style.display='block';statusEl.style.background='var(--sf2)';statusEl.style.color='var(--mu)';statusEl.textContent='Preparing...';
   try{
     // Copy full email to clipboard for paste into Titan
-    const full='To: '+to+'
-Subject: '+subj+'
-
-'+body;
+    const full='To: '+to+'\nSubject: '+subj+'\n\n'+body;
     await navigator.clipboard.writeText(full);
     statusEl.style.background='var(--gnd)';statusEl.style.color='var(--gn)';
     statusEl.innerHTML='Email copied to clipboard. Open Titan mail, paste into a new email, and send to <strong>'+esc(to)+'</strong>.';
