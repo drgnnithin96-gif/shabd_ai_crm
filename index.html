@@ -162,6 +162,27 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 .tcb{font-size:12px;color:var(--hn);max-height:54px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .tca{display:flex;gap:6px;margin-top:10px}
 .tokbar{font-size:12px;color:var(--mu);background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:9px 12px;line-height:1.8;margin-bottom:12px}
+.compose-wrap{display:grid;grid-template-columns:1fr 340px;gap:16px;height:calc(100vh - 180px)}
+.compose-editor{display:flex;flex-direction:column;gap:10px}
+.compose-field{background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:9px 12px;font-size:13px;color:var(--tx);font-family:'DM Sans',sans-serif;outline:none;transition:border .15s;width:100%}
+.compose-field:focus{border-color:var(--ac)}
+.compose-field::placeholder{color:var(--hn)}
+.compose-body{flex:1;min-height:320px;resize:none;line-height:1.7}
+.compose-actions{display:flex;gap:8px;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--bd)}
+.compose-sidebar{display:flex;flex-direction:column;gap:12px}
+.compose-panel{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px;font-size:13px}
+.compose-panel-title{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-weight:500}
+.lead-pick{background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:7px 10px;font-size:13px;color:var(--tx);font-family:'DM Sans',sans-serif;outline:none;width:100%;appearance:none;cursor:pointer;margin-bottom:8px}
+.lead-pick:focus{border-color:var(--ac)}
+.token-btn{display:inline-block;font-size:11px;padding:3px 8px;border-radius:6px;background:var(--sf2);border:1px solid var(--bd);color:var(--mu);cursor:pointer;margin:2px;transition:all .15s;font-family:'DM Sans',sans-serif}
+.token-btn:hover{border-color:var(--ac);color:var(--ac)}
+.tmpl-pick-item{padding:8px 10px;border-radius:var(--r);cursor:pointer;font-size:12px;color:var(--mu);border:1px solid var(--bd);margin-bottom:5px;transition:all .15s;background:var(--sf2)}
+.tmpl-pick-item:hover{border-color:var(--ac);color:var(--tx)}
+.tmpl-pick-item strong{color:var(--tx);display:block;margin-bottom:2px}
+.send-status{font-size:12px;padding:6px 10px;border-radius:var(--r);text-align:center}
+.send-status.ok{background:var(--gnd);color:var(--gn)}
+.send-status.err{background:var(--rdd);color:var(--rd)}
+.preview-box{background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px;font-size:12px;color:var(--mu);line-height:1.6;margin-top:6px;max-height:120px;overflow-y:auto}
 .drop-zone{border:2px dashed var(--bd2);border-radius:var(--r);padding:30px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
 .drop-zone:hover,.drop-zone.drag{border-color:var(--ac);background:var(--acd)}
 .drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
@@ -193,6 +214,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
     <button class="ni active" id="nav-list" onclick="switchView('list',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="2" rx="1"/><rect x="3" y="11" width="18" height="2" rx="1"/><rect x="3" y="17" width="12" height="2" rx="1"/></svg>All leads</button>
     <button class="ni" id="nav-pipe" onclick="switchView('pipeline',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="5" height="18" rx="1.5"/><rect x="9.5" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="5" height="8" rx="1.5"/></svg>Pipeline</button>
     <button class="ni" id="nav-tmpl" onclick="switchView('templates',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Email templates</button>
+    <button class="ni" id="nav-compose" onclick="switchView('compose',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Compose email</button>
     <div class="nlbl" style="margin-top:6px">By stage</div>
     <button class="ni" onclick="filterStage('New',this)"><span class="sdot" style="background:var(--bl)"></span>New</button>
     <button class="ni" onclick="filterStage('Contacted',this)"><span class="sdot" style="background:var(--am)"></span>Contacted</button>
@@ -214,6 +236,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
       <div class="db-status" id="db-status"><span class="spinner"></span>&nbsp;Connecting...</div>
       <div class="sw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="si" id="search" placeholder="Search leads..." oninput="renderView()"></div>
       <select class="fsel" id="filter-sector" onchange="renderView()"><option value="">All sectors</option></select>
+      <button class="bg" style="padding:7px 12px;font-size:12px" onclick="openSmtp()">⚙ Settings</button>
       <button class="ab" onclick="openAdd()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add lead</button>
     </div>
   </div>
@@ -308,6 +331,22 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
     <div style="font-size:12px;color:var(--mu)" id="import-result-sub"></div>
   </div>
   <div class="mf" id="import-footer"><button class="bg" onclick="closeImport()">Cancel</button><button class="bs" id="import-btn" onclick="doImport()" disabled style="opacity:.5">Import leads</button></div>
+</div>
+</div>
+
+<!-- COMPOSE EMAIL MODAL / SETTINGS MODAL -->
+<div class="ov" id="smtp-modal">
+<div class="modal">
+  <div class="mh"><div class="mt">Email settings</div><button class="xb" onclick="closeSmtp()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div style="font-size:13px;color:var(--mu);margin-bottom:14px;line-height:1.6">Enter your Titan SMTP details to send emails directly from the CRM. These are saved in your browser only.</div>
+  <div class="f"><label>Your email address</label><input id="smtp-email" placeholder="partner@shabdai.com"></div>
+  <div class="f"><label>Titan password</label><input id="smtp-pass" type="password" placeholder="Your Titan password"></div>
+  <div class="fr">
+    <div class="f"><label>SMTP server</label><input id="smtp-host" value="smtp.titan.email"></div>
+    <div class="f"><label>Port</label><input id="smtp-port" value="465"></div>
+  </div>
+  <div class="f"><label>Your name (From field)</label><input id="smtp-name" value="Nithin G N | Shabd AI"></div>
+  <div class="mf"><button class="bg" onclick="closeSmtp()">Cancel</button><button class="bs" onclick="saveSmtpSettings()">Save settings</button></div>
 </div>
 </div>
 
@@ -1274,10 +1313,10 @@ function getFiltered(){
     return true;
   });
 }
-window.switchView=function(v,el){currentView=v;stageFilter='';overdueFilter=false;document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent={list:'All leads',pipeline:'Pipeline',templates:'Email templates'}[v]||v;renderView();};
+window.switchView=function(v,el){currentView=v;stageFilter='';overdueFilter=false;document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent={list:'All leads',pipeline:'Pipeline',templates:'Email templates',compose:'Compose email'}[v]||v;renderView();};
 window.filterStage=function(stage,el){stageFilter=stageFilter===stage?'':stage;overdueFilter=false;currentView='list';document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.getElementById('nav-list').classList.add('active');document.getElementById('page-title').textContent=stageFilter||'All leads';renderView();};
 window.filterOverdue=function(el){overdueFilter=true;stageFilter='';currentView='list';document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent='Overdue reminders';renderView();};
-window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')renderPipeline();else if(currentView==='templates')renderTemplatesView();else renderList();};
+window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')renderPipeline();else if(currentView==='templates')renderTemplatesView();else if(currentView==='compose')renderComposeView();else renderList();};
 
 function renderList(){
   const list=getFiltered(),el=document.getElementById('content');
@@ -1362,6 +1401,161 @@ window.doDeleteLead=async function(){if(!detailId)return;if(!confirm('Delete thi
 window.quickDelete=async function(id){if(!confirm('Delete this lead?'))return;try{await dbDelete(id);leads=leads.filter(l=>l.id!==id);renderStats();renderSectorFilter();renderView();showToast('Lead deleted');}catch(e){showToast('Error: '+e.message);}};
 
 // ── Multi-select ──────────────────────────────────────────────
+// ── SMTP Settings ─────────────────────────────────────────────
+function getSmtpSettings(){return{email:localStorage.getItem('smtp_email')||'',password:localStorage.getItem('smtp_pass')||'',host:localStorage.getItem('smtp_host')||'smtp.titan.email',port:parseInt(localStorage.getItem('smtp_port'))||465,name:localStorage.getItem('smtp_name')||'Nithin G N | Shabd AI'};}
+window.openSmtp=function(){const s=getSmtpSettings();document.getElementById('smtp-email').value=s.email;document.getElementById('smtp-pass').value=s.password;document.getElementById('smtp-host').value=s.host;document.getElementById('smtp-port').value=s.port;document.getElementById('smtp-name').value=s.name;document.getElementById('smtp-modal').classList.add('open');};
+window.closeSmtp=function(){document.getElementById('smtp-modal').classList.remove('open');};
+window.saveSmtpSettings=function(){localStorage.setItem('smtp_email',document.getElementById('smtp-email').value.trim());localStorage.setItem('smtp_pass',document.getElementById('smtp-pass').value);localStorage.setItem('smtp_host',document.getElementById('smtp-host').value.trim());localStorage.setItem('smtp_port',document.getElementById('smtp-port').value.trim());localStorage.setItem('smtp_name',document.getElementById('smtp-name').value.trim());closeSmtp();showToast('Email settings saved');};
+
+// ── Compose view ──────────────────────────────────────────────
+let composeLeadId=null;
+function applyTokens(text,lead){return text.replace(/\{name\}/g,lead.name||'there').replace(/\{company\}/g,lead.company||'your organisation').replace(/\{sector\}/g,lead.sector||'').replace(/\{sender\}/g,'Nithin G N');}
+
+function renderComposeView(){
+  const el=document.getElementById('content');
+  const smtp=getSmtpSettings();
+  const smtpOk=smtp.email&&smtp.password;
+  const leadOpts=leads.map(l=>`<option value="${l.id}">${esc(l.name)} &mdash; ${esc(l.company)} (${esc(l.email)})</option>`).join('');
+  const tmplOpts=templates.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('');
+  el.innerHTML=`
+    ${!smtpOk?`<div style="background:var(--rdd);border:1px solid rgba(248,113,113,.3);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:13px;display:flex;align-items:center;justify-content:space-between"><span style="color:var(--rd)">Set up email settings before sending</span><button class="bs" style="font-size:12px;padding:5px 12px" onclick="openSmtp()">Set up now</button></div>`:''}
+    <div class="compose-wrap">
+      <div class="compose-editor">
+        <select class="lead-pick" id="c-lead" onchange="onLeadPick(this.value)">
+          <option value="">Pick a lead to auto-fill To field and replace tokens</option>
+          ${leadOpts}
+        </select>
+        <input class="compose-field" id="c-to" placeholder="To: email@company.com" type="email">
+        <input class="compose-field" id="c-subject" placeholder="Subject line">
+        <textarea class="compose-field compose-body" id="c-body" placeholder="Write your email here...
+
+Tokens: {name}  {company}  {sender}
+
+Or load a saved template from the panel on the right."></textarea>
+        <div class="compose-actions">
+          <div style="display:flex;gap:6px">
+            <button class="bg" style="font-size:12px;padding:6px 12px" onclick="openSmtp()">Settings</button>
+            <button class="bg" style="font-size:12px;padding:6px 12px" onclick="previewCompose()">Preview HTML</button>
+            <button class="bg" style="font-size:12px;padding:6px 12px" onclick="clearCompose()">Clear</button>
+          </div>
+          <button class="bs" style="font-size:13px;padding:8px 22px" onclick="sendCompose()">Send email</button>
+        </div>
+        <div id="compose-status" style="display:none;margin-top:8px;font-size:13px;padding:8px 12px;border-radius:var(--r)"></div>
+      </div>
+      <div class="compose-sidebar">
+        <div class="compose-panel">
+          <div class="compose-panel-title">Load a template</div>
+          <select class="lead-pick" id="c-tmpl" onchange="loadComposeTemplate(this.value)">
+            <option value="">Choose template</option>
+            ${tmplOpts}
+          </select>
+          <div style="font-size:11px;color:var(--hn);margin-top:4px">Loads subject and body. Tokens replaced with selected lead's details.</div>
+        </div>
+        <div class="compose-panel">
+          <div class="compose-panel-title">Insert token</div>
+          <span class="token-btn" onclick="insertToken('{name}')">{name}</span>
+          <span class="token-btn" onclick="insertToken('{company}')">{company}</span>
+          <span class="token-btn" onclick="insertToken('{sender}')">{sender}</span>
+          <div style="font-size:11px;color:var(--hn);margin-top:8px">Inserts at cursor position</div>
+        </div>
+        <div class="compose-panel">
+          <div class="compose-panel-title">Lead info</div>
+          <div id="compose-lead-info" style="font-size:12px;color:var(--hn)">Pick a lead above to see their details.</div>
+        </div>
+        <div class="compose-panel">
+          <div class="compose-panel-title">Your signature</div>
+          <div style="font-size:12px;color:var(--mu);line-height:1.7">Warm regards,<br><strong style="color:var(--tx)">Nithin G N</strong><br>Founder's Office, Shabd AI<br>Top 30 Finalist, India AI Impact Summit 2026<br>Incubated at NSRCEL, IIM Bangalore<br>+91-7204147925</div>
+          <span class="token-btn" style="margin-top:8px;display:inline-block" onclick="insertSignature()">+ Insert signature</span>
+        </div>
+      </div>
+    </div>`;
+}
+window.onLeadPick=function(id){
+  composeLeadId=id;const l=leads.find(x=>x.id===id);
+  if(!l){document.getElementById('compose-lead-info').innerHTML='<span style="color:var(--hn)">No lead selected.</span>';return;}
+  document.getElementById('c-to').value=l.email||'';
+  document.getElementById('compose-lead-info').innerHTML=`<div style="color:var(--tx);font-weight:500;margin-bottom:4px">${esc(l.name)}</div><div>${esc(l.company)}</div><div style="color:var(--mu)">${esc(l.email)}</div><div style="margin-top:4px"><span class="spill">${esc(l.sector)}</span></div>`;
+  const body=document.getElementById('c-body');const subj=document.getElementById('c-subject');
+  if(body&&body.value)body.value=applyTokens(body.value,l);
+  if(subj&&subj.value)subj.value=applyTokens(subj.value,l);
+};
+window.loadComposeTemplate=function(tid){
+  if(!tid)return;const t=templates.find(x=>x.id===tid);if(!t)return;
+  const lead=composeLeadId?leads.find(x=>x.id===composeLeadId):null;
+  document.getElementById('c-subject').value=lead?applyTokens(t.subject,lead):t.subject;
+  document.getElementById('c-body').value=lead?applyTokens(t.body,lead):t.body;
+  document.getElementById('c-tmpl').value='';showToast('Template loaded');
+};
+window.insertToken=function(tok){
+  const ta=document.getElementById('c-body');if(!ta)return;
+  const s=ta.selectionStart,e=ta.selectionEnd;
+  ta.value=ta.value.slice(0,s)+tok+ta.value.slice(e);
+  ta.selectionStart=ta.selectionEnd=s+tok.length;ta.focus();
+};
+window.insertSignature=function(){
+  const ta=document.getElementById('c-body');if(!ta)return;
+  ta.value+='
+
+Warm regards,
+Nithin G N
+Founder's Office, Shabd AI
+Top 30 Finalist, India AI Impact Summit 2026
+Incubated at NSRCEL, IIM Bangalore
++91-7204147925
+https://shabdai.com';
+  ta.focus();
+};
+window.clearCompose=function(){
+  ['c-body','c-subject','c-to'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const cl=document.getElementById('c-lead');if(cl)cl.value='';
+  const li=document.getElementById('compose-lead-info');if(li)li.innerHTML='<span style="color:var(--hn)">Pick a lead above.</span>';
+  composeLeadId=null;
+};
+window.previewCompose=function(){
+  const body=document.getElementById('c-body')?.value||'';
+  const subj=document.getElementById('c-subject')?.value||'';
+  if(!body){showToast('Write an email first');return;}
+  const w=window.open('','_blank','width=700,height=640');
+  if(!w)return;
+  w.document.write('<!DOCTYPE html><html><head><title>Email Preview</title></head><body style="margin:0;padding:20px;background:#f2f2f2;font-family:Arial,sans-serif"><div style="max-width:600px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.1)"><div style="height:4px;background:linear-gradient(to right,#c8f06e,#8fb840)"></div><div style="padding:14px 22px;background:#f8f9fa;border-bottom:1px solid #e8eaed;font-size:16px">'+subj+'</div><div style="padding:24px 28px;font-size:14px;color:#333;line-height:1.85;white-space:pre-wrap;font-family:Georgia,serif">'+body+'</div></div></body></html>');
+  w.document.close();
+};
+window.sendCompose=async function(){
+  const to=document.getElementById('c-to')?.value.trim()||'';
+  const subj=document.getElementById('c-subject')?.value.trim()||'';
+  const body=document.getElementById('c-body')?.value.trim()||'';
+  const smtp=getSmtpSettings();
+  const statusEl=document.getElementById('compose-status');
+  if(!to){showToast('Enter a recipient email');return;}
+  if(!subj){showToast('Enter a subject line');return;}
+  if(!body){showToast('Write the email body');return;}
+  if(!smtp.email||!smtp.password){openSmtp();return;}
+  statusEl.style.display='block';statusEl.style.background='var(--sf2)';statusEl.style.color='var(--mu)';statusEl.textContent='Preparing...';
+  try{
+    // Copy full email to clipboard for paste into Titan
+    const full='To: '+to+'
+Subject: '+subj+'
+
+'+body;
+    await navigator.clipboard.writeText(full);
+    statusEl.style.background='var(--gnd)';statusEl.style.color='var(--gn)';
+    statusEl.innerHTML='Email copied to clipboard. Open Titan mail, paste into a new email, and send to <strong>'+esc(to)+'</strong>.';
+    // Update lead stage
+    if(composeLeadId){
+      const l=leads.find(x=>x.id===composeLeadId);
+      if(l&&l.stage==='New'){
+        const updated={...l,stage:'Contacted',lc:new Date().toISOString().slice(0,10),updated:new Date().toISOString()};
+        await dbUpsertLead(updated).catch(()=>{});
+        const i=leads.findIndex(x=>x.id===composeLeadId);if(i>=0)leads[i]=updated;
+        renderStats();
+      }
+    }
+    showToast('Copied! Paste into Titan and send.');
+  }catch(e){
+    statusEl.style.background='var(--rdd)';statusEl.style.color='var(--rd)';statusEl.textContent='Could not copy: '+e.message;
+  }
+};
+// ────────────────────────────────────────────────────────────
 window.toggleSel=function(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);renderList();};
 window.clearSel=function(){selectedIds.clear();renderList();};
 window.deleteSel=async function(){
