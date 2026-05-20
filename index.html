@@ -359,70 +359,879 @@ const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 
 // ── Default templates (6 sectors × 4 emails = 24) ─────────────
 const DEFAULT_TMPLS=[
-  {id:'t1',name:'NGO — Intro (Day 0)',sector:'NGO & Social Impact',subject:'Email for {company}',body:``},
-  {id:'t1f1',name:'NGO — Follow-up 1 (Day 5)',sector:'NGO & Social Impact',subject:'Email for {company}',body:``},
-  {id:'t1f2',name:'NGO — Follow-up 2 (Day 10 — Sample)',sector:'NGO & Social Impact',subject:'Email for {company}',body:``},
-  {id:'t1f3',name:'NGO — Follow-up 3 (Day 28 — Close)',sector:'NGO & Social Impact',subject:'Email for {company}',body:``},
-  {id:'t2',name:'Education — Intro (Day 0)',sector:'Education',subject:'Email for {company}',body:``},
-  {id:'t2f1',name:'Education — Follow-up 1 (Day 5)',sector:'Education',subject:'Email for {company}',body:``},
-  {id:'t2f2',name:'Education — Follow-up 2 (Day 10 — Sample)',sector:'Education',subject:'Email for {company}',body:``},
-  {id:'t2f3',name:'Education — Follow-up 3 (Day 28 — Close)',sector:'Education',subject:'Email for {company}',body:``},
-  {id:'t3',name:'Healthcare — Intro (Day 0)',sector:'Healthcare',subject:'Email for {company}',body:``},
-  {id:'t3f1',name:'Healthcare — Follow-up 1 (Day 5)',sector:'Healthcare',subject:'Email for {company}',body:``},
-  {id:'t3f2',name:'Healthcare — Follow-up 2 (Day 10 — Sample)',sector:'Healthcare',subject:'Email for {company}',body:``},
-  {id:'t3f3',name:'Healthcare — Follow-up 3 (Day 28 — Close)',sector:'Healthcare',subject:'Email for {company}',body:``},
-  {id:'t4',name:'SaaS — Intro (Day 0)',sector:'SaaS',subject:'Email for {company}',body:``},
-  {id:'t4f1',name:'SaaS — Follow-up 1 (Day 5)',sector:'SaaS',subject:'Email for {company}',body:``},
-  {id:'t4f2',name:'SaaS — Follow-up 2 (Day 10 — Sample)',sector:'SaaS',subject:'Email for {company}',body:``},
-  {id:'t4f3',name:'SaaS — Follow-up 3 (Day 28 — Close)',sector:'SaaS',subject:'Email for {company}',body:``},
-  {id:'t5',name:'E-commerce — Intro (Day 0)',sector:'E-commerce',subject:'Email for {company}',body:``},
-  {id:'t5f1',name:'E-commerce — Follow-up 1 (Day 5)',sector:'E-commerce',subject:'Email for {company}',body:``},
-  {id:'t5f2',name:'E-commerce — Follow-up 2 (Day 10 — Sample)',sector:'E-commerce',subject:'Email for {company}',body:``},
-  {id:'t5f3',name:'E-commerce — Follow-up 3 (Day 28 — Close)',sector:'E-commerce',subject:'Email for {company}',body:``},
-  {id:'t6',name:'Finance — Intro (Day 0)',sector:'Finance',subject:'Email for {company}',body:``},
-  {id:'t6f1',name:'Finance — Follow-up 1 (Day 5)',sector:'Finance',subject:'Email for {company}',body:``},
-  {id:'t6f2',name:'Finance — Follow-up 2 (Day 10 — Sample)',sector:'Finance',subject:'Email for {company}',body:``},
-  {id:'t6f3',name:'Finance — Follow-up 3 (Day 28 — Close)',sector:'Finance',subject:'Email for {company}',body:``},
-  {id:'t7',name:'Banking — Intro (Day 0)',sector:'Banking',subject:'Email for {company}',body:``},
-  {id:'t7f1',name:'Banking — Follow-up 1 (Day 5)',sector:'Banking',subject:'Email for {company}',body:``},
-  {id:'t7f2',name:'Banking — Follow-up 2 (Day 10 — Sample)',sector:'Banking',subject:'Email for {company}',body:``},
-  {id:'t7f3',name:'Banking — Follow-up 3 (Day 28 — Close)',sector:'Banking',subject:'Email for {company}',body:``},
-  {id:'t8',name:'NBFC — Intro (Day 0)',sector:'NBFC',subject:'Email for {company}',body:``},
-  {id:'t8f1',name:'NBFC — Follow-up 1 (Day 5)',sector:'NBFC',subject:'Email for {company}',body:``},
-  {id:'t8f2',name:'NBFC — Follow-up 2 (Day 10 — Sample)',sector:'NBFC',subject:'Email for {company}',body:``},
-  {id:'t8f3',name:'NBFC — Follow-up 3 (Day 28 — Close)',sector:'NBFC',subject:'Email for {company}',body:``},
-  {id:'t9',name:'Microfinance — Intro (Day 0)',sector:'Microfinance',subject:'Email for {company}',body:``},
-  {id:'t9f1',name:'Microfinance — Follow-up 1 (Day 5)',sector:'Microfinance',subject:'Email for {company}',body:``},
-  {id:'t9f2',name:'Microfinance — Follow-up 2 (Day 10 — Sample)',sector:'Microfinance',subject:'Email for {company}',body:``},
-  {id:'t9f3',name:'Microfinance — Follow-up 3 (Day 28 — Close)',sector:'Microfinance',subject:'Email for {company}',body:``},
-  {id:'t10',name:'Health — Intro (Day 0)',sector:'Health',subject:'Email for {company}',body:``},
-  {id:'t10f1',name:'Health — Follow-up 1 (Day 5)',sector:'Health',subject:'Email for {company}',body:``},
-  {id:'t10f2',name:'Health — Follow-up 2 (Day 10 — Sample)',sector:'Health',subject:'Email for {company}',body:``},
-  {id:'t10f3',name:'Health — Follow-up 3 (Day 28 — Close)',sector:'Health',subject:'Email for {company}',body:``},
-  {id:'t11',name:'Fashion — Intro (Day 0)',sector:'Fashion',subject:'Email for {company}',body:``},
-  {id:'t11f1',name:'Fashion — Follow-up 1 (Day 5)',sector:'Fashion',subject:'Email for {company}',body:``},
-  {id:'t11f2',name:'Fashion — Follow-up 2 (Day 10 — Sample)',sector:'Fashion',subject:'Email for {company}',body:``},
-  {id:'t11f3',name:'Fashion — Follow-up 3 (Day 28 — Close)',sector:'Fashion',subject:'Email for {company}',body:``},
-  {id:'t12',name:'Legal — Intro (Day 0)',sector:'Legal',subject:'Email for {company}',body:``},
-  {id:'t12f1',name:'Legal — Follow-up 1 (Day 5)',sector:'Legal',subject:'Email for {company}',body:``},
-  {id:'t12f2',name:'Legal — Follow-up 2 (Day 10 — Sample)',sector:'Legal',subject:'Email for {company}',body:``},
-  {id:'t12f3',name:'Legal — Follow-up 3 (Day 28 — Close)',sector:'Legal',subject:'Email for {company}',body:``},
-  {id:'t13',name:'Government — Intro (Day 0)',sector:'Government',subject:'Email for {company}',body:``},
-  {id:'t13f1',name:'Government — Follow-up 1 (Day 5)',sector:'Government',subject:'Email for {company}',body:``},
-  {id:'t13f2',name:'Government — Follow-up 2 (Day 10 — Sample)',sector:'Government',subject:'Email for {company}',body:``},
-  {id:'t13f3',name:'Government — Follow-up 3 (Day 28 — Close)',sector:'Government',subject:'Email for {company}',body:``},
-  {id:'t14',name:'Manufacturing — Intro (Day 0)',sector:'Manufacturing',subject:'Email for {company}',body:``},
-  {id:'t14f1',name:'Manufacturing — Follow-up 1 (Day 5)',sector:'Manufacturing',subject:'Email for {company}',body:``},
-  {id:'t14f2',name:'Manufacturing — Follow-up 2 (Day 10 — Sample)',sector:'Manufacturing',subject:'Email for {company}',body:``},
-  {id:'t14f3',name:'Manufacturing — Follow-up 3 (Day 28 — Close)',sector:'Manufacturing',subject:'Email for {company}',body:``},
-  {id:'t15',name:'Media — Intro (Day 0)',sector:'Media & Publishing',subject:'Email for {company}',body:``},
-  {id:'t15f1',name:'Media — Follow-up 1 (Day 5)',sector:'Media & Publishing',subject:'Email for {company}',body:``},
-  {id:'t15f2',name:'Media — Follow-up 2 (Day 10 — Sample)',sector:'Media & Publishing',subject:'Email for {company}',body:``},
-  {id:'t15f3',name:'Media — Follow-up 3 (Day 28 — Close)',sector:'Media & Publishing',subject:'Email for {company}',body:``},
-  {id:'t16',name:'Travel — Intro (Day 0)',sector:'Travel & Hospitality',subject:'Email for {company}',body:``},
-  {id:'t16f1',name:'Travel — Follow-up 1 (Day 5)',sector:'Travel & Hospitality',subject:'Email for {company}',body:``},
-  {id:'t16f2',name:'Travel — Follow-up 2 (Day 10 — Sample)',sector:'Travel & Hospitality',subject:'Email for {company}',body:``},
-  {id:'t16f3',name:'Travel — Follow-up 3 (Day 28 — Close)',sector:'Travel & Hospitality',subject:'Email for {company}',body:``}
+  {id:'t1',name:'NGO — Intro (Day 0)',sector:'NGO & Social Impact',subject:'Multilingual Communication Support for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.
+
+For organisations working across education, healthcare, skilling, livelihoods, and community outreach, multilingual communication can significantly improve accessibility, last-mile engagement, and programme effectiveness.
+
+We currently support 40+ organisations at scale, including Quest Alliance, ARMMAN, CRY, Central Square Foundation, AU Small Finance Bank, Jana Small Finance Bank, and Titan Company Limited.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t1f1',name:'NGO — Follow-up 1 (Day 5)',sector:'NGO & Social Impact',subject:'Re: Multilingual Communication Support for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For organisations working across diverse geographies and communities, multilingual communication often plays a key role in improving programme participation, beneficiary understanding, and field engagement.
+
+Happy to share a few relevant examples from similar organisations if helpful.
+
+Best,
+{sender}`},
+  {id:'t1f2',name:'NGO — Follow-up 2 (Day 10)',sector:'NGO & Social Impact',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful for organisations working across awareness programmes, training initiatives, beneficiary communication, and community outreach where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t1f3',name:'NGO — Follow-up 3 (Day 28)',sector:'NGO & Social Impact',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.
+
+Wishing you and the team the very best for your ongoing initiatives.
+
+Best,
+{sender}`},
+  {id:'t2',name:'Education — Intro (Day 0)',sector:'Education',subject:'Multilingual Learning Support for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger learner engagement and accessibility across diverse regions and communities.
+
+For education-focused organisations, multilingual communication can significantly improve learner participation, teacher engagement, comprehension, and accessibility, especially across Tier 2/3 and underserved regions.
+
+We support with:
+- Localisation of curriculum, assessments, and learning resources
+- Multilingual teacher training and skilling modules
+- Translation and dubbing of educational videos and classroom content
+- Voice-enabled learning experiences for low-bandwidth environments
+- Multilingual communication across learner and parent engagement initiatives
+
+We currently support 40+ organisations at scale, including Quest Alliance, Central Square Foundation, ARMMAN, CRY, AU Small Finance Bank, and Titan Company Limited.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t2f1',name:'Education — Follow-up 1 (Day 5)',sector:'Education',subject:'Re: Multilingual Learning Support for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For organisations working across diverse learner groups and geographies, multilingual learning experiences often help improve accessibility, comprehension, engagement, and programme participation significantly.
+
+Happy to share a few relevant examples from similar education initiatives if helpful.
+
+Best,
+{sender}`},
+  {id:'t2f2',name:'Education — Follow-up 2 (Day 10)',sector:'Education',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across curriculum delivery, teacher training, learner engagement, and parent/community communication where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t2f3',name:'Education — Follow-up 3 (Day 28)',sector:'Education',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual learning, localisation, or regional engagement becomes relevant for your team.
+
+Wishing you and the team the very best for your ongoing initiatives.
+
+Best,
+{sender}`},
+  {id:'t3',name:'Healthcare — Intro (Day 0)',sector:'Healthcare',subject:'Multilingual Patient Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer communication with patients, communities, and field teams across diverse geographies.
+
+For healthcare organisations, multilingual communication can significantly improve patient understanding, treatment adherence, beneficiary engagement, and last-mile health outcomes, especially across Tier 2/3 and rural communities.
+
+We support with:
+- Localisation of patient education content and health awareness materials
+- Multilingual training content for field health workers and ASHA/ANM teams
+- Translation and dubbing of health communication videos
+- IVR and WhatsApp scripts for patient and beneficiary outreach
+- Multilingual digital interfaces for patient-facing programmes
+
+We currently support 40+ organisations at scale, including ARMMAN, CRY, Quest Alliance, Central Square Foundation, AU Small Finance Bank, and Titan Company Limited.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t3f1',name:'Healthcare — Follow-up 1 (Day 5)',sector:'Healthcare',subject:'Re: Multilingual Patient Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For healthcare organisations working across diverse communities and geographies, multilingual communication often plays a critical role in improving patient understanding, treatment adherence, and last-mile health outcomes.
+
+Happy to share a few relevant examples from similar health initiatives if helpful.
+
+Best,
+{sender}`},
+  {id:'t3f2',name:'Healthcare — Follow-up 2 (Day 10)',sector:'Healthcare',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across patient education, health awareness, field team training, and beneficiary outreach where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t3f3',name:'Healthcare — Follow-up 3 (Day 28)',sector:'Healthcare',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual health communication, localisation, or regional engagement becomes relevant for your team.
+
+Wishing you and the team the very best for your ongoing initiatives.
+
+Best,
+{sender}`},
+  {id:'t4',name:'SaaS — Intro (Day 0)',sector:'SaaS',subject:'Multilingual Product Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger product engagement and accessibility across diverse user segments and regions.
+
+For SaaS and technology companies, multilingual communication can significantly improve user activation, retention, and engagement, especially across Tier 2/3 markets where language directly impacts product adoption and customer experience.
+
+We support with:
+- Localisation of product UI, onboarding flows, and in-app communication
+- Multilingual customer support content and help centre resources
+- Translation of marketing and campaign material for regional audiences
+- Voice-enabled product experiences across Indian languages
+- Multilingual push notifications, WhatsApp, and engagement workflows
+
+We currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, Titan Company Limited, and other growth-stage and enterprise teams.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t4f1',name:'SaaS — Follow-up 1 (Day 5)',sector:'SaaS',subject:'Re: Multilingual Product Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For technology companies expanding across India, multilingual product experiences often help significantly improve user activation, engagement, and retention across Tier 2/3 markets.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t4f2',name:'SaaS — Follow-up 2 (Day 10)',sector:'SaaS',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across product onboarding, in-app communication, customer support, and regional marketing where accessibility and localisation become important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t4f3',name:'SaaS — Follow-up 3 (Day 28)',sector:'SaaS',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual product communication, localisation, or regional user engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t5',name:'E-commerce — Intro (Day 0)',sector:'E-commerce',subject:'Multilingual Customer Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger customer engagement and accessibility across diverse markets and regions.
+
+For e-commerce organisations, multilingual communication can significantly improve product discovery, customer trust, conversion, and retention, especially across Tier 2/3 markets where regional language directly impacts purchase decisions.
+
+We support with:
+- Localisation of product catalogues, listings, and descriptions
+- Multilingual customer support scripts and communication
+- Translation of marketing, promotional, and campaign content
+- WhatsApp and push notification communication in regional languages
+- Voice-enabled customer engagement and support workflows
+
+We currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Jana Small Finance Bank, Quest Alliance, and other consumer and retail brands.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t5f1',name:'E-commerce — Follow-up 1 (Day 5)',sector:'E-commerce',subject:'Re: Multilingual Customer Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For e-commerce organisations expanding across India, multilingual customer communication often helps significantly improve discovery, trust, conversion, and retention across regional markets.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t5f2',name:'E-commerce — Follow-up 2 (Day 10)',sector:'E-commerce',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across product pages, customer support, promotional campaigns, and regional engagement where accessibility and localisation become important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t5f3',name:'E-commerce — Follow-up 3 (Day 28)',sector:'E-commerce',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual customer communication, localisation, or regional engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t6',name:'Finance — Intro (Day 0)',sector:'Finance',subject:'Multilingual Customer Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer and more contextual communication across diverse customer segments.
+
+For financial services organisations, multilingual communication can play a critical role across onboarding, customer servicing, financial literacy, and collections, especially in Tier 2/3 and rural markets where language directly impacts trust and engagement.
+
+We support with:
+- Multilingual onboarding, KYC, and customer communication
+- Repayment and collections communication across SMS, WhatsApp, IVR, and voice
+- Translation of customer-facing apps, websites, and training content
+- Regional language financial literacy and awareness campaigns
+- Voice-enabled customer engagement workflows
+
+We currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India, IndiaFirst Life, Titan Company Limited, and other financial services organisations.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t6f1',name:'Finance — Follow-up 1 (Day 5)',sector:'Finance',subject:'Re: Multilingual Customer Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For financial services organisations operating across diverse geographies, multilingual communication often helps improve onboarding clarity, customer understanding, and regional engagement significantly.
+
+Happy to share a few relevant examples from similar BFSI organisations if helpful.
+
+Best,
+{sender}`},
+  {id:'t6f2',name:'Finance — Follow-up 2 (Day 10)',sector:'Finance',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across onboarding journeys, customer servicing, financial literacy initiatives, and regional engagement where clarity and accessibility become important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t6f3',name:'Finance — Follow-up 3 (Day 28)',sector:'Finance',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional customer engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t7',name:'Banking — Intro (Day 0)',sector:'Banking',subject:'Multilingual Customer Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer and more contextual communication across diverse customer segments and geographies.
+
+For banking organisations, multilingual communication can play a critical role across customer onboarding, account servicing, financial literacy, and collections, especially across Tier 2/3 and rural branches where language directly impacts customer trust and engagement.
+
+We support with:
+- Multilingual onboarding, KYC, and account communication
+- Branch staff and agent training content in regional languages
+- Translation of customer-facing apps, websites, and service content
+- Regional language financial literacy and awareness campaigns
+- IVR, WhatsApp, and voice-enabled customer engagement workflows
+
+We currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India, IndiaFirst Life, Titan Company Limited, and other banking and financial services organisations.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t7f1',name:'Banking — Follow-up 1 (Day 5)',sector:'Banking',subject:'Re: Multilingual Customer Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For banking organisations expanding across diverse geographies, multilingual communication often helps improve customer onboarding, engagement, financial literacy, and regional accessibility significantly.
+
+Happy to share a few relevant examples from similar banking organisations if helpful.
+
+Best,
+{sender}`},
+  {id:'t7f2',name:'Banking — Follow-up 2 (Day 10)',sector:'Banking',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across customer onboarding, account servicing, financial literacy initiatives, and branch communication where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t7f3',name:'Banking — Follow-up 3 (Day 28)',sector:'Banking',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual banking communication, localisation, or regional customer engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t8',name:'NBFC — Intro (Day 0)',sector:'NBFC',subject:'Multilingual Borrower Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer and more contextual communication across diverse customer segments.
+
+For NBFCs, multilingual communication can play a critical role across onboarding, collections, repayment communication, financial literacy, and customer servicing, especially in Tier 2/3 and rural markets where language directly impacts trust and engagement.
+
+We support with:
+- Multilingual onboarding and KYC communication
+- Repayment and collections communication across SMS, WhatsApp, IVR, and voice
+- Translation of customer-facing apps, websites, and training content
+- Regional language awareness and financial literacy campaigns
+- Voice-enabled customer engagement workflows
+
+We currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India Insurance Company Limited, IndiaFirst Life, Titan Company Limited, and other impact-driven organisations.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t8f1',name:'NBFC — Follow-up 1 (Day 5)',sector:'NBFC',subject:'Re: Multilingual Borrower Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For NBFCs operating across diverse geographies, multilingual communication often helps improve onboarding clarity, repayment engagement, customer understanding, and regional accessibility significantly.
+
+Happy to share a few relevant examples from similar BFSI organisations if helpful.
+
+Best,
+{sender}`},
+  {id:'t8f2',name:'NBFC — Follow-up 2 (Day 10)',sector:'NBFC',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across onboarding journeys, repayment communication, financial literacy initiatives, and regional engagement where clarity and accessibility become important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t8f3',name:'NBFC — Follow-up 3 (Day 28)',sector:'NBFC',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional customer engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t9',name:'Microfinance — Intro (Day 0)',sector:'Microfinance',subject:'Multilingual Borrower Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer communication with borrowers, field teams, and communities across diverse geographies.
+
+For microfinance institutions, multilingual communication plays a critical role across borrower onboarding, group communication, repayment engagement, field team training, and financial literacy, especially in rural and semi-urban markets where language directly impacts trust and portfolio quality.
+
+We support with:
+- Multilingual borrower onboarding and KYC communication
+- Group meeting and repayment communication in regional languages
+- Field staff and loan officer training content
+- IVR, WhatsApp, and voice-enabled borrower engagement
+- Financial literacy and awareness content across communities
+
+We currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, ARMMAN, Quest Alliance, and other microfinance and community-focused organisations.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t9f1',name:'Microfinance — Follow-up 1 (Day 5)',sector:'Microfinance',subject:'Re: Multilingual Borrower Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For microfinance organisations working across rural and semi-urban communities, multilingual borrower communication often helps improve onboarding clarity, repayment engagement, group trust, and field effectiveness significantly.
+
+Happy to share a few relevant examples from similar microfinance organisations if helpful.
+
+Best,
+{sender}`},
+  {id:'t9f2',name:'Microfinance — Follow-up 2 (Day 10)',sector:'Microfinance',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across borrower onboarding, group communication, repayment engagement, field training, and financial literacy initiatives where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t9f3',name:'Microfinance — Follow-up 3 (Day 28)',sector:'Microfinance',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual borrower communication, localisation, or regional engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t10',name:'Health — Intro (Day 0)',sector:'Health',subject:'Multilingual Health Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger health communication and community engagement across diverse regions.
+
+For health-focused organisations, multilingual communication can significantly improve awareness, patient understanding, community participation, and health outcomes, especially across Tier 2/3 and underserved regions.
+
+We support with:
+- Localisation of health awareness and education content
+- Multilingual community outreach and beneficiary communication
+- Translation and dubbing of health communication videos
+- IVR and WhatsApp scripts for patient and community engagement
+- Field team training content in regional languages
+
+We currently support 40+ organisations at scale, including ARMMAN, CRY, Quest Alliance, Central Square Foundation, AU Small Finance Bank, and Titan Company Limited.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t10f1',name:'Health — Follow-up 1 (Day 5)',sector:'Health',subject:'Re: Multilingual Health Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For health organisations working across diverse communities, multilingual communication often plays a key role in improving health awareness, patient engagement, and last-mile health outcomes.
+
+Happy to share a few relevant examples from similar health initiatives if helpful.
+
+Best,
+{sender}`},
+  {id:'t10f2',name:'Health — Follow-up 2 (Day 10)',sector:'Health',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across health awareness campaigns, patient communication, community outreach, and field team engagement where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t10f3',name:'Health — Follow-up 3 (Day 28)',sector:'Health',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual health communication, localisation, or community engagement becomes relevant for your team.
+
+Wishing you and the team the very best for your ongoing initiatives.
+
+Best,
+{sender}`},
+  {id:'t11',name:'Fashion — Intro (Day 0)',sector:'Fashion',subject:'Multilingual Customer Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger customer engagement and brand accessibility across diverse markets and regions.
+
+For fashion and lifestyle brands, multilingual communication can significantly improve customer discovery, engagement, and loyalty, especially across Tier 2/3 markets where regional language plays a key role in purchase decisions and brand trust.
+
+We support with:
+- Localisation of product catalogues, descriptions, and styling content
+- Multilingual customer support and return communication
+- Translation of marketing, campaign, and brand content for regional audiences
+- WhatsApp and push notification communication in regional languages
+- Voice-enabled customer engagement and support workflows
+
+We currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Jana Small Finance Bank, Quest Alliance, and other consumer brands.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t11f1',name:'Fashion — Follow-up 1 (Day 5)',sector:'Fashion',subject:'Re: Multilingual Customer Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For fashion and lifestyle brands expanding across India, multilingual customer communication often helps improve discovery, engagement, and brand loyalty across regional markets significantly.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t11f2',name:'Fashion — Follow-up 2 (Day 10)',sector:'Fashion',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across product pages, customer support, brand campaigns, and regional engagement where accessibility and localisation become important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t11f3',name:'Fashion — Follow-up 3 (Day 28)',sector:'Fashion',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual customer communication, localisation, or regional brand engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t12',name:'Legal — Intro (Day 0)',sector:'Legal',subject:'Multilingual Client Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer and more accessible communication across diverse client segments and geographies.
+
+For legal organisations, multilingual communication can play a critical role in client onboarding, document comprehension, legal awareness, and access to justice, especially for clients across Tier 2/3 regions where language directly impacts understanding and trust.
+
+We support with:
+- Localisation of legal documents, notices, and client communication
+- Multilingual legal awareness and rights education content
+- Translation of contracts, agreements, and compliance materials
+- Regional language client onboarding and intake communication
+- Court document preparation support in regional languages
+
+We currently support 40+ organisations at scale, including ARMMAN, CRY, Quest Alliance, AU Small Finance Bank, and other legal and access-to-justice focused organisations.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t12f1',name:'Legal — Follow-up 1 (Day 5)',sector:'Legal',subject:'Re: Multilingual Client Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For legal organisations working across diverse client segments and geographies, multilingual communication often helps improve client understanding, accessibility, and engagement significantly.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t12f2',name:'Legal — Follow-up 2 (Day 10)',sector:'Legal',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across client onboarding, legal awareness, document comprehension, and community outreach where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t12f3',name:'Legal — Follow-up 3 (Day 28)',sector:'Legal',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual legal communication, localisation, or client engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t13',name:'Government — Intro (Day 0)',sector:'Government',subject:'Multilingual Citizen Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer and more accessible citizen communication across diverse communities and geographies.
+
+For government departments and agencies, multilingual communication can play a critical role in improving scheme awareness, citizen participation, service delivery, and last-mile outreach, especially across Tier 2/3 and rural regions where language directly impacts accessibility and uptake.
+
+We support with:
+- Scheme and policy communication in regional languages
+- Citizen outreach, application guidance, and helpline scripts
+- Frontline worker and field staff training content
+- Translation and dubbing of public awareness and campaign content
+- Multilingual digital interfaces and citizen-facing communication
+
+We currently support 40+ organisations at scale, including Quest Alliance, ARMMAN, CRY, Central Square Foundation, and AU Small Finance Bank.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t13f1',name:'Government — Follow-up 1 (Day 5)',sector:'Government',subject:'Re: Multilingual Citizen Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For government organisations working across diverse regions and communities, multilingual citizen communication often helps improve scheme awareness, participation, and last-mile service delivery significantly.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t13f2',name:'Government — Follow-up 2 (Day 10)',sector:'Government',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across scheme communication, citizen outreach, public awareness campaigns, and field team engagement where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t13f3',name:'Government — Follow-up 3 (Day 28)',sector:'Government',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual citizen communication, localisation, or regional outreach becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t14',name:'Manufacturing — Intro (Day 0)',sector:'Manufacturing',subject:'Multilingual Workforce Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling clearer and more effective workforce communication across diverse geographies and linguistic backgrounds.
+
+For manufacturing organisations, multilingual communication can significantly improve workforce safety, productivity, compliance, and training effectiveness, especially across shop floors where diverse language groups work together.
+
+We support with:
+- Localisation of safety manuals, SOPs, and compliance content
+- Multilingual shop floor training and induction programmes
+- HR policy and workforce communication in regional languages
+- Translation of operational and maintenance documentation
+- Voice-enabled safety and training communication
+
+We currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Quest Alliance, and other manufacturing and enterprise organisations.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t14f1',name:'Manufacturing — Follow-up 1 (Day 5)',sector:'Manufacturing',subject:'Re: Multilingual Workforce Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For manufacturing organisations working with diverse workforces, multilingual communication often helps significantly improve safety compliance, training effectiveness, and operational clarity across facilities.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t14f2',name:'Manufacturing — Follow-up 2 (Day 10)',sector:'Manufacturing',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across safety training, workforce onboarding, operational communication, and compliance documentation where regional accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t14f3',name:'Manufacturing — Follow-up 3 (Day 28)',sector:'Manufacturing',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual workforce communication, localisation, or regional training becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t15',name:'Media — Intro (Day 0)',sector:'Media & Publishing',subject:'Multilingual Content for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger content reach and audience engagement across diverse regional markets.
+
+For media and publishing organisations, multilingual content can significantly expand audience reach, engagement, and monetisation potential, especially across Tier 2/3 regional markets where vernacular content consumption is growing rapidly.
+
+We support with:
+- Localisation and translation of editorial and news content
+- Video dubbing, subtitling, and audio content in Indian languages
+- Social media and digital content localisation for regional audiences
+- Newsletter, email, and campaign content in regional languages
+- Voice-over and narration across 22 Indian languages and dialects
+
+We currently support 40+ organisations at scale, including Quest Alliance, Central Square Foundation, ARMMAN, CRY, Titan Company Limited, and other content-driven organisations.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t15f1',name:'Media — Follow-up 1 (Day 5)',sector:'Media & Publishing',subject:'Re: Multilingual Content for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For media and publishing organisations, multilingual content often helps significantly expand regional audience reach, engagement, and content monetisation across vernacular markets.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t15f2',name:'Media — Follow-up 2 (Day 10)',sector:'Media & Publishing',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual content could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across editorial content, video and audio localisation, social media, and regional audience engagement where vernacular accessibility becomes important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t15f3',name:'Media — Follow-up 3 (Day 28)',sector:'Media & Publishing',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual content, localisation, or regional audience engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`},
+  {id:'t16',name:'Travel — Intro (Day 0)',sector:'Travel & Hospitality',subject:'Multilingual Guest Communication for {company}',body:`Hi {name},
+
+{personal_line}
+
+I'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).
+
+We help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger guest engagement and communication across diverse markets and regions.
+
+For travel and hospitality organisations, multilingual communication can significantly improve guest experience, satisfaction, and loyalty, especially as domestic travel grows rapidly across Tier 2/3 markets.
+
+We support with:
+- Guest communication and pre-arrival information in regional languages
+- In-property signage, menus, and guest guide localisation
+- Customer support scripts and helpline content in Indian languages
+- Marketing and promotional content for regional audiences
+- WhatsApp and voice-enabled guest engagement workflows
+
+We currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Quest Alliance, and other hospitality and consumer brands.
+
+Please let me know if this would be relevant for you and your team.
+
+Best,
+{sender}`},
+  {id:'t16f1',name:'Travel — Follow-up 1 (Day 5)',sector:'Travel & Hospitality',subject:'Re: Multilingual Guest Communication for {company}',body:`Hi {name},
+
+Just wanted to follow up on the note below and see if this might be relevant for your team.
+
+For travel and hospitality organisations, multilingual guest communication often helps improve guest experience, satisfaction, and loyalty across domestic travellers from regional markets.
+
+Happy to share a few relevant examples if helpful.
+
+Best,
+{sender}`},
+  {id:'t16f2',name:'Travel — Follow-up 2 (Day 10)',sector:'Travel & Hospitality',subject:'A quick example for {company}',body:`Hi {name},
+
+Just wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.
+
+[SAMPLE_BLOCK]
+
+This is often useful across guest communication, in-property content, customer support, and regional marketing where accessibility and localisation become important at scale.
+
+Happy to walk you through this briefly if relevant.
+
+Best,
+{sender}`},
+  {id:'t16f3',name:'Travel — Follow-up 3 (Day 28)',sector:'Travel & Hospitality',subject:'Closing the loop — Shabd AI and {company}',body:`Hi {name},
+
+Just wanted to close the loop on this thread.
+
+Completely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual guest communication, localisation, or regional engagement becomes relevant for your team.
+
+Wishing you and the team the very best ahead.
+
+Best,
+{sender}`}
 ];
 
 // ── Supabase ──────────────────────────────────────────────────
