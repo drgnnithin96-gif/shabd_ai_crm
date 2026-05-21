@@ -11,7 +11,7 @@
     "name": "NGO — Follow-up 1 (Day 5)",
     "sector": "NGO & Social Impact",
     "subject": "Re: Multilingual Communication Support for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve programme participation, beneficiary understanding, and field engagement significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For organisations working across diverse geographies, multilingual communication often plays a key role in improving programme participation, beneficiary understanding, and field engagement.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t1f2",
@@ -24,7 +24,7 @@
     "id": "t1f3",
     "name": "NGO — Follow-up 3 (Day 28)",
     "sector": "NGO & Social Impact",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -39,7 +39,7 @@
     "name": "Education — Follow-up 1 (Day 5)",
     "sector": "Education",
     "subject": "Re: Multilingual Learning Support for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve accessibility, comprehension, engagement, and programme participation significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For education organisations working across diverse learner groups, multilingual learning experiences often help improve accessibility, comprehension, engagement, and programme participation significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t2f2",
@@ -52,7 +52,7 @@
     "id": "t2f3",
     "name": "Education — Follow-up 3 (Day 28)",
     "sector": "Education",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -67,7 +67,7 @@
     "name": "Healthcare — Follow-up 1 (Day 5)",
     "sector": "Healthcare",
     "subject": "Re: Multilingual Patient Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve patient understanding, treatment adherence, and last-mile health outcomes significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For healthcare organisations working across diverse communities, multilingual communication often plays a critical role in improving patient understanding, treatment adherence, and last-mile health outcomes.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t3f2",
@@ -80,7 +80,7 @@
     "id": "t3f3",
     "name": "Healthcare — Follow-up 3 (Day 28)",
     "sector": "Healthcare",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -95,7 +95,7 @@
     "name": "SaaS — Follow-up 1 (Day 5)",
     "sector": "SaaS",
     "subject": "Re: Multilingual Product Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve user activation, engagement, and retention across Tier 2/3 markets significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For technology companies expanding across India, multilingual product experiences often help significantly improve user activation, engagement, and retention across Tier 2/3 markets.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t4f2",
@@ -108,7 +108,7 @@
     "id": "t4f3",
     "name": "SaaS — Follow-up 3 (Day 28)",
     "sector": "SaaS",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -123,7 +123,7 @@
     "name": "E-commerce — Follow-up 1 (Day 5)",
     "sector": "E-commerce",
     "subject": "Re: Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve discovery, trust, conversion, and retention across regional markets significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For e-commerce organisations expanding across India, multilingual customer communication often helps significantly improve discovery, trust, conversion, and retention across regional markets.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t5f2",
@@ -136,7 +136,7 @@
     "id": "t5f3",
     "name": "E-commerce — Follow-up 3 (Day 28)",
     "sector": "E-commerce",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -151,7 +151,7 @@
     "name": "Finance — Follow-up 1 (Day 5)",
     "sector": "Finance",
     "subject": "Re: Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve onboarding clarity, customer understanding, and regional engagement significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For financial services organisations operating across diverse geographies, multilingual communication often helps improve onboarding clarity, customer understanding, and regional engagement significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t6f2",
@@ -164,7 +164,7 @@
     "id": "t6f3",
     "name": "Finance — Follow-up 3 (Day 28)",
     "sector": "Finance",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -179,7 +179,7 @@
     "name": "Banking — Follow-up 1 (Day 5)",
     "sector": "Banking",
     "subject": "Re: Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve customer onboarding, engagement, financial literacy, and regional accessibility significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For banking organisations expanding across diverse geographies, multilingual communication often helps improve customer onboarding, engagement, financial literacy, and regional accessibility significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f2",
@@ -192,7 +192,7 @@
     "id": "t7f3",
     "name": "Banking — Follow-up 3 (Day 28)",
     "sector": "Banking",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -207,7 +207,7 @@
     "name": "NBFC — Follow-up 1 (Day 5)",
     "sector": "NBFC",
     "subject": "Re: Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve onboarding clarity, repayment engagement, customer understanding, and regional accessibility significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For NBFCs operating across diverse geographies, multilingual communication often helps improve onboarding clarity, repayment engagement, customer understanding, and regional accessibility significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t8f2",
@@ -220,7 +220,7 @@
     "id": "t8f3",
     "name": "NBFC — Follow-up 3 (Day 28)",
     "sector": "NBFC",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -235,7 +235,7 @@
     "name": "Microfinance — Follow-up 1 (Day 5)",
     "sector": "Microfinance",
     "subject": "Re: Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve onboarding clarity, repayment engagement, group trust, and field effectiveness significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For microfinance organisations working across rural and semi-urban communities, multilingual borrower communication often helps improve onboarding clarity, repayment engagement, group trust, and field effectiveness significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t9f2",
@@ -248,7 +248,7 @@
     "id": "t9f3",
     "name": "Microfinance — Follow-up 3 (Day 28)",
     "sector": "Microfinance",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -263,7 +263,7 @@
     "name": "Health — Follow-up 1 (Day 5)",
     "sector": "Health",
     "subject": "Re: Multilingual Health Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve health awareness, patient engagement, and last-mile health outcomes significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For health organisations working across diverse communities, multilingual communication often plays a key role in improving health awareness, patient engagement, and last-mile health outcomes.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t10f2",
@@ -276,7 +276,7 @@
     "id": "t10f3",
     "name": "Health — Follow-up 3 (Day 28)",
     "sector": "Health",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -291,7 +291,7 @@
     "name": "Fashion — Follow-up 1 (Day 5)",
     "sector": "Fashion",
     "subject": "Re: Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve discovery, engagement, and brand loyalty across regional markets significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For fashion and lifestyle brands expanding across India, multilingual customer communication often helps improve discovery, engagement, and brand loyalty across regional markets significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t11f2",
@@ -304,7 +304,7 @@
     "id": "t11f3",
     "name": "Fashion — Follow-up 3 (Day 28)",
     "sector": "Fashion",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -319,7 +319,7 @@
     "name": "Legal — Follow-up 1 (Day 5)",
     "sector": "Legal",
     "subject": "Re: Multilingual Client Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve client understanding, accessibility, and engagement significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For legal organisations working across diverse client segments, multilingual communication often helps improve client understanding, accessibility, and engagement significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t12f2",
@@ -332,7 +332,7 @@
     "id": "t12f3",
     "name": "Legal — Follow-up 3 (Day 28)",
     "sector": "Legal",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -347,7 +347,7 @@
     "name": "Government — Follow-up 1 (Day 5)",
     "sector": "Government",
     "subject": "Re: Multilingual Citizen Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve scheme awareness, participation, and last-mile service delivery significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For government organisations working across diverse regions, multilingual citizen communication often helps improve scheme awareness, participation, and last-mile service delivery significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t13f2",
@@ -360,7 +360,7 @@
     "id": "t13f3",
     "name": "Government — Follow-up 3 (Day 28)",
     "sector": "Government",
-    "subject": "Closing the loop — Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -375,7 +375,7 @@
     "name": "Manufacturing — Follow-up 1 (Day 5)",
     "sector": "Manufacturing",
     "subject": "Re: Multilingual Workforce Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve safety compliance, training effectiveness, and operational clarity significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For manufacturing organisations working with diverse workforces, multilingual communication often helps significantly improve safety compliance, training effectiveness, and operational clarity across facilities.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t14f2",
@@ -388,7 +388,7 @@
     "id": "t14f3",
     "name": "Manufacturing — Follow-up 3 (Day 28)",
     "sector": "Manufacturing",
-    "subject": "Closing the loop - Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -403,7 +403,7 @@
     "name": "Media — Follow-up 1 (Day 5)",
     "sector": "Media & Publishing",
     "subject": "Re: Multilingual Content for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve regional audience reach, engagement, and content monetisation significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For media and publishing organisations, multilingual content often helps significantly expand regional audience reach, engagement, and content monetisation across vernacular markets.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t15f2",
@@ -416,7 +416,7 @@
     "id": "t15f3",
     "name": "Media — Follow-up 3 (Day 28)",
     "sector": "Media & Publishing",
-    "subject": "Closing the loop - Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   },
   {
@@ -431,7 +431,7 @@
     "name": "Travel — Follow-up 1 (Day 5)",
     "sector": "Travel & Hospitality",
     "subject": "Re: Multilingual Guest Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\nFor organisations in this space, multilingual communication often helps improve guest experience, satisfaction, and loyalty across domestic travellers from regional markets significantly.\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For travel and hospitality organisations, multilingual guest communication often helps improve guest experience, satisfaction, and loyalty across domestic travellers from regional markets.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t16f2",
@@ -444,7 +444,7 @@
     "id": "t16f3",
     "name": "Travel — Follow-up 3 (Day 28)",
     "sector": "Travel & Hospitality",
-    "subject": "Closing the loop - Shabd AI and {company}",
+    "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual communication, localisation, or regional engagement becomes relevant for your team.\n\nWishing you and the team the very best for your ongoing initiatives.\n\nBest,\n{sender}"
   }
 ]
