@@ -803,7 +803,17 @@ window.handleCSVFile=function(file){if(!file)return;const r=new FileReader();r.o
 window.doImport=async function(){
   let added=0,skipped=0;const existing=new Set(leads.map(l=>l.email).filter(Boolean));const newLeads=[];
   for(const row of csvParsed){const get=f=>{const i=csvColMap[f];return(i>=0&&row[i])?row[i].trim():null;};const name=get('name');if(!name){skipped++;continue;}const email=get('email');if(email&&existing.has(email)){skipped++;continue;}const sent=get('sent');const rem=calcRem(sent);newLeads.push({id:uid(),created:new Date().toISOString(),name,company:get('company'),email,sector:get('sector')||'Other',stage:STAGES.includes(get('stage'))?get('stage'):'New',notes:get('notes'),sent,lc:get('lc'),r1:rem.r1,r2:rem.r2,r3:rem.r3,updated:new Date().toISOString()});if(email)existing.add(email);added++;}
-  try{if(newLeads.length){await dbUpsertMany(newLeads);leads=[...newLeads,...leads];}document.getElementById('import-step1').style.display='none';document.getElementById('import-result').style.display='';document.getElementById('import-footer').style.display='none';document.getElementById('import-result-msg').textContent=`${added} lead${added!==1?'s':''} imported`;document.getElementById('import-result-sub').textContent=skipped?`${skipped} row${skipped!==1?'s':''} skipped`:'';renderStats();renderSectorFilter();renderView();setTimeout(()=>closeImport(),2200);}catch(e){showToast('Import error: '+e.message);}
+  try{if(newLeads.length){
+    // Save to localStorage + Supabase (inline to avoid hoisting issues)
+    const existing_leads=lsG('sai_leads')||[];
+    const m=new Map(existing_leads.map(l=>[l.id,l]));
+    newLeads.forEach(l=>m.set(l.id,l));
+    lsS('sai_leads',[...m.values()]);
+    if(!useLocal && sb){
+      sb.from('leads').upsert(newLeads,{onConflict:'id'}).select().catch(e=>console.warn('Supabase sync:',e.message));
+    }
+    leads=[...newLeads,...leads];
+  }document.getElementById('import-step1').style.display='none';document.getElementById('import-result').style.display='';document.getElementById('import-footer').style.display='none';document.getElementById('import-result-msg').textContent=`${added} lead${added!==1?'s':''} imported`;document.getElementById('import-result-sub').textContent=skipped?`${skipped} row${skipped!==1?'s':''} skipped`:'';renderStats();renderSectorFilter();renderView();setTimeout(()=>closeImport(),2200);}catch(e){showToast('Import error: '+e.message);}
 };
 const dz=document.getElementById('drop-zone');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
@@ -836,7 +846,7 @@ window.markReminderDone=async function(leadId, field){
 };
 
 init();
+async function dbUpsertMany(arr){if(useLocal){const a=lsG('sai_leads')||[];const m=new Map(a.map(l=>[l.id,l]));arr.forEach(l=>m.set(l.id,l));lsS('sai_leads',[...m.values()]);return arr;}const{data,error}=await sb.from('leads').upsert(arr,{onConflict:'id'}).select();if(error)throw error;return data;}
 </script>
 </body>
-</html>async function dbUpsertMany(arr){if(useLocal){const a=lsG('sai_leads')||[];const m=new Map(a.map(l=>[l.id,l]));arr.forEach(l=>m.set(l.id,l));lsS('sai_leads',[...m.values()]);return arr;}const{data,error}=await sb.from('leads').upsert(arr,{onConflict:'id'}).select();if(error)throw error;return data;}
-
+</html>
