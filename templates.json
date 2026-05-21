@@ -11,7 +11,7 @@
     "name": "NGO — Follow-up 1 (Day 5)",
     "sector": "NGO & Social Impact",
     "subject": "Re: Multilingual Communication Support for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For organisations working across diverse geographies, multilingual communication often plays a key role in improving programme participation, beneficiary understanding, and field engagement.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For organisations working across diverse geographies and communities, multilingual communication often plays a key role in improving programme participation, beneficiary understanding, and field engagement.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t1f2",
@@ -32,14 +32,14 @@
     "name": "Education — Intro (Day 0)",
     "sector": "Education",
     "subject": "Multilingual Learning Support for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of curriculum, assessments, and learning resources\n- Multilingual teacher training and skilling modules\n- Translation and dubbing of educational videos and classroom content\n- Voice-enabled learning experiences for low-bandwidth environments\n- Multilingual communication across learner and parent engagement initiatives\n\nWe currently support 40+ organisations at scale, including Quest Alliance, Central Square Foundation, ARMMAN, CRY, AU Small Finance Bank, and Titan Company Limited.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of curriculum, assessments, and learning resources\n- Multilingual teacher training and skilling modules\n- Translation and dubbing of educational videos and classroom content\n- Multilingual communication across learner and parent engagement initiatives\n\nWe currently support 40+ organisations at scale, including Quest Alliance, Central Square Foundation, ARMMAN, CRY, AU Small Finance Bank, and Titan Company Limited.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t2f1",
     "name": "Education — Follow-up 1 (Day 5)",
     "sector": "Education",
     "subject": "Re: Multilingual Learning Support for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For education organisations working across diverse learner groups, multilingual learning experiences often help improve accessibility, comprehension, engagement, and programme participation significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For organisations working across diverse learner groups and geographies, multilingual learning experiences often help improve accessibility, comprehension, engagement, and programme participation significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t2f2",
@@ -60,14 +60,14 @@
     "name": "Healthcare — Intro (Day 0)",
     "sector": "Healthcare",
     "subject": "Multilingual Patient Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of patient education content and health awareness materials\n- Multilingual training content for field health workers and ASHA/ANM teams\n- Translation and dubbing of health communication videos\n- IVR and WhatsApp scripts for patient and beneficiary outreach\n- Multilingual digital interfaces for patient-facing programmes\n\nWe currently support 40+ organisations at scale, including ARMMAN, CRY, Quest Alliance, Central Square Foundation, AU Small Finance Bank, and Titan Company Limited.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of patient education content and health awareness materials\n- Multilingual training content for field health workers and ASHA/ANM teams\n- Translation and dubbing of health communication videos\n- Multilingual digital interfaces for patient-facing programmes\n\nWe currently support 40+ organisations at scale, including ARMMAN, CRY, Quest Alliance, Central Square Foundation, AU Small Finance Bank, and Titan Company Limited.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t3f1",
     "name": "Healthcare — Follow-up 1 (Day 5)",
     "sector": "Healthcare",
     "subject": "Re: Multilingual Patient Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For healthcare organisations working across diverse communities, multilingual communication often plays a critical role in improving patient understanding, treatment adherence, and last-mile health outcomes.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For healthcare organisations working across diverse communities and geographies, multilingual communication often plays a critical role in improving patient understanding, treatment adherence, and last-mile health outcomes.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t3f2",
@@ -88,7 +88,7 @@
     "name": "SaaS — Intro (Day 0)",
     "sector": "SaaS",
     "subject": "Multilingual Product Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of product UI, onboarding flows, and in-app communication\n- Multilingual customer support content and help centre resources\n- Translation of marketing and campaign material for regional audiences\n- Voice-enabled product experiences across Indian languages\n- Multilingual push notifications, WhatsApp, and engagement workflows\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, Titan Company Limited, and other growth-stage and enterprise teams.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of product UI, onboarding flows, and in-app communication\n- Multilingual customer support content and help centre resources\n- Translation of marketing and campaign material for regional audiences\n- Multilingual push notifications, WhatsApp, and engagement workflows\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, Titan Company Limited, and other growth-stage and enterprise teams.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t4f1",
@@ -116,7 +116,7 @@
     "name": "E-commerce — Intro (Day 0)",
     "sector": "E-commerce",
     "subject": "Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of product catalogues, listings, and descriptions\n- Multilingual customer support scripts and communication\n- Translation of marketing, promotional, and campaign content\n- WhatsApp and push notification communication in regional languages\n- Voice-enabled customer engagement and support workflows\n\nWe currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Jana Small Finance Bank, Quest Alliance, and other consumer and retail brands.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of product catalogues, listings, and descriptions\n- Multilingual customer support scripts and communication\n- Translation of marketing, promotional, and campaign content\n- WhatsApp and push notification communication in regional languages\n\nWe currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Jana Small Finance Bank, Quest Alliance, and other consumer and retail brands.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t5f1",
@@ -144,7 +144,7 @@
     "name": "Finance — Intro (Day 0)",
     "sector": "Finance",
     "subject": "Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding, KYC, and customer communication\n- Repayment and collections communication across SMS, WhatsApp, IVR, and voice\n- Translation of customer-facing apps, websites, and training content\n- Regional language financial literacy and awareness campaigns\n- Voice-enabled customer engagement workflows\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India, IndiaFirst Life, Titan Company Limited, and other financial services organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding, KYC, and customer communication\n- Repayment and collections communication across SMS, WhatsApp\n- Translation of customer-facing apps, websites, and training content\n- Regional language financial literacy and awareness campaigns\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India, IndiaFirst Life, Titan Company Limited, and other financial services organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t6f1",
@@ -172,7 +172,7 @@
     "name": "Banking — Intro (Day 0)",
     "sector": "Banking",
     "subject": "Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding, KYC, and account communication\n- Branch staff and agent training content in regional languages\n- Translation of customer-facing apps, websites, and service content\n- Regional language financial literacy and awareness campaigns\n- IVR, WhatsApp, and voice-enabled customer engagement workflows\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India, IndiaFirst Life, Titan Company Limited, and other banking and financial services organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding, KYC, and account communication\n- Branch staff and agent training content in regional languages\n- Translation of customer-facing apps, websites, and service content\n- Regional language financial literacy and awareness campaigns\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India, IndiaFirst Life, Titan Company Limited, and other banking and financial services organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f1",
@@ -200,7 +200,7 @@
     "name": "NBFC — Intro (Day 0)",
     "sector": "NBFC",
     "subject": "Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding and KYC communication\n- Repayment and collections communication across SMS, WhatsApp, IVR, and voice\n- Translation of customer-facing apps, websites, and training content\n- Regional language awareness and financial literacy campaigns\n- Voice-enabled customer engagement workflows\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India Insurance Company Limited, IndiaFirst Life, Titan Company Limited, and other impact-driven organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding and KYC communication\n- Repayment and collections communication across SMS, WhatsApp\n- Translation of customer-facing apps, websites, and training content\n- Regional language awareness and financial literacy campaigns\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India Insurance Company Limited, IndiaFirst Life, Titan Company Limited, and other impact-driven organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t8f1",
@@ -228,7 +228,7 @@
     "name": "Microfinance — Intro (Day 0)",
     "sector": "Microfinance",
     "subject": "Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual borrower onboarding and KYC communication\n- Group meeting and repayment communication in regional languages\n- Field staff and loan officer training content\n- IVR, WhatsApp, and voice-enabled borrower engagement\n- Financial literacy and awareness content across communities\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, ARMMAN, Quest Alliance, and other microfinance and community-focused organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual borrower onboarding and KYC communication\n- Group meeting and repayment communication in regional languages\n- Field staff and loan officer training content\n- Financial literacy and awareness content across communities\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, ARMMAN, Quest Alliance, and other microfinance and community-focused organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t9f1",
@@ -256,7 +256,7 @@
     "name": "Health — Intro (Day 0)",
     "sector": "Health",
     "subject": "Multilingual Health Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of health awareness and education content\n- Multilingual community outreach and beneficiary communication\n- Translation and dubbing of health communication videos\n- IVR and WhatsApp scripts for patient and community engagement\n- Field team training content in regional languages\n\nWe currently support 40+ organisations at scale, including ARMMAN, CRY, Quest Alliance, Central Square Foundation, AU Small Finance Bank, and Titan Company Limited.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of health awareness and education content\n- Multilingual community outreach and beneficiary communication\n- Translation and dubbing of health communication videos\n- Field team training content in regional languages\n\nWe currently support 40+ organisations at scale, including ARMMAN, CRY, Quest Alliance, Central Square Foundation, AU Small Finance Bank, and Titan Company Limited.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t10f1",
@@ -284,7 +284,7 @@
     "name": "Fashion — Intro (Day 0)",
     "sector": "Fashion",
     "subject": "Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of product catalogues, descriptions, and styling content\n- Multilingual customer support and return communication\n- Translation of marketing, campaign, and brand content for regional audiences\n- WhatsApp and push notification communication in regional languages\n- Voice-enabled customer engagement and support workflows\n\nWe currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Jana Small Finance Bank, Quest Alliance, and other consumer brands.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of product catalogues, descriptions, and styling content\n- Multilingual customer support and return communication\n- Translation of marketing, campaign, and brand content for regional audiences\n- WhatsApp and push notification communication in regional languages\n\nWe currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Jana Small Finance Bank, Quest Alliance, and other consumer brands.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t11f1",
@@ -319,7 +319,7 @@
     "name": "Legal — Follow-up 1 (Day 5)",
     "sector": "Legal",
     "subject": "Re: Multilingual Client Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For legal organisations working across diverse client segments, multilingual communication often helps improve client understanding, accessibility, and engagement significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For legal organisations working across diverse client segments and geographies, multilingual communication often helps improve client understanding, accessibility, and engagement significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t12f2",
@@ -347,7 +347,7 @@
     "name": "Government — Follow-up 1 (Day 5)",
     "sector": "Government",
     "subject": "Re: Multilingual Citizen Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For government organisations working across diverse regions, multilingual citizen communication often helps improve scheme awareness, participation, and last-mile service delivery significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For government organisations working across diverse regions and communities, multilingual citizen communication often helps improve scheme awareness, participation, and last-mile service delivery significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
   },
   {
     "id": "t13f2",
@@ -368,7 +368,7 @@
     "name": "Manufacturing — Intro (Day 0)",
     "sector": "Manufacturing",
     "subject": "Multilingual Workforce Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of safety manuals, SOPs, and compliance content\n- Multilingual shop floor training and induction programmes\n- HR policy and workforce communication in regional languages\n- Translation of operational and maintenance documentation\n- Voice-enabled safety and training communication\n\nWe currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Quest Alliance, and other manufacturing and enterprise organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Localisation of safety manuals, SOPs, and compliance content\n- Multilingual shop floor training and induction programmes\n- HR policy and workforce communication in regional languages\n- Translation of operational and maintenance documentation\n\nWe currently support 40+ organisations at scale, including Titan Company Limited, AU Small Finance Bank, Quest Alliance, and other manufacturing and enterprise organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
   },
   {
     "id": "t14f1",
