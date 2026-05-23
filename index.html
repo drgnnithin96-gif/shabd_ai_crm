@@ -162,6 +162,23 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 .tcb{font-size:12px;color:var(--hn);max-height:54px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .tca{display:flex;gap:6px;margin-top:10px}
 .tokbar{font-size:12px;color:var(--mu);background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:9px 12px;line-height:1.8;margin-bottom:12px}
+.snooze-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(245,158,11,.15);color:#d97706;border:1px solid rgba(245,158,11,.3);margin-left:6px}
+.note-item{padding:10px 12px;border-left:3px solid var(--bd);margin-bottom:8px;border-radius:0 6px 6px 0;background:var(--sf2)}
+.note-item.type-reply{border-left-color:var(--gn);background:rgba(34,197,94,.05)}
+.note-item.type-call{border-left-color:var(--pu);background:rgba(139,92,246,.05)}
+.note-item.type-meeting{border-left-color:var(--bl);background:rgba(59,130,246,.05)}
+.note-item.type-bounce{border-left-color:var(--rd);background:rgba(239,68,68,.05)}
+.note-time{font-size:10px;color:var(--hn);margin-top:4px}
+.note-type-tag{font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;padding:1px 6px;border-radius:8px;background:var(--sf);color:var(--mu)}
+.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.dash-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px;text-align:center}
+.dash-num{font-size:28px;font-weight:700;color:var(--tx);margin-bottom:4px}
+.dash-label{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.05em}
+.dash-sub{font-size:12px;color:var(--hn);margin-top:4px}
+.sector-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd)}
+.sector-bar-wrap{flex:1;background:var(--sf2);border-radius:4px;height:6px;overflow:hidden}
+.sector-bar{height:6px;border-radius:4px;background:linear-gradient(to right,var(--ac),var(--gn));transition:width .4s}
+.open-dot{width:7px;height:7px;border-radius:50%;background:var(--gn);display:inline-block;margin-right:4px}
 .compose-wrap{display:grid;grid-template-columns:1fr 340px;gap:16px;height:calc(100vh - 180px)}
 .compose-editor{display:flex;flex-direction:column;gap:10px}
 .compose-field{background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:9px 12px;font-size:13px;color:var(--tx);font-family:'DM Sans',sans-serif;outline:none;transition:border .15s;width:100%}
@@ -215,12 +232,14 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
     <button class="ni" id="nav-pipe" onclick="switchView('pipeline',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="5" height="18" rx="1.5"/><rect x="9.5" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="5" height="8" rx="1.5"/></svg>Pipeline</button>
     <button class="ni" id="nav-tmpl" onclick="switchView('templates',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Email templates</button>
     <button class="ni" id="nav-compose" onclick="switchView('compose',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Compose email</button>
+    <button class="ni" id="nav-dashboard" onclick="switchView('dashboard',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/></svg>Dashboard</button>
     <div class="nlbl" style="margin-top:6px">By stage</div>
     <button class="ni" onclick="filterStage('New',this)"><span class="sdot" style="background:var(--bl)"></span>New</button>
     <button class="ni" onclick="filterStage('Contacted',this)"><span class="sdot" style="background:var(--am)"></span>Contacted</button>
     <button class="ni" onclick="filterStage('Replied',this)"><span class="sdot" style="background:var(--gn)"></span>Replied</button>
     <button class="ni" onclick="filterStage('Follow-up',this)"><span class="sdot" style="background:var(--pu)"></span>Follow-up</button>
     <button class="ni" onclick="filterStage('Closed',this)"><span class="sdot" style="background:var(--mu)"></span>Closed</button>
+    <button class="ni" onclick="filterStage('Bounced',this)"><span class="sdot" style="background:#dc2626"></span>Bounced</button>
     <div class="nlbl" style="margin-top:6px">Alerts</div>
     <button class="ni" id="nav-ov" onclick="filterOverdue(this)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rd)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span style="color:var(--rd)">Overdue reminders</span></button>
   </nav>
@@ -350,6 +369,60 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 </div>
 </div>
 
+<!-- NOTES TIMELINE MODAL -->
+<div class="ov" id="notes-modal">
+<div class="modal" style="max-width:520px">
+  <div class="mh">
+    <div class="mt">Notes &amp; Timeline</div>
+    <button class="xb" onclick="closeNotesModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div style="font-size:12px;color:var(--mu);margin-bottom:12px" id="notes-lead-name"></div>
+  <input type="hidden" id="notes-lead-id">
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <select id="notes-type" class="compose-field" style="width:130px;flex-shrink:0">
+      <option value="note">📝 Note</option>
+      <option value="call">📞 Call</option>
+      <option value="meeting">🤝 Meeting</option>
+      <option value="email">✉ Email</option>
+      <option value="reply">↩ Reply received</option>
+    </select>
+    <textarea id="notes-body" class="compose-field" style="flex:1;height:72px;resize:none" placeholder="Add a note, call summary, or meeting update..."></textarea>
+  </div>
+  <div class="mf" style="margin-bottom:16px">
+    <button class="bg" onclick="closeNotesModal()">Close</button>
+    <button class="bs" onclick="saveNote()">Save note</button>
+  </div>
+  <div style="font-size:11px;color:var(--hn);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Timeline</div>
+  <div id="notes-list" style="max-height:300px;overflow-y:auto"></div>
+</div>
+</div>
+
+<!-- SNOOZE MODAL -->
+<div class="ov" id="snooze-modal">
+<div class="modal" style="max-width:380px">
+  <div class="mh">
+    <div class="mt">Snooze followups</div>
+    <button class="xb" onclick="closeSnooze()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div style="font-size:12px;color:var(--mu);margin-bottom:14px" id="snooze-lead-name"></div>
+  <input type="hidden" id="snooze-lead-id">
+  <div class="f">
+    <label>Pause all followups until</label>
+    <input type="date" id="snooze-date" class="compose-field">
+  </div>
+  <div style="font-size:12px;color:var(--hn);margin:8px 0 16px">The automation will skip this lead until the selected date. Useful when a lead says "reach out next month".</div>
+  <div style="display:flex;gap:6px;margin-bottom:12px">
+    <button class="bg" style="font-size:12px;padding:5px 10px" onclick="document.getElementById('snooze-date').value=new Date(Date.now()+7*864e5).toISOString().slice(0,10)">+7 days</button>
+    <button class="bg" style="font-size:12px;padding:5px 10px" onclick="document.getElementById('snooze-date').value=new Date(Date.now()+14*864e5).toISOString().slice(0,10)">+14 days</button>
+    <button class="bg" style="font-size:12px;padding:5px 10px" onclick="document.getElementById('snooze-date').value=new Date(Date.now()+30*864e5).toISOString().slice(0,10)">+1 month</button>
+  </div>
+  <div class="mf">
+    <button class="bg" onclick="closeSnooze()">Cancel</button>
+    <button class="bs" onclick="saveSnooze()">Snooze</button>
+  </div>
+</div>
+</div>
+
 <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Saved</span></div>
 
 <script type="module">
@@ -388,7 +461,7 @@ async function dbUpsertTmpl(t){if(useLocal){const a=lsG('sai_tmpls')||[];const i
 async function dbDeleteTmpl(id){if(useLocal){lsS('sai_tmpls',(lsG('sai_tmpls')||[]).filter(t=>t.id!==id));return;}const{error}=await sb.from('templates').delete().eq('id',id);if(error)throw error;}
 
 // ── State ─────────────────────────────────────────────────────
-const STAGES=['New','Contacted','Replied','Follow-up','Closed'];
+const STAGES=['New','Contacted','Replied','Follow-up','Closed','Bounced'];
 const SCOL={New:'var(--bl)',Contacted:'var(--am)',Replied:'var(--gn)','Follow-up':'var(--pu)',Closed:'var(--mu)'};
 const SPILL={New:'pN',Contacted:'pC',Replied:'pR','Follow-up':'pF',Closed:'pX'};
 let leads=[],templates=[],editId=null,detailId=null,emailLeadId=null,editTmplId=null;
@@ -480,10 +553,10 @@ function getFiltered(){
     return true;
   });
 }
-window.switchView=function(v,el){currentView=v;stageFilter='';overdueFilter=false;document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent={list:'All leads',pipeline:'Pipeline',templates:'Email templates',compose:'Compose email'}[v]||v;renderView();};
+window.switchView=function(v,el){currentView=v;stageFilter='';overdueFilter=false;document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent={list:'All leads',pipeline:'Pipeline',templates:'Email templates',compose:'Compose email',dashboard:'Dashboard'}[v]||v;renderView();};
 window.filterStage=function(stage,el){stageFilter=stageFilter===stage?'':stage;overdueFilter=false;currentView='list';document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.getElementById('nav-list').classList.add('active');document.getElementById('page-title').textContent=stageFilter||'All leads';renderView();};
 window.filterOverdue=function(el){overdueFilter=true;stageFilter='';currentView='list';document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent='Overdue reminders';renderView();};
-window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')renderPipeline();else if(currentView==='templates')renderTemplatesView();else if(currentView==='compose')renderComposeView();else renderList();};
+window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')renderPipeline();else if(currentView==='templates')renderTemplatesView();else if(currentView==='compose')renderComposeView();else if(currentView==='dashboard')renderDashboard();else renderList();};
 
 function renderList(){
   const list=getFiltered(),el=document.getElementById('content');
@@ -495,12 +568,12 @@ function renderList(){
   el.innerHTML=banner+bbar+`<div class="table-wrap"><table class="lt">
     <thead><tr>
       <th class="cb-cell"></th>
-      <th>Name</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Last contacted</th><th>Reminders</th><th>Notes</th><th></th>
+      <th>Name</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Last contacted</th><th>Opens</th><th>Reminders</th><th>Notes</th><th></th>
     </tr></thead>
     <tbody>${list.map(l=>{
       const chk=selectedIds.has(l.id);
       const nd2=nextDue(l);
-      return`<tr onclick="openDetail('${l.id}')" style="${chk?'background:var(--acd)':''}">
+      return`<tr onclick="openDetail('${l.id}')" style="${chk?'background:var(--acd)':l.stage==='Bounced'?'background:rgba(220,38,38,.06)':l.stage==='Replied'?'background:rgba(34,197,94,.06)':''}">
         <td class="cb-cell" onclick="event.stopPropagation()"><input type="checkbox" ${chk?'checked':''} onchange="toggleSel('${l.id}',this)"></td>
         <td style="font-weight:400;white-space:nowrap">${esc(l.name)}</td>
         <td style="white-space:nowrap">${esc(l.company)}</td>
@@ -560,6 +633,20 @@ window.openDetail=function(id){
     <div class="slbl">Move stage</div>
     <div class="mb2">${STAGES.map(s=>`<button class="smb${l.stage===s?' cur':''}" onclick="moveStage('${id}','${s}')">${esc(s)}</button>`).join('')}</div>`;
   document.getElementById('detail-modal').classList.add('open');
+  // Inject action buttons
+  const actDiv = document.createElement('div');
+  actDiv.style.cssText = 'margin-top:12px';
+  actDiv.innerHTML = `
+    <div class="slbl">Actions</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+      <button class="bg" style="font-size:12px;padding:5px 12px" onclick="openNotesPanel('${id}')">📝 Notes</button>
+      <button class="bg" style="font-size:12px;padding:5px 12px" onclick="openSnooze('${id}')">💤 Snooze</button>
+      ${l.snooze_until ? `<span class="snooze-badge">Until ${l.snooze_until} <span onclick="clearSnooze('${id}')" style="cursor:pointer;margin-left:3px">✕</span></span>` : ''}
+    </div>
+    ${l.opens > 0 ? `<div style="font-size:12px;color:var(--gn)"><span class="open-dot"></span>${l.opens} open${l.opens>1?'s':''} tracked</div>` : ''}
+  `;
+  const detailBody = document.querySelector('#detail-modal .db');
+  if (detailBody) detailBody.appendChild(actDiv);
 };
 window.closeDetail=function(){document.getElementById('detail-modal').classList.remove('open');detailId=null;};
 window.moveStage=async function(id,stage){const l=leads.find(x=>x.id===id);if(!l)return;l.stage=stage;l.updated=new Date().toISOString();if(stage==='Contacted'&&!l.lc)l.lc=new Date().toISOString().slice(0,10);try{await dbUpsert(l);renderStats();renderView();openDetail(id);showToast('Moved to '+stage);}catch(e){showToast('Error: '+e.message);}};
@@ -568,7 +655,271 @@ window.doDeleteLead=async function(){if(!detailId)return;if(!confirm('Delete thi
 window.quickDelete=async function(id){if(!confirm('Delete this lead?'))return;try{await dbDelete(id);leads=leads.filter(l=>l.id!==id);renderStats();renderSectorFilter();renderView();showToast('Lead deleted');}catch(e){showToast('Error: '+e.message);}};
 
 // ── Multi-select ──────────────────────────────────────────────
-// ── SMTP Settings ─────────────────────────────────────────────
+
+// ══════════════════════════════════════════════════════════════
+// ── NOTES / TIMELINE ─────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+
+async function dbGetNotes(leadId) {
+  if (useLocal) {
+    return (lsG('sai_notes') || []).filter(n => n.lead_id === leadId)
+      .sort((a,b) => new Date(b.created) - new Date(a.created));
+  }
+  const { data, error } = await sb.from('notes').select('*')
+    .eq('lead_id', leadId).order('created', { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+async function dbAddNote(note) {
+  if (useLocal) {
+    const all = lsG('sai_notes') || [];
+    all.unshift(note);
+    lsS('sai_notes', all);
+    return note;
+  }
+  const { data, error } = await sb.from('notes').insert(note).select().single();
+  if (error) throw error;
+  return data;
+}
+
+async function dbDeleteNote(id) {
+  if (useLocal) {
+    lsS('sai_notes', (lsG('sai_notes') || []).filter(n => n.id !== id));
+    return;
+  }
+  await sb.from('notes').delete().eq('id', id);
+}
+
+window.openNotesPanel = async function(leadId) {
+  const l = leads.find(x => x.id === leadId);
+  if (!l) return;
+  const modal = document.getElementById('notes-modal');
+  document.getElementById('notes-lead-name').textContent = l.name + ' — ' + l.company;
+  document.getElementById('notes-lead-id').value = leadId;
+  document.getElementById('notes-body').value = '';
+  document.getElementById('notes-type').value = 'note';
+  modal.classList.add('open');
+  await renderNotesList(leadId);
+};
+
+window.closeNotesModal = function() {
+  document.getElementById('notes-modal').classList.remove('open');
+};
+
+async function renderNotesList(leadId) {
+  const el = document.getElementById('notes-list');
+  el.innerHTML = '<div style="color:var(--hn);font-size:12px;padding:8px 0">Loading...</div>';
+  try {
+    const notes = await dbGetNotes(leadId);
+    if (!notes.length) {
+      el.innerHTML = '<div style="color:var(--hn);font-size:12px;padding:8px 0">No notes yet. Add one above.</div>';
+      return;
+    }
+    const typeColour = { note:'var(--mu)', call:'var(--pu)', meeting:'var(--bl)', reply:'var(--gn)', bounce:'var(--rd)', email:'var(--am)' };
+    el.innerHTML = notes.map(n => `
+      <div class="note-item type-${n.type}" id="note-${n.id}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <span class="note-type-tag" style="color:${typeColour[n.type]||'var(--mu)'};">${n.type}</span>
+          <button onclick="deleteNote('${n.id}','${leadId}')" style="background:none;border:none;color:var(--hn);cursor:pointer;font-size:12px;padding:0">✕</button>
+        </div>
+        <div style="font-size:13px;color:var(--tx);margin-top:6px;line-height:1.6">${esc(n.body)}</div>
+        <div class="note-time">${new Date(n.created).toLocaleString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</div>
+      </div>`).join('');
+  } catch(e) {
+    el.innerHTML = '<div style="color:var(--rd);font-size:12px">Error loading notes</div>';
+  }
+}
+
+window.saveNote = async function() {
+  const leadId = document.getElementById('notes-lead-id').value;
+  const body   = document.getElementById('notes-body').value.trim();
+  const type   = document.getElementById('notes-type').value;
+  if (!body) { showToast('Write something first'); return; }
+  const note = { id: uid(), lead_id: leadId, type, body, created_by: 'Nithin G N', created: new Date().toISOString() };
+  try {
+    await dbAddNote(note);
+    document.getElementById('notes-body').value = '';
+    showToast('Note saved');
+    await renderNotesList(leadId);
+    // Update lead's lc if it's a call or meeting
+    if (type === 'call' || type === 'meeting') {
+      const l = leads.find(x => x.id === leadId);
+      if (l) {
+        l.lc = new Date().toISOString().slice(0,10);
+        await dbUpsert(l).catch(() => {});
+        renderStats();
+      }
+    }
+  } catch(e) { showToast('Error: ' + e.message); }
+};
+
+window.deleteNote = async function(noteId, leadId) {
+  if (!confirm('Delete this note?')) return;
+  await dbDeleteNote(noteId).catch(() => {});
+  await renderNotesList(leadId);
+};
+
+// ══════════════════════════════════════════════════════════════
+// ── FOLLOWUP SNOOZE ──────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+
+window.openSnooze = function(leadId) {
+  const l = leads.find(x => x.id === leadId);
+  if (!l) return;
+  const modal = document.getElementById('snooze-modal');
+  document.getElementById('snooze-lead-id').value = leadId;
+  document.getElementById('snooze-lead-name').textContent = l.name + ' — ' + l.company;
+  // Set default to 7 days from now
+  const d = new Date(); d.setDate(d.getDate() + 7);
+  document.getElementById('snooze-date').value = d.toISOString().slice(0,10);
+  modal.classList.add('open');
+};
+
+window.closeSnooze = function() {
+  document.getElementById('snooze-modal').classList.remove('open');
+};
+
+window.saveSnooze = async function() {
+  const leadId = document.getElementById('snooze-lead-id').value;
+  const date   = document.getElementById('snooze-date').value;
+  if (!date) { showToast('Pick a date'); return; }
+  const l = leads.find(x => x.id === leadId);
+  if (!l) return;
+  l.snooze_until = date;
+  l.updated = new Date().toISOString();
+  try {
+    await dbUpsert(l);
+    closeSnooze();
+    renderStats(); renderView();
+    showToast('Snoozed until ' + new Date(date).toLocaleDateString('en-IN',{day:'numeric',month:'short'}));
+  } catch(e) { showToast('Error: ' + e.message); }
+};
+
+window.clearSnooze = async function(leadId) {
+  const l = leads.find(x => x.id === leadId);
+  if (!l) return;
+  l.snooze_until = null;
+  l.updated = new Date().toISOString();
+  await dbUpsert(l).catch(() => {});
+  renderStats(); renderView();
+  showToast('Snooze cleared');
+};
+
+// ══════════════════════════════════════════════════════════════
+// ── DASHBOARD / RESPONSE RATE ────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+
+function renderDashboard() {
+  const el = document.getElementById('content');
+
+  // ── Stats ─────────────────────────────────────────────────
+  const total     = leads.length;
+  const contacted = leads.filter(l => l.stage !== 'New').length;
+  const replied   = leads.filter(l => l.stage === 'Replied').length;
+  const bounced   = leads.filter(l => l.stage === 'Bounced').length;
+  const opened    = leads.filter(l => l.opens > 0).length;
+  const snoozed   = leads.filter(l => l.snooze_until && l.snooze_until >= new Date().toISOString().slice(0,10)).length;
+  const replyRate = contacted > 0 ? Math.round((replied / contacted) * 100) : 0;
+  const openRate  = contacted > 0 ? Math.round((opened / contacted) * 100) : 0;
+  const bounceRate= contacted > 0 ? Math.round((bounced / contacted) * 100) : 0;
+
+  // ── By sector ─────────────────────────────────────────────
+  const sectorMap = {};
+  for (const l of leads) {
+    if (!sectorMap[l.sector]) sectorMap[l.sector] = { total:0, replied:0, opened:0, contacted:0 };
+    sectorMap[l.sector].total++;
+    if (l.stage !== 'New') sectorMap[l.sector].contacted++;
+    if (l.stage === 'Replied') sectorMap[l.sector].replied++;
+    if (l.opens > 0) sectorMap[l.sector].opened++;
+  }
+  const sectorRows = Object.entries(sectorMap)
+    .sort((a,b) => b[1].replied - a[1].replied)
+    .map(([sector, s]) => {
+      const rr = s.contacted > 0 ? Math.round(s.replied/s.contacted*100) : 0;
+      return `
+        <div class="sector-row">
+          <div style="font-size:12px;color:var(--tx);min-width:160px">${esc(sector)}</div>
+          <div style="font-size:12px;color:var(--hn);min-width:30px;text-align:right">${s.total}</div>
+          <div class="sector-bar-wrap">
+            <div class="sector-bar" style="width:${rr}%"></div>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:${rr>20?'var(--gn)':rr>10?'var(--am)':'var(--mu)'};min-width:36px;text-align:right">${rr}%</div>
+          <div style="font-size:11px;color:var(--hn);min-width:60px;text-align:right">${s.replied} replied</div>
+        </div>`;
+    }).join('');
+
+  // ── Recent activity ────────────────────────────────────────
+  const recent = [...leads]
+    .filter(l => l.lc)
+    .sort((a,b) => new Date(b.lc) - new Date(a.lc))
+    .slice(0, 8);
+
+  const recentRows = recent.map(l => `
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)">
+      ${pill(l.stage)}
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;color:var(--tx);font-weight:500">${esc(l.name)}</div>
+        <div style="font-size:11px;color:var(--hn)">${esc(l.company)}</div>
+      </div>
+      ${l.opens > 0 ? `<span title="${l.opens} opens"><span class="open-dot"></span><span style="font-size:11px;color:var(--gn)">${l.opens}</span></span>` : ''}
+      <div style="font-size:11px;color:var(--hn)">${new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div>
+    </div>`).join('');
+
+  el.innerHTML = `
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-num">${total}</div>
+        <div class="dash-label">Total leads</div>
+        <div class="dash-sub">${snoozed} snoozed</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num" style="color:var(--gn)">${replyRate}%</div>
+        <div class="dash-label">Reply rate</div>
+        <div class="dash-sub">${replied} of ${contacted} contacted</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num" style="color:var(--bl)">${openRate}%</div>
+        <div class="dash-label">Open rate</div>
+        <div class="dash-sub">${opened} emails opened</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num" style="color:${bounceRate>10?'var(--rd)':'var(--mu)'}">${bounceRate}%</div>
+        <div class="dash-label">Bounce rate</div>
+        <div class="dash-sub">${bounced} bounced</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px">
+        <div style="font-size:13px;font-weight:500;color:var(--tx);margin-bottom:12px">Reply rate by sector</div>
+        ${sectorRows || '<div style="color:var(--hn);font-size:12px">No data yet</div>'}
+      </div>
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px">
+        <div style="font-size:13px;font-weight:500;color:var(--tx);margin-bottom:12px">Recent activity</div>
+        ${recentRows || '<div style="color:var(--hn);font-size:12px">No activity yet</div>'}
+      </div>
+    </div>
+
+    <div style="margin-top:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px">
+      <div style="font-size:13px;font-weight:500;color:var(--tx);margin-bottom:12px">Stage breakdown</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${Object.entries(sectorMap).length === 0 ? '<div style="color:var(--hn);font-size:12px">No leads yet</div>' :
+          ['New','Contacted','Follow-up','Replied','Bounced','Closed'].map(s => {
+            const count = leads.filter(l => l.stage === s).length;
+            const pct = total > 0 ? Math.round(count/total*100) : 0;
+            return `<div style="flex:1;min-width:80px;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:10px;text-align:center">
+              <div style="font-size:18px;font-weight:700;color:${SCOL[s]||'var(--mu)'}">${count}</div>
+              <div style="font-size:10px;color:var(--hn);margin-top:2px">${s}</div>
+              <div style="font-size:10px;color:var(--hn)">${pct}%</div>
+            </div>`;
+          }).join('')
+        }
+      </div>
+    </div>`;
+}
+
+// SMTP Settings
 function getSmtpSettings(){return{email:localStorage.getItem('smtp_email')||'',password:localStorage.getItem('smtp_pass')||'',host:localStorage.getItem('smtp_host')||'smtp.titan.email',port:parseInt(localStorage.getItem('smtp_port'))||465,name:localStorage.getItem('smtp_name')||'Nithin G N | Shabd AI'};}
 window.openSmtp=function(){const s=getSmtpSettings();document.getElementById('smtp-email').value=s.email;document.getElementById('smtp-pass').value=s.password;document.getElementById('smtp-host').value=s.host;document.getElementById('smtp-port').value=s.port;document.getElementById('smtp-name').value=s.name;document.getElementById('smtp-modal').classList.add('open');};
 window.closeSmtp=function(){document.getElementById('smtp-modal').classList.remove('open');};
