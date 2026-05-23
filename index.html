@@ -365,6 +365,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
     <div class="f"><label>Port</label><input id="smtp-port" value="465"></div>
   </div>
   <div class="f"><label>Your name (From field)</label><input id="smtp-name" value="Nithin G N | Shabd AI"></div>
+  <div class="f"><label>Local API port <span style="font-size:10px;color:var(--hn)">Nithin = 3456, Founder = 3457</span></label><input id="smtp-apiport" value="3456" type="number"></div>
   <div class="mf"><button class="bg" onclick="closeSmtp()">Cancel</button><button class="bs" onclick="saveSmtpSettings()">Save settings</button></div>
 </div>
 </div>
@@ -920,10 +921,10 @@ function renderDashboard() {
 }
 
 // SMTP Settings
-function getSmtpSettings(){return{email:localStorage.getItem('smtp_email')||'',password:localStorage.getItem('smtp_pass')||'',host:localStorage.getItem('smtp_host')||'smtp.titan.email',port:parseInt(localStorage.getItem('smtp_port'))||465,name:localStorage.getItem('smtp_name')||'Nithin G N | Shabd AI'};}
-window.openSmtp=function(){const s=getSmtpSettings();document.getElementById('smtp-email').value=s.email;document.getElementById('smtp-pass').value=s.password;document.getElementById('smtp-host').value=s.host;document.getElementById('smtp-port').value=s.port;document.getElementById('smtp-name').value=s.name;document.getElementById('smtp-modal').classList.add('open');};
+function getSmtpSettings(){return{email:localStorage.getItem('smtp_email')||'',password:localStorage.getItem('smtp_pass')||'',host:localStorage.getItem('smtp_host')||'smtp.titan.email',port:parseInt(localStorage.getItem('smtp_port'))||465,name:localStorage.getItem('smtp_name')||'Nithin G N | Shabd AI',apiPort:parseInt(localStorage.getItem('smtp_apiport'))||3456};}
+window.openSmtp=function(){const s=getSmtpSettings();document.getElementById('smtp-email').value=s.email;document.getElementById('smtp-pass').value=s.password;document.getElementById('smtp-host').value=s.host;document.getElementById('smtp-port').value=s.port;document.getElementById('smtp-name').value=s.name;document.getElementById('smtp-apiport').value=s.apiPort||3456;document.getElementById('smtp-modal').classList.add('open');};
 window.closeSmtp=function(){document.getElementById('smtp-modal').classList.remove('open');};
-window.saveSmtpSettings=function(){localStorage.setItem('smtp_email',document.getElementById('smtp-email').value.trim());localStorage.setItem('smtp_pass',document.getElementById('smtp-pass').value);localStorage.setItem('smtp_host',document.getElementById('smtp-host').value.trim());localStorage.setItem('smtp_port',document.getElementById('smtp-port').value.trim());localStorage.setItem('smtp_name',document.getElementById('smtp-name').value.trim());closeSmtp();showToast('Email settings saved');};
+window.saveSmtpSettings=function(){localStorage.setItem('smtp_email',document.getElementById('smtp-email').value.trim());localStorage.setItem('smtp_pass',document.getElementById('smtp-pass').value);localStorage.setItem('smtp_host',document.getElementById('smtp-host').value.trim());localStorage.setItem('smtp_port',document.getElementById('smtp-port').value.trim());localStorage.setItem('smtp_name',document.getElementById('smtp-name').value.trim());localStorage.setItem('smtp_apiport',document.getElementById('smtp-apiport').value.trim());closeSmtp();showToast('Email settings saved');};
 
 // ── Compose view ──────────────────────────────────────────────
 let composeLeadId=null;
@@ -1037,34 +1038,52 @@ window.sendCompose=async function(){
   const to=document.getElementById('c-to')?.value.trim()||'';
   const subj=document.getElementById('c-subject')?.value.trim()||'';
   const body=document.getElementById('c-body')?.value.trim()||'';
-  const smtp=getSmtpSettings();
   const statusEl=document.getElementById('compose-status');
   if(!to){showToast('Enter a recipient email');return;}
   if(!subj){showToast('Enter a subject line');return;}
   if(!body){showToast('Write the email body');return;}
-  if(!smtp.email||!smtp.password){openSmtp();return;}
-  statusEl.style.display='block';statusEl.style.background='var(--sf2)';statusEl.style.color='var(--mu)';statusEl.textContent='Preparing...';
+  statusEl.style.display='block';
+  statusEl.style.cssText='display:block;background:var(--sf2);color:var(--mu);font-size:13px;padding:8px 12px;border-radius:var(--r);margin-top:8px';
+  statusEl.textContent='Sending...';
   try{
-    // Copy full email to clipboard for paste into Titan
-    const full='To: '+to+'\nSubject: '+subj+'\n\n'+body;
-    await navigator.clipboard.writeText(full);
-    statusEl.style.background='var(--gnd)';statusEl.style.color='var(--gn)';
-    statusEl.innerHTML='Email copied to clipboard. Open Titan mail, paste into a new email, and send to <strong>'+esc(to)+'</strong>.';
-    // Update lead stage
-    if(composeLeadId){
-      const l=leads.find(x=>x.id===composeLeadId);
-      if(l&&l.stage==='New'){
-        const updated={...l,stage:'Contacted',lc:new Date().toISOString().slice(0,10),updated:new Date().toISOString()};
-        await dbUpsertLead(updated).catch(()=>{});
-        const i=leads.findIndex(x=>x.id===composeLeadId);if(i>=0)leads[i]=updated;
-        renderStats();
-      }
+    // Try local API (START.bat must be running)
+    let sent=false;
+    try{
+      const resp=await Promise.race([
+        fetch(`http://localhost:${getSmtpSettings().apiPort}/send`,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({to,subject:subj,bodyText:body,leadId:composeLeadId||null})
+        }),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),4000))
+      ]);
+      if(resp&&resp.ok){sent=true;}
+    }catch(fetchErr){
+      console.log('Local API not available:',fetchErr.message);
     }
-    showToast('Copied! Paste into Titan and send.');
+
+    if(sent){
+      statusEl.style.background='var(--gnd)';statusEl.style.color='var(--gn)';
+      statusEl.innerHTML='Sent to <strong>'+esc(to)+'</strong> via Titan.';
+      if(composeLeadId){
+        const l=leads.find(x=>x.id===composeLeadId);
+        if(l){l.stage='Contacted';l.lc=new Date().toISOString().slice(0,10);renderStats();}
+        await dbUpsert(leads.find(x=>x.id===composeLeadId)).catch(()=>{});
+      }
+      showToast('Email sent via Titan!');
+    } else {
+      // Fallback: copy to clipboard
+      const full='To: '+to+'\nSubject: '+subj+'\n\n'+body;
+      await navigator.clipboard.writeText(full).catch(()=>{});
+      statusEl.style.background='rgba(245,158,11,.15)';statusEl.style.color='#92400e';
+      statusEl.innerHTML='<strong>START.bat is not running.</strong> Email copied to clipboard. Open Titan and paste to send to <strong>'+esc(to)+'</strong>.';
+      showToast('Copied — paste into Titan to send');
+    }
   }catch(e){
-    statusEl.style.background='var(--rdd)';statusEl.style.color='var(--rd)';statusEl.textContent='Could not copy: '+e.message;
+    statusEl.style.background='var(--rdd)';statusEl.style.color='var(--rd)';
+    statusEl.textContent='Error: '+e.message;
   }
-};
+}
 // ────────────────────────────────────────────────────────────
 window.toggleSel=function(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);renderList();};
 window.clearSel=function(){selectedIds.clear();renderList();};
