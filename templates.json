@@ -171,22 +171,22 @@
     "id": "t7",
     "name": "Banking — Intro (Day 0)",
     "sector": "Banking",
-    "subject": "Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding, KYC, and account communication\n- Branch staff and agent training content in regional languages\n- Translation of customer-facing apps, websites, and service content\n- Regional language financial literacy and awareness campaigns\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India, IndiaFirst Life, Titan Company Limited, and other banking and financial services organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "subject": "RBI KFS compliance — multilingual borrower documents for {company}",
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nThe RBI's KFS mandate (circular RBI/2024-25/18, effective October 2024) requires all retail and MSME term loan documents, including Key Fact Statements, to be provided in a language the borrower can understand. For 2025-26 inspection cycles, supervisory observations on KFS language compliance are already being flagged.\n\nFor a bank like {company} operating across diverse geographies, this means KFS documents, loan agreements, and borrower communication need to be available across the regional languages your customers actually speak.\n\nWe help banks and regulated entities meet this requirement at scale, covering text and document localisation across 22 Indic languages with full contextual accuracy.\n\nWe support with:\n- KFS and loan document localisation across regional languages\n- Multilingual onboarding, consent, and KYC communication\n- Branch staff training content in regional languages\n- Customer-facing app and website localisation\n- Multilingual grievance redress and servicing communication\n\nWe currently work with AU Small Finance Bank, Jana Small Finance Bank, and other regulated entities on exactly this.\n\nWould it make sense to connect briefly on how {company} is approaching the KFS language requirement?\n\nBest,\n{sender}"
   },
   {
     "id": "t7f1",
     "name": "Banking — Follow-up 1 (Day 5)",
     "sector": "Banking",
-    "subject": "Re: Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For banking organisations expanding across diverse geographies, multilingual communication often helps improve customer onboarding, engagement, financial literacy, and regional accessibility significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "subject": "Re: RBI KFS compliance — {company}",
+    "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[The RBI's KFS mandate requires loan documents to be in a language the borrower understands. For banks operating across Tier 2/3 and rural markets, this is not just a compliance requirement — it directly affects customer trust, grievance escalations, and supervisory inspection outcomes.]]\n\nHappy to share how other regulated entities are approaching this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f2",
     "name": "Banking — Follow-up 2 (Day 10)",
     "sector": "Banking",
-    "subject": "A quick example for {company}",
-    "body": "Hi {name},\n\nJust wanted to share a small example from your website that we localised into a regional language to demonstrate how multilingual communication could look for {company}.\n\n[SAMPLE_BLOCK]\n\nThis is often useful across customer onboarding, account servicing, financial literacy initiatives, and branch communication where regional accessibility becomes important at scale.\n\nHappy to walk you through this briefly if relevant.\n\nBest,\n{sender}"
+    "subject": "A quick KFS localisation example for {company}",
+    "body": "Hi {name},\n\nJust wanted to share a quick example of what a KFS document looks like when localised into Tamil for a retail borrower, the way we would do it for {company}.\n\n[SAMPLE_BLOCK]\n\nThis is the kind of localisation that directly addresses the RBI's requirement that the KFS be in a language understood by the borrower, while keeping the format, terms, and structure fully compliant.\n\nHappy to walk you through this briefly if relevant.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f3",
@@ -199,15 +199,15 @@
     "id": "t8",
     "name": "NBFC — Intro (Day 0)",
     "sector": "NBFC",
-    "subject": "Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual onboarding and KYC communication\n- Repayment and collections communication across SMS, WhatsApp\n- Translation of customer-facing apps, websites, and training content\n- Regional language awareness and financial literacy campaigns\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, PNB MetLife India Insurance Company Limited, IndiaFirst Life, Titan Company Limited, and other impact-driven organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "subject": "RBI KFS compliance — regional language documents for {company}",
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nThe RBI's KFS mandate (effective October 2024) requires all NBFCs to provide Key Fact Statements for retail and MSME loans in a language the borrower understands. With 2025-26 inspection cycles now actively reviewing KFS compliance, regulated entities that have not addressed the language requirement are being flagged.\n\nFor {company} operating across diverse geographies, making KFS documents, loan communication, and onboarding content available in regional languages is both a compliance requirement and a trust-building opportunity.\n\nWe help NBFCs meet this at scale, across 22 Indic languages.\n\nWe support with:\n- KFS and loan document localisation across regional languages\n- Multilingual onboarding, KYC, and borrower communication\n- Repayment and collections communication across WhatsApp and SMS\n- Translation of customer-facing apps and digital interfaces\n- Regional language financial literacy content\n\nWe currently work with AU Small Finance Bank, Jana Small Finance Bank, and other regulated entities on exactly this.\n\nWould it make sense to connect briefly on how {company} is approaching the KFS language requirement?\n\nBest,\n{sender}"
   },
   {
     "id": "t8f1",
     "name": "NBFC — Follow-up 1 (Day 5)",
     "sector": "NBFC",
-    "subject": "Re: Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For NBFCs operating across diverse geographies, multilingual communication often helps improve onboarding clarity, repayment engagement, customer understanding, and regional accessibility significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "subject": "Re: RBI KFS compliance — {company}",
+    "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[The RBI's KFS mandate requires NBFCs to provide loan documents in a language the borrower understands. With inspection cycles now flagging language compliance, regulated entities that rely on English-only KFS documents face real supervisory risk — particularly for Tier 2/3 and rural customer segments.]]\n\nHappy to share how other regulated entities are handling this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t8f2",
@@ -227,15 +227,15 @@
     "id": "t9",
     "name": "Microfinance — Intro (Day 0)",
     "sector": "Microfinance",
-    "subject": "Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger communication and engagement across diverse communities and regions.\n\nWe support with:\n- Multilingual borrower onboarding and KYC communication\n- Group meeting and repayment communication in regional languages\n- Field staff and loan officer training content\n- Financial literacy and awareness content across communities\n\nWe currently support 40+ organisations at scale, including AU Small Finance Bank, Jana Small Finance Bank, ARMMAN, Quest Alliance, and other microfinance and community-focused organisations.\n\nPlease let me know if this would be relevant for you and your team.\n\nBest,\n{sender}"
+    "subject": "RBI KFS mandate — multilingual borrower documents for {company}",
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nThe RBI's KFS mandate now applies to microfinance institutions as well. MFIs are required to provide Key Fact Statements in a language understood by the borrower — and with 2025-26 inspection cycles actively flagging KFS language compliance, the regulatory pressure is real.\n\nFor an MFI like {company} working with borrowers in rural and semi-urban India, this means loan terms, repayment schedules, and KFS documents need to reach borrowers in the language they actually speak — not just English or Hindi.\n\nWe help MFIs meet this requirement at scale, with contextual localisation across 22 Indic languages.\n\nWe support with:\n- KFS and loan agreement localisation across regional languages\n- Multilingual borrower onboarding and consent communication\n- Group meeting and repayment communication in local languages\n- Field staff training content in regional languages\n- Multilingual financial literacy and awareness content\n\nWe currently work with several MFIs and regulated entities on exactly this.\n\nWould it make sense to connect briefly on how {company} is approaching the KFS language requirement?\n\nBest,\n{sender}"
   },
   {
     "id": "t9f1",
     "name": "Microfinance — Follow-up 1 (Day 5)",
     "sector": "Microfinance",
-    "subject": "Re: Multilingual Borrower Communication for {company}",
-    "body": "Hi {name},\n\nJust wanted to follow up on the note below and see if this might be relevant for your team.\n\n[[For microfinance organisations working across rural and semi-urban communities, multilingual borrower communication often helps improve onboarding clarity, repayment engagement, group trust, and field effectiveness significantly.]]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+    "subject": "Re: RBI KFS mandate — {company}",
+    "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[The RBI's KFS mandate requires MFIs to provide loan documents in a language the borrower understands. For microfinance institutions working with rural borrowers, this is not just a compliance requirement — it directly affects repayment behaviour, group trust, and portfolio quality when borrowers fully understand their terms.]]\n\nHappy to share how other MFIs are approaching this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t9f2",
