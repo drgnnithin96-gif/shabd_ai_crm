@@ -537,7 +537,19 @@ function remStatus(ds){
 }
 const nextDue=l=>{for(const f of['r1','r2','r3']){if(l[f]){const rs=remStatus(l[f]);if(rs.cls==='rb-ov'||rs.cls==='rb-sn')return rs;}}return null;};
 const pill=stage=>`<span class="pill ${SPILL[stage]||'pX'}"><span class="pd" style="background:${SCOL[stage]||'var(--mu)'}"></span>${esc(stage)}</span>`;
-const overdueCount=()=>{const t=new Date();t.setHours(0,0,0,0);return leads.filter(l=>!['Replied','Closed','Bounced'].includes(l.stage)&&['r1','r2','r3'].some(f=>{if(!l[f])return false;const d=new Date(l[f]);d.setHours(0,0,0,0);return d<=t;})).length;};
+const overdueCount=()=>{
+  const t=new Date();t.setHours(0,0,0,0);
+  return leads.filter(l=>{
+    if(['Replied','Closed','Bounced'].includes(l.stage)) return false;
+    // r1 overdue only if r1 date passed AND r1 not yet sent
+    if(l.r1 && !l.r1_sent){const d=new Date(l.r1);d.setHours(0,0,0,0);if(d<=t)return true;}
+    // r2 overdue only if r1 was sent, r2 date passed, r2 not yet sent
+    if(l.r2 && l.r1_sent && !l.r2_sent){const d=new Date(l.r2);d.setHours(0,0,0,0);if(d<=t)return true;}
+    // r3 overdue only if r2 was sent, r3 date passed, r3 not yet sent
+    if(l.r3 && l.r2_sent && !l.r3_sent){const d=new Date(l.r3);d.setHours(0,0,0,0);if(d<=t)return true;}
+    return false;
+  }).length;
+};
 
 // ── Render ────────────────────────────────────────────────────
 function renderStats(){document.getElementById('stats-row').innerHTML=STAGES.map(s=>`<div class="sc" onclick="filterStage('${s}',null)"><div class="sn">${leads.filter(l=>l.stage===s).length}</div><div class="sl"><span class="sdot" style="background:${SCOL[s]}"></span>${s}</div></div>`).join('');}
@@ -549,7 +561,7 @@ function getFiltered(){
   return leads.filter(l=>{
     if(stageFilter&&l.stage!==stageFilter)return false;
     if(fsc&&l.sector!==fsc)return false;
-    if(overdueFilter){const ov=['r1','r2','r3'].some(f=>{if(!l[f])return false;const d=new Date(l[f]);d.setHours(0,0,0,0);return d<=today;});if(!ov)return false;}
+    if(overdueFilter){const ov=(l.r1&&!l.r1_sent&&new Date(l.r1)<=today)||(l.r2&&l.r1_sent&&!l.r2_sent&&new Date(l.r2)<=today)||(l.r3&&l.r2_sent&&!l.r3_sent&&new Date(l.r3)<=today);if(!ov)return false;}
     if(q&&!((l.name||'').toLowerCase().includes(q)||(l.company||'').toLowerCase().includes(q)||(l.email||'').toLowerCase().includes(q)))return false;
     return true;
   });
