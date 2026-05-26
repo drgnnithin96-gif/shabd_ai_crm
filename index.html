@@ -268,7 +268,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 <div class="ov" id="form-modal">
 <div class="modal">
   <div class="mh"><div class="mt" id="form-title">Add lead</div><button class="xb" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-  <div class="fr"><div class="f"><label>Name *</label><input id="f-name" placeholder="Pallavi Jadhav"></div><div class="f"><label>Company</label><input id="f-company" placeholder="CRY India"></div></div>
+  <div class="fr"><div class="f"><label>Name *</label><input id="f-name" placeholder="Pallavi Jadhav"></div><div class="f"><label>Designation</label><input id="f-designation" placeholder="Head of Partnerships"></div><div class="f"><label>Company</label><input id="f-company" placeholder="CRY India"></div></div>
   <div class="f"><label>Email</label><input id="f-email" type="email" placeholder="pallavi@cry.org"></div>
   <div class="f"><label>Website <span style="font-size:10px;color:var(--hn);text-transform:none;letter-spacing:0">(used for company research)</span></label><input id="f-website" type="url" placeholder="https://cry.org"></div>
   <div class="fr">
@@ -581,7 +581,7 @@ function renderList(){
   el.innerHTML=banner+bbar+`<div class="table-wrap"><table class="lt">
     <thead><tr>
       <th class="cb-cell"></th>
-      <th>Name</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Last contacted</th><th>Opens</th><th>Reminders</th><th>Notes</th><th></th>
+      <th>Name</th><th>Designation</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Last contacted</th><th>Opens</th><th>Reminders</th><th>Notes</th><th></th>
     </tr></thead>
     <tbody>${list.map(l=>{
       const chk=selectedIds.has(l.id);
@@ -589,6 +589,7 @@ function renderList(){
       return`<tr onclick="openDetail('${l.id}')" style="${chk?'background:var(--acd)':l.stage==='Bounced'?'background:rgba(220,38,38,.06)':l.stage==='Replied'?'background:rgba(34,197,94,.06)':''}">
         <td class="cb-cell" onclick="event.stopPropagation()"><input type="checkbox" ${chk?'checked':''} onchange="toggleSel('${l.id}',this)"></td>
         <td style="font-weight:400;white-space:nowrap">${esc(l.name)}</td>
+        <td style="white-space:nowrap;color:var(--hn);font-size:12px">${esc(l.designation||'')}</td>
         <td style="white-space:nowrap">${esc(l.company)}</td>
         <td class="dc">${esc(l.email)}</td>
         <td><span class="spill">${esc(l.sector)}</span></td>
@@ -610,15 +611,16 @@ function renderPipeline(){
   const q=(document.getElementById('search').value||'').toLowerCase();
   const fsc=document.getElementById('filter-sector').value;
   const ok=l=>{if(fsc&&l.sector!==fsc)return false;if(q&&!((l.name||'').toLowerCase().includes(q)||(l.company||'').toLowerCase().includes(q)))return false;return true;};
-  el.innerHTML=`<div class="pipeline">${STAGES.map(s=>{const cards=leads.filter(l=>l.stage===s&&ok(l));return`<div class="stcol"><div class="sthd"><div class="stname"><span style="width:7px;height:7px;border-radius:50%;background:${SCOL[s]};display:inline-block"></span>${s}</div><span class="stcnt">${cards.length}</span></div><div class="stcards">${cards.length?cards.map(l=>{const nd2=nextDue(l);return`<div class="pc" onclick="openDetail('${l.id}')"><div class="pcn">${esc(l.name)}</div><div class="pcc">${esc(l.company)||'—'}</div><div class="pcm"><span class="spill">${esc(l.sector)}</span>${nd2?`<span class="rb ${nd2.cls}">${nd2.label}</span>`:''}</div></div>`;}).join(''):`<div class="ec">—</div>`}</div></div>`;}).join('')}</div>`;
+  el.innerHTML=`<div class="pipeline">${STAGES.map(s=>{const cards=leads.filter(l=>l.stage===s&&ok(l));return`<div class="stcol"><div class="sthd"><div class="stname"><span style="width:7px;height:7px;border-radius:50%;background:${SCOL[s]};display:inline-block"></span>${s}</div><span class="stcnt">${cards.length}</span></div><div class="stcards">${cards.length?cards.map(l=>{const nd2=nextDue(l);return`<div class="pc" onclick="openDetail('${l.id}')"><div class="pcn">${esc(l.name)}</div>${l.designation?`<div style="font-size:12px;color:var(--hn);margin-bottom:4px">${esc(l.designation)}</div>`:''}<div class="pcc">${esc(l.company)||'—'}</div><div class="pcm"><span class="spill">${esc(l.sector)}</span>${nd2?`<span class="rb ${nd2.cls}">${nd2.label}</span>`:''}</div></div>`;}).join(''):`<div class="ec">—</div>`}</div></div>`;}).join('')}</div>`;
 }
 
 // ── Lead CRUD ─────────────────────────────────────────────────
 window.openAdd=function(){editId=null;document.getElementById('form-title').textContent='Add lead';['name','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value='');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-simple-date').value='';document.getElementById('f-sector').value='NGO & Social Impact';document.getElementById('f-stage').value='New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
-window.openEdit=function(id){const l=leads.find(x=>x.id===id);if(!l)return;editId=id;document.getElementById('form-title').textContent='Edit lead';['name','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');document.getElementById('f-simple-date').value=l.lc||'';document.getElementById('f-sector').value=l.sector||'NGO & Social Impact';document.getElementById('f-stage').value=l.stage||'New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
+window.openEdit=function(id){const l=leads.find(x=>x.id===id);if(!l)return;editId=id;document.getElementById('form-title').textContent='Edit lead';['name','designation','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');document.getElementById('f-simple-date').value=l.lc||'';document.getElementById('f-sector').value=l.sector||'NGO & Social Impact';document.getElementById('f-stage').value=l.stage||'New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
 window.closeForm=function(){document.getElementById('form-modal').classList.remove('open');};
 window.saveLead=async function(){
-  const name=document.getElementById('f-name').value.trim();if(!name){document.getElementById('f-name').focus();return;}
+  const name=document.getElementById('f-name').value.trim();
+  const designation=document.getElementById('f-designation')?.value.trim()||'';if(!name){document.getElementById('f-name').focus();return;}
   const stage=document.getElementById('f-stage').value;
   const isOutreach=['New','Contacted'].includes(stage);
   // For Replied/Follow-up/Closed use the single date field as lc
@@ -831,11 +833,11 @@ function renderDashboard() {
   const contacted = leads.filter(l => l.stage !== 'New').length;
   const replied   = leads.filter(l => l.stage === 'Replied').length;
   const bounced   = leads.filter(l => l.stage === 'Bounced').length;
-  const opened    = leads.filter(l => l.opens > 0).length;
+  const opened    = leads.filter(l => (l.opens||0) > 0).length;
   const snoozed   = leads.filter(l => l.snooze_until && l.snooze_until >= new Date().toISOString().slice(0,10)).length;
   const replyRate = contacted > 0 ? Math.round((replied / contacted) * 100) : 0;
-  const openRate  = contacted > 0 ? Math.round((opened / contacted) * 100) : 0;
-  const bounceRate= contacted > 0 ? Math.round((bounced / contacted) * 100) : 0;
+  const openRate  = contacted > 0 ? Math.round((opened / Math.max(contacted,1)) * 100) : 0;
+  const bounceRate= contacted > 0 ? Math.round((bounced / Math.max(contacted,1)) * 100) : 0;
 
   // ── By sector ─────────────────────────────────────────────
   const sectorMap = {};
@@ -894,7 +896,8 @@ function renderDashboard() {
       <div class="dash-card">
         <div class="dash-num" style="color:var(--bl)">${openRate}%</div>
         <div class="dash-label">Open rate</div>
-        <div class="dash-sub">${opened} emails opened</div>
+        <div class="dash-sub">${opened} of ${contacted} opened</div>
+        ${!CFG_TRACK_URL?'<div style="font-size:10px;color:var(--am);margin-top:4px">⚠ Deploy Vercel tracker to enable</div>':''}
       </div>
       <div class="dash-card">
         <div class="dash-num" style="color:${bounceRate>10?'var(--rd)':'var(--mu)'}">${bounceRate}%</div>
@@ -1178,9 +1181,9 @@ window.doDelTmpl=async function(id){if(!confirm('Delete this template?'))return;
 window.openImport=function(){csvParsed=[];csvHeaders=[];csvColMap={};document.getElementById('import-step1').style.display='';document.getElementById('import-result').style.display='none';document.getElementById('import-footer').style.display='flex';document.getElementById('csv-map-section').style.display='none';document.getElementById('import-btn').disabled=true;document.getElementById('import-btn').style.opacity='.5';document.getElementById('csv-file-input').value='';document.getElementById('import-modal').classList.add('open');};
 window.closeImport=function(){document.getElementById('import-modal').classList.remove('open');};
 function parseCSV(text){const lines=text.split(/\r?\n/).filter(l=>l.trim());if(!lines.length)return{headers:[],rows:[]};function sp(l){const r=[];let inQ=false,cur='';for(let i=0;i<l.length;i++){if(l[i]==='"'&&l[i+1]==='"'){cur+='"';i++;}else if(l[i]==='"'){inQ=!inQ;}else if(l[i]===','&&!inQ){r.push(cur.trim());cur='';}else cur+=l[i];}r.push(cur.trim());return r;}return{headers:sp(lines[0]),rows:lines.slice(1).map(l=>sp(l))};}
-const FLDS=['name','company','email','website','sector','stage','notes','sent','lc'];
-const FLB={name:'Name',company:'Company',email:'Email',website:'Website',sector:'Sector',stage:'Stage',notes:'Notes',sent:'Date sent',lc:'Last contacted'};
-const GS={name:['name','full name','contact'],company:['company','organisation','organization','org'],email:['email','e-mail','mail'],website:['website','url','web','site','linkedin'],sector:['sector','industry'],stage:['stage','status'],notes:['notes','note','remarks'],sent:['sent','date sent','email date'],lc:['last contacted','last contact']};
+const FLDS=['name','designation','company','email','website','sector','stage','notes','sent','lc'];
+const FLB={name:'Name',designation:'Designation',company:'Company',email:'Email',website:'Website',sector:'Sector',stage:'Stage',notes:'Notes',sent:'Date sent',lc:'Last contacted'};
+const GS={name:['name','full name','contact'],designation:['designation','title','job title','role','position'],company:['company','organisation','organization','org'],email:['email','e-mail','mail'],website:['website','url','web','site','linkedin'],sector:['sector','industry'],stage:['stage','status'],notes:['notes','note','remarks'],sent:['sent','date sent','email date'],lc:['last contacted','last contact']};
 window.handleCSVFile=function(file){if(!file)return;const r=new FileReader();r.onload=e=>{const{headers,rows}=parseCSV(e.target.result);if(!headers.length){showToast('Could not parse CSV');return;}csvHeaders=headers;csvParsed=rows;const hh=headers.map(x=>x.toLowerCase().trim());const mapRows=FLDS.map(f=>{const guess=((GS[f]||[]).reduce((acc,kw)=>{if(acc>=0)return acc;const i=hh.findIndex(x=>x.includes(kw));return i;},-1));csvColMap[f]=guess>=0?guess:-1;return`<div class="map-row"><span>${FLB[f]}</span><select style="flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:6px 10px;font-size:13px;color:var(--tx);font-family:'DM Sans',sans-serif;outline:none" onchange="csvColMap['${f}']=parseInt(this.value)"><option value="-1">— skip —</option>${headers.map((h,i)=>`<option value="${i}"${i===guess?' selected':''}>${esc(h)}</option>`).join('')}</select></div>`;});document.getElementById('csv-map-rows').innerHTML=mapRows.join('');const prev=rows.slice(0,4);document.getElementById('csv-preview').innerHTML=`<table><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${prev.map(r2=>`<tr>${headers.map((_,i)=>`<td>${esc(r2[i]||'')}</td>`).join('')}</tr>`).join('')}</tbody></table>`;document.getElementById('csv-map-section').style.display='';document.getElementById('import-btn').disabled=false;document.getElementById('import-btn').style.opacity='1';};r.readAsText(file);};
 window.doImport=async function(){
   let added=0,skipped=0;// Dedup against BOTH email AND name+company to catch blank-email dupes
@@ -1191,7 +1194,7 @@ window.doImport=async function(){
     if(emailKey&&existing.has(emailKey)){skipped++;continue;}
     if(!emailKey&&nameKey&&existingNames.has(nameKey)){skipped++;continue;}
     if(emailKey)existing.add(emailKey);
-    if(nameKey)existingNames.add(nameKey);const sent=get('sent');const rem=calcRem(sent);newLeads.push({id:uid(),created:new Date().toISOString(),name,company:get('company'),email,website:get('website')||null,sector:get('sector')||'Other',stage:STAGES.includes(get('stage'))?get('stage'):'New',notes:get('notes'),sent,lc:get('lc'),r1:rem.r1,r2:rem.r2,r3:rem.r3,updated:new Date().toISOString()});if(email)existing.add(email);added++;}
+    if(nameKey)existingNames.add(nameKey);const sent=get('sent');const rem=calcRem(sent);newLeads.push({id:uid(),created:new Date().toISOString(),name,designation:get('designation')||'',company:get('company'),email,website:get('website')||null,sector:get('sector')||'Other',stage:STAGES.includes(get('stage'))?get('stage'):'New',notes:get('notes'),sent,lc:get('lc'),r1:rem.r1,r2:rem.r2,r3:rem.r3,updated:new Date().toISOString()});if(email)existing.add(email);added++;}
   try{if(newLeads.length){
     // Save to localStorage + Supabase (inline to avoid hoisting issues)
     const existing_leads=lsG('sai_leads')||[];
