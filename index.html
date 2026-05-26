@@ -537,7 +537,7 @@ function remStatus(ds){
 }
 const nextDue=l=>{for(const f of['r1','r2','r3']){if(l[f]){const rs=remStatus(l[f]);if(rs.cls==='rb-ov'||rs.cls==='rb-sn')return rs;}}return null;};
 const pill=stage=>`<span class="pill ${SPILL[stage]||'pX'}"><span class="pd" style="background:${SCOL[stage]||'var(--mu)'}"></span>${esc(stage)}</span>`;
-const overdueCount=()=>{const t=new Date();t.setHours(0,0,0,0);return leads.filter(l=>['r1','r2','r3'].some(f=>{if(!l[f])return false;const d=new Date(l[f]);d.setHours(0,0,0,0);return d<=t;})).length;};
+const overdueCount=()=>{const t=new Date();t.setHours(0,0,0,0);return leads.filter(l=>!['Replied','Closed','Bounced'].includes(l.stage)&&['r1','r2','r3'].some(f=>{if(!l[f])return false;const d=new Date(l[f]);d.setHours(0,0,0,0);return d<=t;})).length;};
 
 // ── Render ────────────────────────────────────────────────────
 function renderStats(){document.getElementById('stats-row').innerHTML=STAGES.map(s=>`<div class="sc" onclick="filterStage('${s}',null)"><div class="sn">${leads.filter(l=>l.stage===s).length}</div><div class="sl"><span class="sdot" style="background:${SCOL[s]}"></span>${s}</div></div>`).join('');}
@@ -1171,8 +1171,15 @@ const FLB={name:'Name',company:'Company',email:'Email',website:'Website',sector:
 const GS={name:['name','full name','contact'],company:['company','organisation','organization','org'],email:['email','e-mail','mail'],website:['website','url','web','site','linkedin'],sector:['sector','industry'],stage:['stage','status'],notes:['notes','note','remarks'],sent:['sent','date sent','email date'],lc:['last contacted','last contact']};
 window.handleCSVFile=function(file){if(!file)return;const r=new FileReader();r.onload=e=>{const{headers,rows}=parseCSV(e.target.result);if(!headers.length){showToast('Could not parse CSV');return;}csvHeaders=headers;csvParsed=rows;const hh=headers.map(x=>x.toLowerCase().trim());const mapRows=FLDS.map(f=>{const guess=((GS[f]||[]).reduce((acc,kw)=>{if(acc>=0)return acc;const i=hh.findIndex(x=>x.includes(kw));return i;},-1));csvColMap[f]=guess>=0?guess:-1;return`<div class="map-row"><span>${FLB[f]}</span><select style="flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:6px 10px;font-size:13px;color:var(--tx);font-family:'DM Sans',sans-serif;outline:none" onchange="csvColMap['${f}']=parseInt(this.value)"><option value="-1">— skip —</option>${headers.map((h,i)=>`<option value="${i}"${i===guess?' selected':''}>${esc(h)}</option>`).join('')}</select></div>`;});document.getElementById('csv-map-rows').innerHTML=mapRows.join('');const prev=rows.slice(0,4);document.getElementById('csv-preview').innerHTML=`<table><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${prev.map(r2=>`<tr>${headers.map((_,i)=>`<td>${esc(r2[i]||'')}</td>`).join('')}</tr>`).join('')}</tbody></table>`;document.getElementById('csv-map-section').style.display='';document.getElementById('import-btn').disabled=false;document.getElementById('import-btn').style.opacity='1';};r.readAsText(file);};
 window.doImport=async function(){
-  let added=0,skipped=0;const existing=new Set(leads.map(l=>l.email).filter(Boolean));const newLeads=[];
-  for(const row of csvParsed){const get=f=>{const i=csvColMap[f];return(i>=0&&row[i])?row[i].trim():null;};const name=get('name');if(!name){skipped++;continue;}const email=get('email');if(email&&existing.has(email)){skipped++;continue;}const sent=get('sent');const rem=calcRem(sent);newLeads.push({id:uid(),created:new Date().toISOString(),name,company:get('company'),email,website:get('website')||null,sector:get('sector')||'Other',stage:STAGES.includes(get('stage'))?get('stage'):'New',notes:get('notes'),sent,lc:get('lc'),r1:rem.r1,r2:rem.r2,r3:rem.r3,updated:new Date().toISOString()});if(email)existing.add(email);added++;}
+  let added=0,skipped=0;// Dedup against BOTH email AND name+company to catch blank-email dupes
+  const existing=new Set(leads.map(l=>l.email?.toLowerCase().trim()).filter(Boolean));
+  const existingNames=new Set(leads.map(l=>`${l.name?.toLowerCase()}_${l.company?.toLowerCase()}`).filter(Boolean));const newLeads=[];
+  for(const row of csvParsed){const get=f=>{const i=csvColMap[f];return(i>=0&&row[i])?row[i].trim():null;};const name=get('name');if(!name){skipped++;continue;}const email=get('email');const emailKey=email?.toLowerCase().trim();
+    const nameKey=`${name?.toLowerCase()}_${get('company')?.toLowerCase()}`;
+    if(emailKey&&existing.has(emailKey)){skipped++;continue;}
+    if(!emailKey&&nameKey&&existingNames.has(nameKey)){skipped++;continue;}
+    if(emailKey)existing.add(emailKey);
+    if(nameKey)existingNames.add(nameKey);const sent=get('sent');const rem=calcRem(sent);newLeads.push({id:uid(),created:new Date().toISOString(),name,company:get('company'),email,website:get('website')||null,sector:get('sector')||'Other',stage:STAGES.includes(get('stage'))?get('stage'):'New',notes:get('notes'),sent,lc:get('lc'),r1:rem.r1,r2:rem.r2,r3:rem.r3,updated:new Date().toISOString()});if(email)existing.add(email);added++;}
   try{if(newLeads.length){
     // Save to localStorage + Supabase (inline to avoid hoisting issues)
     const existing_leads=lsG('sai_leads')||[];
