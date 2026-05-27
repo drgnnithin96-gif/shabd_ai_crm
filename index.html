@@ -581,7 +581,7 @@ function renderList(){
   el.innerHTML=banner+bbar+`<div class="table-wrap"><table class="lt">
     <thead><tr>
       <th class="cb-cell"></th>
-      <th>Name</th><th>Designation</th><th>Company</th><th>Email</th><th>Sector</th><th>Stage</th><th>Last contacted</th><th>Opens</th><th>Reminders</th><th>Notes</th><th></th>
+      <th>Name</th><th>Email</th><th>Designation</th><th>Company</th><th>Sector</th><th>Stage</th><th>Last contacted</th><th>Opens</th><th>Reminders</th><th>Notes</th><th></th>
     </tr></thead>
     <tbody>${list.map(l=>{
       const chk=selectedIds.has(l.id);
@@ -589,9 +589,9 @@ function renderList(){
       return`<tr onclick="openDetail('${l.id}')" style="${chk?'background:var(--acd)':l.stage==='Bounced'?'background:rgba(220,38,38,.06)':l.stage==='Replied'?'background:rgba(34,197,94,.06)':''}">
         <td class="cb-cell" onclick="event.stopPropagation()"><input type="checkbox" ${chk?'checked':''} onchange="toggleSel('${l.id}',this)"></td>
         <td style="font-weight:400;white-space:nowrap">${esc(l.name)}</td>
-        <td style="white-space:nowrap;color:var(--hn);font-size:12px">${esc(l.designation||'')}</td>
-        <td style="white-space:nowrap">${esc(l.company)}</td>
         <td class="dc">${esc(l.email)}</td>
+        <td style="white-space:nowrap;color:var(--hn);font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis" title="${esc(l.designation||'')}">${esc(l.designation||'')}</td>
+        <td style="white-space:nowrap">${esc(l.company)}</td>
         <td><span class="spill">${esc(l.sector)}</span></td>
         <td>${pill(l.stage)}</td>
         <td class="dc">${l.lc?new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td>
@@ -625,7 +625,7 @@ window.saveLead=async function(){
   const isOutreach=['New','Contacted'].includes(stage);
   // For Replied/Follow-up/Closed use the single date field as lc
   const simpleDate=nd('f-simple-date');
-  const data={id:editId||uid(),name,company:nd('f-company'),email:nd('f-email'),website:nd('f-website'),sector:document.getElementById('f-sector').value,stage,
+  const data={id:editId||uid(),name,designation,company:nd('f-company'),email:nd('f-email'),website:nd('f-website'),sector:document.getElementById('f-sector').value,stage,
     sent:isOutreach?nd('f-sent'):null,
     r1:isOutreach?nd('f-r1'):null,
     r2:isOutreach?nd('f-r2'):null,
