@@ -186,7 +186,7 @@
     "name": "Banking — Follow-up 2 (Day 10)",
     "sector": "Banking",
     "subject": "A quick KFS localisation example for {company}",
-    "body": "Hi {name},\n\nJust wanted to share a quick example of what a KFS document looks like when localised into Tamil for a retail borrower, the way we would do it for {company}.\n\n[SAMPLE_BLOCK]\n\nThis is the kind of localisation that directly addresses the RBI's requirement that the KFS be in a language understood by the borrower, while keeping the format, terms, and structure fully compliant.\n\nHappy to walk you through this briefly if relevant.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nJust wanted to share a quick example of what a KFS document looks like when localised into Hindi for a retail borrower, the way we would do it for {company}.\n\n[SAMPLE_BLOCK]\n\nThis is the kind of localisation that directly addresses the RBI's requirement that the KFS be in a language understood by the borrower, while keeping the format, terms, and structure fully compliant.\n\nHappy to walk you through this briefly if relevant.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f3",
