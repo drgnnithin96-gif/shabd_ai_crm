@@ -49,7 +49,7 @@ code{background:var(--sf2);padding:1px 5px;border-radius:5px;color:var(--ac);fon
 .db-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
 .spinner{display:inline-block;width:10px;height:10px;border:2px solid var(--bd2);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--bd);border-bottom:1px solid var(--bd)}
+.stats-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--bd);border-bottom:1px solid var(--bd)}
 .sc{background:var(--sf);padding:13px 16px;cursor:pointer;transition:background .15s}
 .sc:hover{background:var(--sf2)}
 .sn{font-size:22px;font-weight:300;font-family:'Instrument Serif',serif;color:var(--tx);line-height:1}
@@ -90,7 +90,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 .mark-done-btn{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid rgba(74,222,128,.4);background:rgba(74,222,128,.08);color:var(--gn);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;margin-left:4px}
 .mark-done-btn:hover{background:rgba(74,222,128,.2)}
 .rtl-step .mark-done-btn{display:block;margin:6px auto 0;font-size:10px}
-.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.pipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 .stcol{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden}
 .sthd{padding:10px 12px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
 .stname{font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
@@ -216,7 +216,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
 .toast{position:fixed;bottom:20px;right:20px;background:var(--sf2);border:1px solid var(--bd2);border-radius:var(--r);padding:9px 14px;font-size:13px;color:var(--tx);z-index:300;display:flex;align-items:center;gap:7px;transform:translateY(50px);opacity:0;transition:all .25s;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
 .toast svg{width:13px;height:13px;stroke:var(--ac);stroke-width:2;flex-shrink:0}
-@media(max-width:860px){.shell{grid-template-columns:1fr}.sidebar{display:none}.pipeline{grid-template-columns:repeat(3,1fr)}.stats-row{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:860px){.shell{grid-template-columns:1fr}.sidebar{display:none}.pipeline{grid-template-columns:repeat(3,1fr);overflow-x:auto}.stats-row{grid-template-columns:repeat(3,1fr);overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -246,6 +246,8 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
   <div class="sf-foot">
     <button class="sf-btn" onclick="openImport()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import CSV</button>
     <button class="sf-btn" onclick="exportCSV()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export CSV</button>
+    <button class="sf-btn" style="color:#d97706" onclick="swapNameCompany()" title="Swap Name↔Company for selected leads">⇄ Swap</button>
+    <button class="sf-btn" style="color:#dc2626" onclick="cleanBlankLeads()" title="Remove blank leads">🗑 Clean</button>
   </div>
 </aside>
 <div class="main">
@@ -463,7 +465,7 @@ async function dbDeleteTmpl(id){if(useLocal){lsS('sai_tmpls',(lsG('sai_tmpls')||
 
 // ── State ─────────────────────────────────────────────────────
 const STAGES=['New','Contacted','Replied','Follow-up','Closed','Bounced'];
-const SCOL={New:'var(--bl)',Contacted:'var(--am)',Replied:'var(--gn)','Follow-up':'var(--pu)',Closed:'var(--mu)'};
+const SCOL={New:'var(--bl)',Contacted:'var(--am)',Replied:'var(--gn)','Follow-up':'var(--pu)',Closed:'var(--mu)',Bounced:'#dc2626'};
 const SPILL={New:'pN',Contacted:'pC',Replied:'pR','Follow-up':'pF',Closed:'pX'};
 let leads=[],templates=[],editId=null,detailId=null,emailLeadId=null,editTmplId=null;
 let currentView='list',stageFilter='',overdueFilter=false;
@@ -561,7 +563,7 @@ function getFiltered(){
   return leads.filter(l=>{
     if(stageFilter&&l.stage!==stageFilter)return false;
     if(fsc&&l.sector!==fsc)return false;
-    if(overdueFilter){const ov=(l.r1&&!l.r1_sent&&new Date(l.r1)<=today)||(l.r2&&l.r1_sent&&!l.r2_sent&&new Date(l.r2)<=today)||(l.r3&&l.r2_sent&&!l.r3_sent&&new Date(l.r3)<=today);if(!ov)return false;}
+    if(overdueFilter){const t2=new Date();t2.setHours(0,0,0,0);const ov=(l.r1&&!l.r1_sent&&new Date(l.r1)<=t2)||(l.r2&&!l.r2_sent&&new Date(l.r2)<=t2)||(l.r3&&!l.r3_sent&&new Date(l.r3)<=t2);if(!ov)return false;}
     if(q&&!((l.name||'').toLowerCase().includes(q)||(l.company||'').toLowerCase().includes(q)||(l.email||'').toLowerCase().includes(q)))return false;
     return true;
   });
@@ -595,6 +597,7 @@ function renderList(){
         <td><span class="spill">${esc(l.sector)}</span></td>
         <td>${pill(l.stage)}</td>
         <td class="dc">${l.lc?new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td>
+        <td>${(l.opens||0)>0?'<span style="font-size:11px;color:var(--gn)"><span class="open-dot"></span>'+(l.opens||0)+'</span>':''}</td>
         <td>${nd2?`<span class="rb ${nd2.cls}">${nd2.label}</span>`:'<span style="color:var(--hn);font-size:11px">—</span>'}</td>
         <td class="nc" title="${esc(l.notes)}">${esc(l.notes)||'—'}</td>
         <td class="ac-cell" onclick="event.stopPropagation()">
@@ -615,7 +618,7 @@ function renderPipeline(){
 }
 
 // ── Lead CRUD ─────────────────────────────────────────────────
-window.openAdd=function(){editId=null;document.getElementById('form-title').textContent='Add lead';['name','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value='');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-simple-date').value='';document.getElementById('f-sector').value='NGO & Social Impact';document.getElementById('f-stage').value='New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
+window.openAdd=function(){editId=null;document.getElementById('form-title').textContent='Add lead';['name','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value='');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value='');document.getElementById('f-simple-date').value='';document.getElementById('f-sector').value='NGO & Social Impact';document.getElementById('f-stage').value='New';document.getElementById('f-sector').selectedIndex=0;if(document.getElementById('f-designation'))document.getElementById('f-designation').value='';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
 window.openEdit=function(id){const l=leads.find(x=>x.id===id);if(!l)return;editId=id;document.getElementById('form-title').textContent='Edit lead';['name','designation','company','email','notes','website'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');['sent','r1','r2','r3','lc'].forEach(f=>document.getElementById('f-'+f).value=l[f]||'');document.getElementById('f-simple-date').value=l.lc||'';document.getElementById('f-sector').value=l.sector||'NGO & Social Impact';document.getElementById('f-stage').value=l.stage||'New';toggleDateFields();document.getElementById('form-modal').classList.add('open');};
 window.closeForm=function(){document.getElementById('form-modal').classList.remove('open');};
 window.saveLead=async function(){
@@ -1000,7 +1003,7 @@ Or load a saved template from the panel on the right."></textarea>
     </div>`;
 }
 window.onLeadPick=function(id){
-  composeLeadId=id;const l=leads.find(x=>x.id===id);
+  composeLeadId=id;const ln=leads.find(x=>x.id===id);if(ln){document.getElementById('compose-modal-title').textContent='Email to '+ln.name+' ('+ln.company+')';};const l=leads.find(x=>x.id===id);
   if(!l){document.getElementById('compose-lead-info').innerHTML='<span style="color:var(--hn)">No lead selected.</span>';return;}
   document.getElementById('c-to').value=l.email||'';
   document.getElementById('compose-lead-info').innerHTML=`<div style="color:var(--tx);font-weight:500;margin-bottom:4px">${esc(l.name)}</div><div>${esc(l.company)}</div><div style="color:var(--mu)">${esc(l.email)}</div><div style="margin-top:4px"><span class="spill">${esc(l.sector)}</span></div>`;
@@ -1209,6 +1212,31 @@ dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)handleCSVFile(f);});
 
 // ── Export ────────────────────────────────────────────────────
+window.swapNameCompany=async function(){
+  const ids=selectedIds.size>0?[...selectedIds]:leads.filter(l=>l.stage==='New'||l.stage==='Contacted').map(l=>l.id);
+  if(!confirm('Swap Name and Company for '+ids.length+' leads? Only do this if your CSV was imported with columns in wrong order. Cannot be undone easily.'))return;
+  let fixed=0;
+  for(const id of ids){
+    const l=leads.find(x=>x.id===id);
+    if(!l)continue;
+    const tmp=l.name;l.name=l.company;l.company=tmp;
+    await dbUpsert(l).catch(()=>{});
+    fixed++;
+  }
+  renderStats();renderView();
+  showToast(fixed+' leads swapped — check a few to confirm they look correct');
+};
+window.cleanBlankLeads=async function(){
+  const blank=leads.filter(l=>!l.email&&!l.company&&!l.name);
+  const noEmail=leads.filter(l=>!l.email);
+  if(!confirm('Found '+noEmail.length+' leads with no email (cannot receive emails). Remove the '+blank.length+' completely blank records?'))return;
+  for(const l of blank){
+    leads=leads.filter(x=>x.id!==l.id);
+    if(!useLocal&&sb)sb.from('leads').delete().eq('id',l.id).catch(()=>{});
+  }
+  renderStats();renderView();
+  showToast('Removed '+blank.length+' blank leads');
+};
 window.exportCSV=function(){const h=['Name','Company','Email','Website','Sector','Stage','Date Sent','Reminder 1 (Day 5)','Reminder 2 (Day 10)','Reminder 3 (Day 28)','Last Contacted','Notes','Date Added'];const rows=leads.map(l=>[l.name,l.company,l.email,l.website||'',l.sector,l.stage,l.sent||'',l.r1||'',l.r2||'',l.r3||'',l.lc||'',l.notes,l.created?new Date(l.created).toLocaleDateString('en-IN'):''].map(v=>`"${(v||'').replace(/"/g,'""')}"`));const csv=[h.join(','),...rows.map(r=>r.join(','))].join('\n');const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='shabd-ai-leads-'+new Date().toISOString().slice(0,10)+'.csv';a.click();showToast('CSV exported');};
 
 // ── Toast + close ─────────────────────────────────────────────
