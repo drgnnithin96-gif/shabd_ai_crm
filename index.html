@@ -877,7 +877,7 @@ function renderDashboard() {
         <div style="font-size:13px;color:var(--tx);font-weight:500">${esc(l.name)}</div>
         <div style="font-size:11px;color:var(--hn)">${esc(l.company)}</div>
       </div>
-      ${l.opens > 0 ? `<span title="${l.opens} opens"><span class="open-dot"></span><span style="font-size:11px;color:var(--gn)">${l.opens}</span></span>` : ''}
+      ${l.opens > 0 ? '<span><span class="open-dot"></span><span style="font-size:11px;color:var(--gn)">'+l.opens+'</span></span>' : ''}
       <div style="font-size:11px;color:var(--hn)">${new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div>
     </div>`).join('');
 
@@ -897,7 +897,7 @@ function renderDashboard() {
         <div class="dash-num" style="color:var(--bl)">${openRate}%</div>
         <div class="dash-label">Open rate</div>
         <div class="dash-sub">${opened} of ${contacted} opened</div>
-        ${!CFG_TRACK_URL?'<div style="font-size:10px;color:var(--am);margin-top:4px">⚠ Deploy Vercel tracker to enable</div>':''}
+        
       </div>
       <div class="dash-card">
         <div class="dash-num" style="color:${bounceRate>10?'var(--rd)':'var(--mu)'}">${bounceRate}%</div>
@@ -920,17 +920,11 @@ function renderDashboard() {
     <div style="margin-top:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px">
       <div style="font-size:13px;font-weight:500;color:var(--tx);margin-bottom:12px">Stage breakdown</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        ${Object.entries(sectorMap).length === 0 ? '<div style="color:var(--hn);font-size:12px">No leads yet</div>' :
-          ['New','Contacted','Follow-up','Replied','Bounced','Closed'].map(s => {
+        ${['New','Contacted','Follow-up','Replied','Bounced','Closed'].map(s => {
             const count = leads.filter(l => l.stage === s).length;
             const pct = total > 0 ? Math.round(count/total*100) : 0;
-            return `<div style="flex:1;min-width:80px;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:10px;text-align:center">
-              <div style="font-size:18px;font-weight:700;color:${SCOL[s]||'var(--mu)'}">${count}</div>
-              <div style="font-size:10px;color:var(--hn);margin-top:2px">${s}</div>
-              <div style="font-size:10px;color:var(--hn)">${pct}%</div>
-            </div>`;
-          }).join('')
-        }
+            return '<div style="flex:1;min-width:80px;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);padding:10px;text-align:center"><div style="font-size:18px;font-weight:700;color:'+(SCOL[s]||'var(--mu)')+'">'+count+'</div><div style="font-size:10px;color:var(--hn);margin-top:2px">'+s+'</div><div style="font-size:10px;color:var(--hn)">'+pct+'%</div></div>';
+          }).join('')}
       </div>
     </div>`;
 }
