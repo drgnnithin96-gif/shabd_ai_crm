@@ -274,7 +274,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
   <div class="f"><label>Email</label><input id="f-email" type="email" placeholder="pallavi@cry.org"></div>
   <div class="f"><label>Website <span style="font-size:10px;color:var(--hn);text-transform:none;letter-spacing:0">(used for company research)</span></label><input id="f-website" type="url" placeholder="https://cry.org"></div>
   <div class="fr">
-    <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>Banking</option><option>NBFC</option><option>Microfinance</option><option>Health</option><option>Fashion</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option></select></div>
+    <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>Banking</option><option>NBFC</option><option>Microfinance</option><option>Health</option><option>Fashion</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option><option>FMCG</option><option>Energy</option><option>Pharma</option></select></div>
     <div class="f"><label>Stage</label><select id="f-stage" onchange="toggleDateFields()"><option>New</option><option>Contacted</option><option>Replied</option><option>Follow-up</option><option>Closed</option></select></div>
   </div>
   <!-- Date fields for New/Contacted — shown by default -->
@@ -543,12 +543,12 @@ const overdueCount=()=>{
   const t=new Date();t.setHours(0,0,0,0);
   return leads.filter(l=>{
     if(['Replied','Closed','Bounced'].includes(l.stage)) return false;
-    // r1 overdue only if r1 date passed AND r1 not yet sent
-    if(l.r1 && !l.r1_sent){const d=new Date(l.r1);d.setHours(0,0,0,0);if(d<=t)return true;}
-    // r2 overdue only if r1 was sent, r2 date passed, r2 not yet sent
-    if(l.r2 && l.r1_sent && !l.r2_sent){const d=new Date(l.r2);d.setHours(0,0,0,0);if(d<=t)return true;}
-    // r3 overdue only if r2 was sent, r3 date passed, r3 not yet sent
-    if(l.r3 && l.r2_sent && !l.r3_sent){const d=new Date(l.r3);d.setHours(0,0,0,0);if(d<=t)return true;}
+    const r1s=l.r1_sent===true||l.r1_sent==='true';
+    const r2s=l.r2_sent===true||l.r2_sent==='true';
+    const r3s=l.r3_sent===true||l.r3_sent==='true';
+    if(l.r1&&!r1s){const d=new Date(l.r1);d.setHours(0,0,0,0);if(d<=t)return true;}
+    if(l.r2&&!r2s){const d=new Date(l.r2);d.setHours(0,0,0,0);if(d<=t)return true;}
+    if(l.r3&&!r3s){const d=new Date(l.r3);d.setHours(0,0,0,0);if(d<=t)return true;}
     return false;
   }).length;
 };
@@ -563,7 +563,7 @@ function getFiltered(){
   return leads.filter(l=>{
     if(stageFilter&&l.stage!==stageFilter)return false;
     if(fsc&&l.sector!==fsc)return false;
-    if(overdueFilter){const t2=new Date();t2.setHours(0,0,0,0);const ov=(l.r1&&!l.r1_sent&&new Date(l.r1)<=t2)||(l.r2&&!l.r2_sent&&new Date(l.r2)<=t2)||(l.r3&&!l.r3_sent&&new Date(l.r3)<=t2);if(!ov)return false;}
+    if(overdueFilter){const t2=new Date();t2.setHours(0,0,0,0);const r1s=l.r1_sent===true||l.r1_sent==='true';const r2s=l.r2_sent===true||l.r2_sent==='true';const r3s=l.r3_sent===true||l.r3_sent==='true';const ov=(l.r1&&!r1s&&new Date(l.r1)<=t2)||(l.r2&&!r2s&&new Date(l.r2)<=t2)||(l.r3&&!r3s&&new Date(l.r3)<=t2);if(!ov)return false;}
     if(q&&!((l.name||'').toLowerCase().includes(q)||(l.company||'').toLowerCase().includes(q)||(l.email||'').toLowerCase().includes(q)))return false;
     return true;
   });
@@ -840,7 +840,7 @@ function renderDashboard() {
   const snoozed   = leads.filter(l => l.snooze_until && l.snooze_until >= new Date().toISOString().slice(0,10)).length;
   const replyRate = contacted > 0 ? Math.round((replied / contacted) * 100) : 0;
   const openRate  = contacted > 0 ? Math.round((opened / Math.max(contacted,1)) * 100) : 0;
-  const bounceRate= contacted > 0 ? Math.round((bounced / Math.max(contacted,1)) * 100) : 0;
+  const totalSent = leads.filter(l=>l.sent||l.stage!=='New').length; const bounceRate= totalSent > 0 ? Math.round((bounced / Math.max(totalSent,1)) * 100) : 0;
 
   // ── By sector ─────────────────────────────────────────────
   const sectorMap = {};
@@ -903,9 +903,9 @@ function renderDashboard() {
         
       </div>
       <div class="dash-card">
-        <div class="dash-num" style="color:${bounceRate>10?'var(--rd)':'var(--mu)'}">${bounceRate}%</div>
+        <div class="dash-num" style="color:${bounced>0?'var(--rd)':'var(--mu)'}">${bounceRate}%</div>
         <div class="dash-label">Bounce rate</div>
-        <div class="dash-sub">${bounced} bounced</div>
+        <div class="dash-sub">${bounced} of ${totalSent} bounced</div>
       </div>
     </div>
 
