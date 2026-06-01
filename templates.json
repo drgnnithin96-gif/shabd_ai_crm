@@ -1,532 +1,532 @@
 [
   {
     "id": "t1",
-    "name": "NGO & Social Impact — Intro (Day 0)",
+    "name": "NGO & Social Impact, Intro (Day 0)",
     "sector": "NGO & Social Impact",
     "subject": "Multilingual Outreach for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling them to reach more communities in the languages they actually speak.\n\nFor NGOs and social impact organisations, multilingual communication can significantly improve programme reach, beneficiary trust, and community participation, especially in rural and semi-urban contexts where English or formal Hindi creates real barriers to engagement.\n\nWe support with:\n- Localisation of programme content, field materials, and training modules\n- Multilingual beneficiary communication across WhatsApp, SMS, and in-person formats\n- Translation of impact reports, proposals, and donor communication\n- Regional language awareness campaigns and community outreach content\n- Localisation of digital platforms and mobile applications for last-mile users\n\nWe currently support organisations including CRY, ARMMAN, Quest Alliance, and Central Square Foundation on exactly this.\n\nWould it make sense to connect briefly on how {company} is thinking about language accessibility in your outreach?\n\nBest,\n{sender}"
   },
   {
     "id": "t1f1",
-    "name": "NGO & Social Impact — Follow-up 1 (Day 5)",
+    "name": "NGO & Social Impact, Follow-up 1 (Day 5)",
     "sector": "NGO & Social Impact",
     "subject": "Re: Multilingual Outreach for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For NGOs working with communities across rural and semi-urban India, language accessibility often makes the difference between a programme that reaches beneficiaries and one that doesn't. When communication happens in the language communities actually speak, participation rates, trust, and sustained engagement all improve significantly.]]\n\nHappy to share how other social impact organisations are approaching this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t1f2",
-    "name": "NGO & Social Impact — Follow-up 2 (Day 10)",
+    "name": "NGO & Social Impact, Follow-up 2 (Day 10)",
     "sector": "NGO & Social Impact",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s website and programme communication.\n\nA lot of the content, field materials, and beneficiary-facing communication appears to be in English or formal Hindi. For communities you're working with across rural and semi-urban India, this creates a real gap between the work being done and the communities being able to fully engage with it.\n\nWe've helped organisations like CRY, ARMMAN, and Quest Alliance bridge exactly this gap, moving from English-only communication to multilingual content that actually reaches beneficiaries in their own language.\n\nHappy to share a specific example from a similar organisation if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t1f3",
-    "name": "NGO & Social Impact — Follow-up 3 (Day 28)",
+    "name": "NGO & Social Impact, Follow-up 3 (Day 28)",
     "sector": "NGO & Social Impact",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nCompletely understand if this may not be an immediate priority right now, but would be happy to reconnect whenever multilingual outreach, regional language localisation, or community communication becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t2",
-    "name": "Education — Intro (Day 0)",
+    "name": "Education, Intro (Day 0)",
     "sector": "Education",
     "subject": "Multilingual Learning Content for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help organisations localise text, voice, and video across Indian languages and dialects, enabling stronger learning outcomes and wider educational reach across diverse student populations.\n\nFor education organisations, multilingual content can significantly improve comprehension, teacher effectiveness, and learner engagement, especially in Tier 2/3 districts and underserved communities where regional language is the primary medium of learning.\n\nWe support with:\n- Localisation of curriculum, lesson content, and learning materials\n- Multilingual teacher training and professional development content\n- Translation of student-facing platforms, apps, and digital learning tools\n- Regional language assessment and evaluation content\n- Localisation of parent communication and school engagement material\n\nWe currently support organisations including Quest Alliance and Central Square Foundation on exactly this.\n\nWould it make sense to connect briefly on how {company} is thinking about language accessibility in learning content?\n\nBest,\n{sender}"
   },
   {
     "id": "t2f1",
-    "name": "Education — Follow-up 1 (Day 5)",
+    "name": "Education, Follow-up 1 (Day 5)",
     "sector": "Education",
     "subject": "Re: Multilingual Learning Content for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[When learners engage with content in the language they think in, comprehension improves significantly, assessments become more accurate, and teachers can focus on building skills rather than bridging language gaps. For education organisations working across Tier 2/3 districts, regional language content often makes the most direct difference to learning outcomes.]]\n\nHappy to share how other education organisations are approaching this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t2f2",
-    "name": "Education — Follow-up 2 (Day 10)",
+    "name": "Education, Follow-up 2 (Day 10)",
     "sector": "Education",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s content and learning resources.\n\nMost of the curriculum and teacher-facing material appears to be in English or standard Hindi. For learners in Tier 2/3 districts and underserved communities, this creates a comprehension gap that directly affects learning outcomes.\n\nWe've helped organisations like Quest Alliance and Central Square Foundation localise learning content across Tamil, Telugu, Kannada, and other regional languages, with measurable impact on learner engagement.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t2f3",
-    "name": "Education — Follow-up 3 (Day 28)",
+    "name": "Education, Follow-up 3 (Day 28)",
     "sector": "Education",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual learning content, regional language localisation, or student communication becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t3",
-    "name": "Healthcare — Intro (Day 0)",
+    "name": "Healthcare, Intro (Day 0)",
     "sector": "Healthcare",
     "subject": "Multilingual Patient Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help healthcare organisations localise text, voice, and video across Indian languages and dialects, enabling clearer patient communication and better health outcomes across diverse communities.\n\nFor healthcare organisations, multilingual communication often plays a critical role in patient understanding, treatment adherence, and community health behaviour, especially across Tier 2/3 and rural populations where language is frequently the primary barrier to accessing care.\n\nWe support with:\n- Localisation of patient education materials, discharge instructions, and health guides\n- Multilingual appointment reminders, follow-up communication, and care alerts\n- Translation of community health awareness content and disease education campaigns\n- Regional language training content for community health workers and field staff\n- Localisation of healthcare platforms and patient-facing digital tools\n\nWe currently support organisations including ARMMAN on exactly this.\n\nWould it make sense to connect briefly on how {company} is approaching patient communication in regional languages?\n\nBest,\n{sender}"
   },
   {
     "id": "t3f1",
-    "name": "Healthcare — Follow-up 1 (Day 5)",
+    "name": "Healthcare, Follow-up 1 (Day 5)",
     "sector": "Healthcare",
     "subject": "Re: Multilingual Patient Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For healthcare organisations serving patients across Tier 2/3 and rural populations, language is often the primary barrier to treatment adherence and care-seeking behaviour. When patients receive health communication in their own language, understanding improves, follow-through on treatment increases, and health outcomes measurably improve.]]\n\nHappy to share how other healthcare organisations are approaching this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t3f2",
-    "name": "Healthcare — Follow-up 2 (Day 10)",
+    "name": "Healthcare, Follow-up 2 (Day 10)",
     "sector": "Healthcare",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s patient communication and health awareness material.\n\nA significant portion of patient-facing content appears to be in English or formal Hindi. For patients across rural and semi-urban communities, this creates a real barrier to understanding diagnosis, treatment, and follow-up care.\n\nWe've helped organisations like ARMMAN localise health communication for last-mile communities, with measurable improvements in treatment adherence and programme participation.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t3f3",
-    "name": "Healthcare — Follow-up 3 (Day 28)",
+    "name": "Healthcare, Follow-up 3 (Day 28)",
     "sector": "Healthcare",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual patient communication, health awareness localisation, or regional language content becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t4",
-    "name": "Banking — Intro (Day 0)",
+    "name": "Banking, Intro (Day 0)",
     "sector": "Banking",
     "subject": "RBI KFS compliance, multilingual borrower documents for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nThe RBI's KFS mandate (circular RBI/2024-25/18, effective October 2024) requires all retail and MSME term loan documents, including Key Fact Statements, to be provided in a language the borrower can understand. For 2025-26 inspection cycles, supervisory observations on KFS language compliance are already being flagged.\n\nFor a bank like {company} operating across diverse geographies, this means KFS documents, loan agreements, and borrower communication need to be available across the regional languages your customers actually speak.\n\nWe help banks and regulated entities meet this requirement at scale, covering text and document localisation across 22 Indic languages with full contextual accuracy.\n\nWe support with:\n- KFS and loan document localisation across regional languages\n- Multilingual onboarding, consent, and KYC communication\n- Branch staff training content in regional languages\n- Customer-facing app and website localisation\n- Multilingual grievance redress and servicing communication\n\nWe currently work with AU Small Finance Bank, Jana Small Finance Bank, and other regulated entities on exactly this.\n\nWould it make sense to connect briefly on how {company} is approaching the KFS language requirement?\n\nBest,\n{sender}"
   },
   {
     "id": "t4f1",
-    "name": "Banking — Follow-up 1 (Day 5)",
+    "name": "Banking, Follow-up 1 (Day 5)",
     "sector": "Banking",
     "subject": "Re: RBI KFS compliance, {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[The RBI's KFS mandate requires loan documents to be in a language the borrower understands. For banks operating across Tier 2/3 and rural markets, this is not just a compliance requirement. It directly affects customer trust, grievance escalations, and supervisory inspection outcomes.]]\n\nHappy to share how other regulated entities are approaching this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t4f2",
-    "name": "Banking — Follow-up 2 (Day 10)",
+    "name": "Banking, Follow-up 2 (Day 10)",
     "sector": "Banking",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nUnder the RBI's KFS mandate, Key Fact Statements and loan documents need to be in a language the borrower understands. For a bank with branches across Tier 2/3 districts, English-only or formal Hindi KFS documents don't meet this requirement for a significant portion of your borrower base.\n\nWe've helped AU Small Finance Bank and Jana Small Finance Bank localise exactly this, compliant KFS documents and borrower communication across Tamil, Kannada, Telugu, Marathi, and Bengali.\n\nHappy to walk through what this looks like in practice.\n\nBest,\n{sender}"
   },
   {
     "id": "t4f3",
-    "name": "Banking — Follow-up 3 (Day 28)",
+    "name": "Banking, Follow-up 3 (Day 28)",
     "sector": "Banking",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever KFS localisation, multilingual borrower communication, or regional language compliance becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t5",
-    "name": "NBFC — Intro (Day 0)",
+    "name": "NBFC, Intro (Day 0)",
     "sector": "NBFC",
     "subject": "RBI KFS compliance, regional language documents for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nThe RBI's KFS mandate (effective October 2024) requires all NBFCs to provide Key Fact Statements for retail and MSME loans in a language the borrower understands. With 2025-26 inspection cycles now actively reviewing KFS compliance, regulated entities that have not addressed the language requirement are being flagged.\n\nFor {company} operating across diverse geographies, making KFS documents, loan communication, and onboarding content available in regional languages is both a compliance requirement and a trust-building opportunity with your borrowers.\n\nWe help NBFCs meet this at scale, across 22 Indic languages.\n\nWe support with:\n- KFS and loan document localisation across regional languages\n- Multilingual onboarding, KYC, and borrower communication\n- Repayment and collections communication across WhatsApp and SMS\n- Translation of customer-facing apps and digital interfaces\n- Regional language financial literacy content\n\nWe currently work with AU Small Finance Bank, Jana Small Finance Bank, and other regulated entities on exactly this.\n\nWould it make sense to connect briefly on how {company} is approaching the KFS language requirement?\n\nBest,\n{sender}"
   },
   {
     "id": "t5f1",
-    "name": "NBFC — Follow-up 1 (Day 5)",
+    "name": "NBFC, Follow-up 1 (Day 5)",
     "sector": "NBFC",
     "subject": "Re: RBI KFS compliance, {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[The RBI's KFS mandate requires NBFCs to provide loan documents in a language the borrower understands. With inspection cycles now flagging language compliance, regulated entities that rely on English-only KFS documents face real supervisory risk, particularly for Tier 2/3 and rural customer segments.]]\n\nHappy to share how other regulated entities are handling this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t5f2",
-    "name": "NBFC — Follow-up 2 (Day 10)",
+    "name": "NBFC, Follow-up 2 (Day 10)",
     "sector": "NBFC",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s borrower communication and digital interfaces.\n\nUnder the RBI's KFS mandate, loan documents need to be in a language the borrower can understand. For an NBFC operating in Tier 2/3 markets, English-only or formal Hindi communication creates both a compliance gap and a trust gap with borrowers.\n\nWe've helped regulated entities localise KFS documents and repayment communication across regional languages, addressing both the regulatory requirement and the borrower experience.\n\nHappy to walk through what this looks like in practice.\n\nBest,\n{sender}"
   },
   {
     "id": "t5f3",
-    "name": "NBFC — Follow-up 3 (Day 28)",
+    "name": "NBFC, Follow-up 3 (Day 28)",
     "sector": "NBFC",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever KFS localisation, multilingual borrower communication, or regional language compliance becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t6",
-    "name": "Microfinance — Intro (Day 0)",
+    "name": "Microfinance, Intro (Day 0)",
     "sector": "Microfinance",
     "subject": "RBI KFS mandate, multilingual borrower documents for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nThe RBI's KFS mandate now applies to microfinance institutions. MFIs are required to provide Key Fact Statements in a language understood by the borrower, and with 2025-26 inspection cycles actively flagging KFS language compliance, the regulatory pressure is real.\n\nFor an MFI like {company} working with borrowers in rural and semi-urban India, this means loan terms, repayment schedules, and KFS documents need to reach borrowers in the language they actually speak.\n\nWe help MFIs meet this requirement at scale, with contextual localisation across 22 Indic languages.\n\nWe support with:\n- KFS and loan agreement localisation across regional languages\n- Multilingual borrower onboarding and consent communication\n- Group meeting and repayment communication in local languages\n- Field staff training content in regional languages\n- Multilingual financial literacy and awareness content\n\nWould it make sense to connect briefly on how {company} is approaching the KFS language requirement?\n\nBest,\n{sender}"
   },
   {
     "id": "t6f1",
-    "name": "Microfinance — Follow-up 1 (Day 5)",
+    "name": "Microfinance, Follow-up 1 (Day 5)",
     "sector": "Microfinance",
     "subject": "Re: RBI KFS mandate, {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[The RBI's KFS mandate requires MFIs to provide loan documents in a language the borrower understands. For microfinance institutions working with rural borrowers, this directly affects repayment behaviour, group trust, and portfolio quality when borrowers fully understand their terms.]]\n\nHappy to share how other MFIs are approaching this, if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t6f2",
-    "name": "Microfinance — Follow-up 2 (Day 10)",
+    "name": "Microfinance, Follow-up 2 (Day 10)",
     "sector": "Microfinance",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s borrower-facing content and communication.\n\nFor an MFI working with rural and semi-urban communities, the language of borrower onboarding, group communication, and repayment reminders directly affects repayment behaviour and portfolio quality. Most MFI communication defaults to formal Hindi or English, neither of which is the first language for a large proportion of borrowers.\n\nWe've helped microfinance institutions localise borrower communication across Tamil, Marathi, Bengali, Odia, and other regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t6f3",
-    "name": "Microfinance — Follow-up 3 (Day 28)",
+    "name": "Microfinance, Follow-up 3 (Day 28)",
     "sector": "Microfinance",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever KFS localisation, multilingual borrower communication, or regional language compliance becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t7",
-    "name": "Finance — Intro (Day 0)",
+    "name": "Finance, Intro (Day 0)",
     "sector": "Finance",
     "subject": "Multilingual Customer Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help financial services organisations localise text, voice, and video across Indian languages and dialects, enabling stronger customer engagement and brand accessibility across diverse markets.\n\nFor financial services organisations, multilingual communication can play a critical role across onboarding, customer servicing, financial literacy, and collections, especially in Tier 2/3 and rural markets where language directly impacts trust and engagement. With the RBI's KFS mandate requiring loan documents in a language borrowers understand, regulated entities are also facing direct compliance pressure to address language accessibility.\n\nWe support with:\n- Multilingual customer onboarding, KYC, and product communication\n- Localisation of financial literacy and awareness content\n- Regional language collections and repayment communication\n- Translation of customer-facing apps, websites, and digital interfaces\n- Multilingual customer service and grievance redress communication\n\nWe currently work with AU Small Finance Bank, Jana Small Finance Bank, and other financial services organisations on exactly this.\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t7f1",
-    "name": "Finance — Follow-up 1 (Day 5)",
+    "name": "Finance, Follow-up 1 (Day 5)",
     "sector": "Finance",
     "subject": "Re: Multilingual Customer Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For financial services organisations operating across India, multilingual customer communication often plays a critical role in improving conversion, reducing drop-off, and building the trust that drives long-term retention, especially in Tier 2/3 markets where regional language is the primary touchpoint for financial decision-making.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f2",
-    "name": "Finance — Follow-up 2 (Day 10)",
+    "name": "Finance, Follow-up 2 (Day 10)",
     "sector": "Finance",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nA significant portion of onboarding, product, and customer service content appears to be in English or formal Hindi. For customers across Tier 2/3 markets, this creates friction in understanding products, completing onboarding, and resolving queries, all of which affect conversion and retention.\n\nWe've helped financial services organisations localise across Tamil, Telugu, Kannada, Marathi, and other regional languages with measurable impact on customer engagement.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f3",
-    "name": "Finance — Follow-up 3 (Day 28)",
+    "name": "Finance, Follow-up 3 (Day 28)",
     "sector": "Finance",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual customer communication, regional language localisation, or financial content translation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t8",
-    "name": "SaaS — Intro (Day 0)",
+    "name": "SaaS, Intro (Day 0)",
     "sector": "SaaS",
     "subject": "Multilingual Product Localisation for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help technology and SaaS companies localise product interfaces, onboarding flows, and customer communication across Indian languages and dialects, enabling stronger product adoption and user engagement across diverse markets.\n\nFor SaaS companies expanding into Tier 2/3 cities and regional markets, language is often the primary barrier to adoption. Regional language users are the fastest-growing user segment in India, and product experiences that don't speak their language see significantly higher drop-off and lower retention.\n\nWe support with:\n- Product UI and interface localisation across regional languages\n- Multilingual onboarding flows and in-product communication\n- Customer support and help centre content in regional languages\n- Translation of marketing and growth communication\n- Localisation of mobile applications and digital platforms\n\nWould it make sense to connect briefly on how {company} is approaching regional language adoption?\n\nBest,\n{sender}"
   },
   {
     "id": "t8f1",
-    "name": "SaaS — Follow-up 1 (Day 5)",
+    "name": "SaaS, Follow-up 1 (Day 5)",
     "sector": "SaaS",
     "subject": "Re: Multilingual Product Localisation for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For SaaS companies targeting growth across Tier 2/3 India, regional language product experiences often make the most significant difference to adoption and retention. Users who onboard in their own language complete setup faster, engage more deeply, and churn significantly less than users who navigate an English-only interface.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t8f2",
-    "name": "SaaS — Follow-up 2 (Day 10)",
+    "name": "SaaS, Follow-up 2 (Day 10)",
     "sector": "SaaS",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s product and onboarding experience.\n\nThe product UI, onboarding flows, and support content appear to be primarily in English. For users from Tier 2/3 cities and non-English-speaking segments, this creates a significant adoption barrier. In a market where regional language users are the fastest-growing segment, it's a gap that directly affects growth.\n\nWe've helped SaaS companies localise product UI and customer communication across Hindi, Tamil, Telugu, Kannada, and Marathi.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t8f3",
-    "name": "SaaS — Follow-up 3 (Day 28)",
+    "name": "SaaS, Follow-up 3 (Day 28)",
     "sector": "SaaS",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever product localisation, regional language onboarding, or multilingual user communication becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t9",
-    "name": "E-commerce — Intro (Day 0)",
+    "name": "E-commerce, Intro (Day 0)",
     "sector": "E-commerce",
     "subject": "Multilingual Commerce Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help e-commerce and digital commerce brands localise product content, customer communication, and shopping experiences across Indian languages and dialects, enabling stronger discovery, conversion, and customer loyalty across diverse markets.\n\nFor e-commerce brands, regional language product content often drives significantly higher discovery and purchase intent in Tier 2/3 and rural markets, where customers are more comfortable browsing and buying in their own language.\n\nWe support with:\n- Product listing and catalogue localisation across regional languages\n- Multilingual customer communication, order updates, and service messages\n- Translation of marketing campaigns and promotional content\n- Regional language customer support and returns communication\n- Localisation of mobile apps and shopping platforms\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t9f1",
-    "name": "E-commerce — Follow-up 1 (Day 5)",
+    "name": "E-commerce, Follow-up 1 (Day 5)",
     "sector": "E-commerce",
     "subject": "Re: Multilingual Commerce Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For e-commerce brands expanding into Tier 2/3 and rural India, regional language product content often makes a significant difference to discovery, conversion, and repeat purchase. Customers who browse and buy in their own language show higher engagement, lower cart abandonment, and stronger loyalty.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t9f2",
-    "name": "E-commerce — Follow-up 2 (Day 10)",
+    "name": "E-commerce, Follow-up 2 (Day 10)",
     "sector": "E-commerce",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s product listings and customer communication.\n\nMost of the product content and customer-facing communication appears to be in English. For buyers from Tier 2/3 cities and rural markets, where regional language is the primary touchpoint for discovery and purchase decisions, this creates a real conversion gap.\n\nWe've helped e-commerce brands localise product content and customer communication across Hindi, Tamil, Marathi, Telugu, and Kannada.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t9f3",
-    "name": "E-commerce — Follow-up 3 (Day 28)",
+    "name": "E-commerce, Follow-up 3 (Day 28)",
     "sector": "E-commerce",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever product localisation, multilingual commerce content, or regional language customer communication becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t10",
-    "name": "Health — Intro (Day 0)",
+    "name": "Health, Intro (Day 0)",
     "sector": "Health",
     "subject": "Multilingual Health Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help health and wellness organisations localise content, programmes, and communication across Indian languages and dialects, enabling stronger community engagement and health behaviour change across diverse populations.\n\nFor health organisations, language accessibility often determines whether health communication actually reaches and motivates the communities it is designed for, especially across Tier 2/3 and rural populations where English or clinical Hindi creates real barriers to engagement.\n\nWe support with:\n- Localisation of health awareness campaigns and disease education content\n- Multilingual community outreach and behaviour change communication\n- Translation of wellness programmes, nutrition content, and fitness guidance\n- Regional language training content for community health workers and frontline staff\n- Localisation of health platforms, apps, and digital tools\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t10f1",
-    "name": "Health — Follow-up 1 (Day 5)",
+    "name": "Health, Follow-up 1 (Day 5)",
     "sector": "Health",
     "subject": "Re: Multilingual Health Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For health organisations working with communities across Tier 2/3 and rural India, language is often the primary determinant of whether health communication drives behaviour change. Content that reaches people in their own language is significantly more likely to be understood, remembered, and acted on.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t10f2",
-    "name": "Health — Follow-up 2 (Day 10)",
+    "name": "Health, Follow-up 2 (Day 10)",
     "sector": "Health",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s health content and community outreach material.\n\nA significant portion of health awareness and user-facing content appears to be in English or formal Hindi. For communities across rural and semi-urban India, language is often the primary barrier to health behaviour change, and content that doesn't reach people in their own language simply doesn't work.\n\nWe've helped health organisations localise awareness campaigns and community outreach across regional languages with measurable impact.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t10f3",
-    "name": "Health — Follow-up 3 (Day 28)",
+    "name": "Health, Follow-up 3 (Day 28)",
     "sector": "Health",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual health communication, regional language content, or community outreach localisation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t11",
-    "name": "Fashion — Intro (Day 0)",
+    "name": "Fashion, Intro (Day 0)",
     "sector": "Fashion",
     "subject": "Multilingual Brand Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help fashion and lifestyle brands localise product content, brand communication, and shopping experiences across Indian languages and dialects, enabling stronger brand discovery, customer connection, and loyalty across diverse markets.\n\nFor fashion brands, regional language content often drives significantly higher engagement and purchase intent in Tier 2/3 markets, where customers are increasingly shopping online but prefer to engage with brands in their own language.\n\nWe support with:\n- Product catalogue and listing localisation across regional languages\n- Multilingual brand campaigns and marketing content\n- Translation of social media content for regional audiences\n- Customer communication and service content in regional languages\n- Localisation of e-commerce platforms and mobile apps\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t11f1",
-    "name": "Fashion — Follow-up 1 (Day 5)",
+    "name": "Fashion, Follow-up 1 (Day 5)",
     "sector": "Fashion",
     "subject": "Re: Multilingual Brand Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For fashion brands expanding across India, regional language content often makes a meaningful difference to brand discovery and purchase intent in Tier 2/3 markets. Customers who engage with brand content in their own language show stronger brand affinity, higher average order values, and better retention.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t11f2",
-    "name": "Fashion — Follow-up 2 (Day 10)",
+    "name": "Fashion, Follow-up 2 (Day 10)",
     "sector": "Fashion",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s product pages and customer communication.\n\nMost of the brand content and product communication appears to be in English. For customers from Tier 2/3 cities, which now represent the fastest-growing segment for fashion brands, regional language content significantly improves discovery, trust, and purchase intent.\n\nWe've helped fashion and lifestyle brands localise product content and brand communication across Hindi, Tamil, Marathi, and other regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t11f3",
-    "name": "Fashion — Follow-up 3 (Day 28)",
+    "name": "Fashion, Follow-up 3 (Day 28)",
     "sector": "Fashion",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual brand communication, regional language content, or product localisation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t12",
-    "name": "Legal — Intro (Day 0)",
+    "name": "Legal, Intro (Day 0)",
     "sector": "Legal",
     "subject": "Multilingual Legal Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help legal organisations and law firms localise client communication, legal documents, and awareness content across Indian languages and dialects, enabling clearer access to justice and stronger client understanding across diverse communities.\n\nFor legal organisations, language accessibility often determines whether clients fully understand their rights, obligations, and options, especially for clients from non-English-speaking backgrounds where formal legal language creates real barriers.\n\nWe support with:\n- Translation of client-facing legal documents and correspondence\n- Multilingual legal awareness and rights education content\n- Localisation of legal aid information and access-to-justice content\n- Regional language client communication and onboarding\n- Translation of compliance, regulatory, and policy documentation\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t12f1",
-    "name": "Legal — Follow-up 1 (Day 5)",
+    "name": "Legal, Follow-up 1 (Day 5)",
     "sector": "Legal",
     "subject": "Re: Multilingual Legal Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For legal organisations serving clients across diverse linguistic backgrounds, language accessibility often makes the difference between a client who understands their rights and one who doesn't. When legal communication happens in a client's own language, comprehension improves, informed consent becomes genuine, and outcomes for clients are measurably better.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t12f2",
-    "name": "Legal — Follow-up 2 (Day 10)",
+    "name": "Legal, Follow-up 2 (Day 10)",
     "sector": "Legal",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s client-facing content and service communication.\n\nMost legal communication and client-facing material appears to be in English. For clients from non-English-speaking backgrounds, which is a significant proportion of those who need legal support in India, language is often the primary barrier to accessing justice and understanding their rights.\n\nWe've helped legal organisations localise client communication and legal awareness content across regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t12f3",
-    "name": "Legal — Follow-up 3 (Day 28)",
+    "name": "Legal, Follow-up 3 (Day 28)",
     "sector": "Legal",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual client communication, legal document translation, or regional language access-to-justice content becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t13",
-    "name": "Government — Intro (Day 0)",
+    "name": "Government, Intro (Day 0)",
     "sector": "Government",
     "subject": "Multilingual Citizen Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help government departments and public sector organisations localise citizen communication, scheme information, and public awareness content across Indian languages and dialects, enabling wider scheme uptake and more effective public engagement across diverse communities.\n\nFor government organisations, language accessibility often determines whether schemes, services, and information actually reach the citizens they are designed for, especially in rural and semi-urban regions where regional language is the primary medium of communication.\n\nWe support with:\n- Localisation of scheme information, eligibility content, and application guidance\n- Multilingual public awareness campaigns and community communication\n- Translation of citizen-facing portals, apps, and digital services\n- Regional language training and capacity building content for field staff\n- Localisation of notices, circulars, and official communication\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t13f1",
-    "name": "Government — Follow-up 1 (Day 5)",
+    "name": "Government, Follow-up 1 (Day 5)",
     "sector": "Government",
     "subject": "Re: Multilingual Citizen Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For government departments and public sector organisations, language is often the primary determinant of scheme uptake and citizen participation. Schemes that are communicated only in English or formal Hindi see significantly lower uptake in Tier 2/3 and rural regions, even when citizens are eligible and motivated to participate.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t13f2",
-    "name": "Government — Follow-up 2 (Day 10)",
+    "name": "Government, Follow-up 2 (Day 10)",
     "sector": "Government",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s scheme communication and citizen-facing content.\n\nA significant portion of scheme information, application guidance, and public awareness content appears to be in English or formal Hindi. For citizens across Tier 2/3 and rural regions, language accessibility is frequently the primary barrier to participation.\n\nWe've helped government-linked organisations localise scheme communication and citizen outreach across regional languages with measurable impact on uptake.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t13f3",
-    "name": "Government — Follow-up 3 (Day 28)",
+    "name": "Government, Follow-up 3 (Day 28)",
     "sector": "Government",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual citizen communication, scheme localisation, or regional language public awareness becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t14",
-    "name": "Manufacturing — Intro (Day 0)",
+    "name": "Manufacturing, Intro (Day 0)",
     "sector": "Manufacturing",
     "subject": "Multilingual Workforce Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help manufacturing organisations localise safety content, training materials, and workforce communication across Indian languages and dialects, enabling stronger safety compliance, productivity, and workforce effectiveness across diverse shop floor and field teams.\n\nFor manufacturing organisations, language accessibility in safety and training content is directly linked to compliance outcomes. When workers receive safety instructions and SOPs in their own language, comprehension improves, incidents reduce, and training effectiveness increases significantly.\n\nWe support with:\n- Localisation of safety manuals, SOPs, and compliance content\n- Multilingual workforce training and induction programmes\n- Translation of equipment operating guides and maintenance content\n- Regional language supervisor and team leader communication\n- Localisation of quality, compliance, and audit-related content\n\nWe currently support Titan Company Limited and other manufacturing organisations on exactly this.\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t14f1",
-    "name": "Manufacturing — Follow-up 1 (Day 5)",
+    "name": "Manufacturing, Follow-up 1 (Day 5)",
     "sector": "Manufacturing",
     "subject": "Re: Multilingual Workforce Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For manufacturing organisations with diverse workforces, safety and training content in regional languages often makes a direct and measurable difference. When workers receive safety instructions in the language they actually think in, comprehension improves, incidents reduce, and compliance becomes genuine rather than procedural.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t14f2",
-    "name": "Manufacturing — Follow-up 2 (Day 10)",
+    "name": "Manufacturing, Follow-up 2 (Day 10)",
     "sector": "Manufacturing",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s workforce communication and training content.\n\nMost safety manuals, SOPs, and training materials appear to be in English or formal Hindi. For shop floor workers and field teams, many of whom are more comfortable in regional languages, this creates a real safety and productivity gap.\n\nWe've helped manufacturing organisations including Titan Company Limited localise safety and training content across Tamil, Telugu, Kannada, Hindi, and Marathi.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t14f3",
-    "name": "Manufacturing — Follow-up 3 (Day 28)",
+    "name": "Manufacturing, Follow-up 3 (Day 28)",
     "sector": "Manufacturing",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual safety content, workforce training localisation, or regional language manufacturing communication becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t15",
-    "name": "Media & Publishing — Intro (Day 0)",
+    "name": "Media & Publishing, Intro (Day 0)",
     "sector": "Media & Publishing",
     "subject": "Multilingual Content for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help media and publishing organisations localise editorial content, video, audio, and digital formats across Indian languages and dialects, enabling wider audience reach and stronger content engagement across regional markets.\n\nIn India, vernacular content consumption is growing significantly faster than English content across every digital format. For media organisations, reaching regional language audiences is not just an opportunity but an increasingly necessary part of audience strategy.\n\nWe support with:\n- Localisation of editorial content, articles, and news formats\n- Translation and adaptation of video and audio content for regional audiences\n- Multilingual digital publishing and content management\n- Regional language social media and audience engagement content\n- Localisation of podcasts, newsletters, and subscriber communication\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t15f1",
-    "name": "Media & Publishing — Follow-up 1 (Day 5)",
+    "name": "Media & Publishing, Follow-up 1 (Day 5)",
     "sector": "Media & Publishing",
     "subject": "Re: Multilingual Content for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[Vernacular content consumption in India is growing significantly faster than English content across video, audio, and digital formats. Media organisations that localise content for regional language audiences consistently see stronger engagement, longer time-on-platform, and higher subscriber retention compared to English-only content strategies.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t15f2",
-    "name": "Media & Publishing — Follow-up 2 (Day 10)",
+    "name": "Media & Publishing, Follow-up 2 (Day 10)",
     "sector": "Media & Publishing",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s content and publishing formats.\n\nMost of the content appears to be in English or standard Hindi. In a market where vernacular content consumption is growing significantly faster than English content, there is a real opportunity to reach a much larger audience with localised content.\n\nWe've helped media and publishing organisations localise editorial content, video, and audio across regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t15f3",
-    "name": "Media & Publishing — Follow-up 3 (Day 28)",
+    "name": "Media & Publishing, Follow-up 3 (Day 28)",
     "sector": "Media & Publishing",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever regional language content, multilingual publishing, or audience localisation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t16",
-    "name": "Travel & Hospitality — Intro (Day 0)",
+    "name": "Travel & Hospitality, Intro (Day 0)",
     "sector": "Travel & Hospitality",
     "subject": "Multilingual Guest Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help travel and hospitality organisations localise guest communication, property content, and customer-facing experiences across Indian languages and dialects, enabling stronger guest satisfaction and loyalty across diverse traveller segments.\n\nFor hospitality brands, multilingual guest communication can significantly improve the experience for domestic travellers from Tier 2/3 cities, who now represent the fastest-growing traveller segment in India and increasingly prefer to engage with brands in their own language.\n\nWe support with:\n- Multilingual guest communication across pre-arrival, in-stay, and post-stay touchpoints\n- Localisation of property content, amenity guides, and service information\n- Translation of booking confirmation, itinerary, and travel documentation\n- Regional language customer service and query resolution\n- Localisation of travel platforms, apps, and booking interfaces\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t16f1",
-    "name": "Travel & Hospitality — Follow-up 1 (Day 5)",
+    "name": "Travel & Hospitality, Follow-up 1 (Day 5)",
     "sector": "Travel & Hospitality",
     "subject": "Re: Multilingual Guest Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For travel and hospitality brands, multilingual guest communication often makes a meaningful difference to the experience of domestic travellers from Tier 2/3 cities. Guests who receive pre-arrival, in-stay, and post-stay communication in their own language report significantly higher satisfaction and are more likely to return or recommend.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t16f2",
-    "name": "Travel & Hospitality — Follow-up 2 (Day 10)",
+    "name": "Travel & Hospitality, Follow-up 2 (Day 10)",
     "sector": "Travel & Hospitality",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s guest communication and property content.\n\nMost guest-facing content, booking communication, and in-property information appears to be in English. For the growing segment of domestic travellers from Tier 2/3 cities driving the fastest growth in Indian hospitality, regional language communication significantly improves guest experience and loyalty.\n\nWe've helped hospitality brands localise guest communication and property content across Hindi, Tamil, Marathi, and other regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t16f3",
-    "name": "Travel & Hospitality — Follow-up 3 (Day 28)",
+    "name": "Travel & Hospitality, Follow-up 3 (Day 28)",
     "sector": "Travel & Hospitality",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual guest communication, property content localisation, or regional language hospitality experiences becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t17",
-    "name": "FMCG — Intro (Day 0)",
+    "name": "FMCG, Intro (Day 0)",
     "sector": "FMCG",
     "subject": "Multilingual Consumer Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help FMCG brands localise product content, consumer communication, and brand campaigns across Indian languages and dialects, enabling stronger consumer engagement and brand accessibility across diverse markets.\n\nFor FMCG brands, multilingual communication can significantly improve product discovery, consumer trust, and brand loyalty, especially across Tier 2/3 and rural markets where regional language is the primary touchpoint for purchase decisions.\n\nWe support with:\n- Localisation of product packaging, labels, and point-of-sale communication\n- Multilingual consumer awareness and brand campaigns\n- Translation of digital and social media content for regional audiences\n- Multilingual distributor and retailer training content\n- WhatsApp and push notification communication in regional languages\n\nWe currently support 40+ organisations at scale, including Titan Company Limited and other consumer-facing brands.\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t17f1",
-    "name": "FMCG — Follow-up 1 (Day 5)",
+    "name": "FMCG, Follow-up 1 (Day 5)",
     "sector": "FMCG",
     "subject": "Re: Multilingual Consumer Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For FMCG brands expanding across India, multilingual consumer communication often helps significantly improve brand recall, purchase intent, and consumer loyalty across Tier 2/3 and rural markets where regional language is the primary decision-making touchpoint.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t17f2",
-    "name": "FMCG — Follow-up 2 (Day 10)",
+    "name": "FMCG, Follow-up 2 (Day 10)",
     "sector": "FMCG",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s consumer communication and packaging content.\n\nMost consumer-facing content appears to be in English or standard Hindi. For FMCG brands with distribution across Tier 2/3 and rural markets, where regional language is the primary touchpoint for brand trust and purchase decisions, this creates a real gap between reach and relevance.\n\nWe've helped consumer brands localise packaging, point-of-sale, and digital communication across regional languages with measurable impact on brand recall and purchase intent.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t17f3",
-    "name": "FMCG — Follow-up 3 (Day 28)",
+    "name": "FMCG, Follow-up 3 (Day 28)",
     "sector": "FMCG",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual consumer communication, localisation, or regional brand engagement becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t18",
-    "name": "Energy — Intro (Day 0)",
+    "name": "Energy, Intro (Day 0)",
     "sector": "Energy",
     "subject": "Multilingual Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help energy sector organisations localise safety content, workforce communication, and community engagement material across Indian languages and dialects, enabling clearer communication across field teams, communities, and diverse geographies.\n\nFor energy organisations, multilingual communication plays a critical role across community engagement, workforce safety compliance, and last-mile outreach, especially in rural regions where projects are deployed and language directly impacts project acceptance and field effectiveness.\n\nWe support with:\n- Localisation of safety manuals, SOPs, and compliance content for field teams\n- Community engagement and public consultation content in regional languages\n- Translation of regulatory and stakeholder communication\n- Multilingual workforce training and induction programmes\n- Regional language awareness content for rural consumer and community outreach\n\nWe currently support 40+ organisations at scale, including Titan Company Limited and other infrastructure and enterprise organisations.\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t18f1",
-    "name": "Energy — Follow-up 1 (Day 5)",
+    "name": "Energy, Follow-up 1 (Day 5)",
     "sector": "Energy",
     "subject": "Re: Multilingual Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For energy sector organisations operating across diverse geographies, multilingual communication often plays a critical role in improving field team safety compliance, community trust, and regulatory engagement, especially in rural regions where language directly impacts project acceptance and workforce effectiveness.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t18f2",
-    "name": "Energy — Follow-up 2 (Day 10)",
+    "name": "Energy, Follow-up 2 (Day 10)",
     "sector": "Energy",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s community communication and field team content.\n\nMost community-facing and workforce-facing content appears to be in English or formal Hindi. For energy projects deployed in rural regions, where community acceptance and field team safety compliance are critical, language accessibility directly affects project outcomes.\n\nWe've helped infrastructure and energy organisations localise community engagement content and safety materials across regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t18f3",
-    "name": "Energy — Follow-up 3 (Day 28)",
+    "name": "Energy, Follow-up 3 (Day 28)",
     "sector": "Energy",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual workforce communication, community engagement, or regional localisation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
   },
   {
     "id": "t19",
-    "name": "Pharma — Intro (Day 0)",
+    "name": "Pharma, Intro (Day 0)",
     "sector": "Pharma",
     "subject": "Multilingual Communication for {company}",
     "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help pharmaceutical organisations localise patient communication, HCP content, and field force training across Indian languages and dialects, enabling clearer communication across patients, healthcare professionals, and field teams.\n\nFor pharmaceutical organisations, multilingual communication plays a critical role across patient education, HCP engagement, and field force effectiveness, especially across Tier 2/3 and rural markets where language directly impacts product understanding and treatment adherence.\n\nWe support with:\n- Localisation of patient information leaflets and medication guides\n- Multilingual HCP detailing materials and medical education content\n- Field force training and product communication in regional languages\n- Translation of regulatory submissions and compliance documentation\n- Regional language patient awareness and disease education campaigns\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
   },
   {
     "id": "t19f1",
-    "name": "Pharma — Follow-up 1 (Day 5)",
+    "name": "Pharma, Follow-up 1 (Day 5)",
     "sector": "Pharma",
     "subject": "Re: Multilingual Communication for {company}",
     "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For pharmaceutical organisations operating across diverse geographies, multilingual communication often plays a critical role in improving HCP engagement, patient understanding, treatment adherence, and field force effectiveness, especially across Tier 2/3 and rural markets where regional language is the primary touchpoint for health decisions.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t19f2",
-    "name": "Pharma — Follow-up 2 (Day 10)",
+    "name": "Pharma, Follow-up 2 (Day 10)",
     "sector": "Pharma",
     "subject": "A quick observation about {company}",
     "body": "Hi {name},\n\nI had a quick look at {company}'s patient communication and HCP-facing content.\n\nMost patient information material and field force content appears to be in English or formal Hindi. For a pharmaceutical organisation across Tier 2/3 and rural markets, this creates a gap in product understanding, prescription confidence, and treatment adherence.\n\nWe've helped healthcare and pharma-adjacent organisations localise patient communication and HCP content across Tamil, Telugu, Kannada, Marathi, Bengali, and other regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t19f3",
-    "name": "Pharma — Follow-up 3 (Day 28)",
+    "name": "Pharma, Follow-up 3 (Day 28)",
     "sector": "Pharma",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual patient communication, HCP engagement, or regional language localisation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
