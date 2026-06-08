@@ -239,7 +239,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
     <button class="ni" onclick="filterStage('Replied',this)"><span class="sdot" style="background:var(--gn)"></span>Replied</button>
     <button class="ni" onclick="filterStage('Follow-up',this)"><span class="sdot" style="background:var(--pu)"></span>Follow-up</button>
     <button class="ni" onclick="filterStage('Closed',this)"><span class="sdot" style="background:var(--mu)"></span>Closed</button>
-    <button class="ni" onclick="filterStage('Bounced',this)"><span class="sdot" style="background:#dc2626"></span>Bounced</button>
+    <button class="ni" onclick="filterStage('Bounced',this)"><span class="sdot" style="background:#dc2626"></span>Bounced <span id="bounced-count" style="font-size:10px;background:#dc2626;color:#fff;border-radius:8px;padding:1px 5px;margin-left:2px"></span></button>
     <div class="nlbl" style="margin-top:6px">Alerts</div>
     <button class="ni" id="nav-ov" onclick="filterOverdue(this)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rd)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span style="color:var(--rd)">Overdue reminders</span></button>
   </nav>
@@ -274,7 +274,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
   <div class="f"><label>Email</label><input id="f-email" type="email" placeholder="pallavi@cry.org"></div>
   <div class="f"><label>Website <span style="font-size:10px;color:var(--hn);text-transform:none;letter-spacing:0">(used for company research)</span></label><input id="f-website" type="url" placeholder="https://cry.org"></div>
   <div class="fr">
-    <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>Banking</option><option>NBFC</option><option>Microfinance</option><option>Health</option><option>Fashion</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option><option>FMCG</option><option>Energy</option><option>Pharma</option></select></div>
+    <div class="f"><label>Sector</label><select id="f-sector"><option>NGO &amp; Social Impact</option><option>Education</option><option>Healthcare</option><option>SaaS</option><option>E-commerce</option><option>Finance</option><option>Banking</option><option>NBFC</option><option>Microfinance</option><option>Health</option><option>Fashion</option><option>Legal</option><option>Government</option><option>Manufacturing</option><option>Media &amp; Publishing</option><option>Travel &amp; Hospitality</option><option>FMCG</option><option>Energy</option><option>Pharma</option><option>Telecom</option><option>Fintech</option><option>Insurance</option></select></div>
     <div class="f"><label>Stage</label><select id="f-stage" onchange="toggleDateFields()"><option>New</option><option>Contacted</option><option>Replied</option><option>Follow-up</option><option>Closed</option></select></div>
   </div>
   <!-- Date fields for New/Contacted — shown by default -->
@@ -554,7 +554,11 @@ const overdueCount=()=>{
 };
 
 // ── Render ────────────────────────────────────────────────────
-function renderStats(){document.getElementById('stats-row').innerHTML=STAGES.map(s=>`<div class="sc" onclick="filterStage('${s}',null)"><div class="sn">${leads.filter(l=>l.stage===s).length}</div><div class="sl"><span class="sdot" style="background:${SCOL[s]}"></span>${s}</div></div>`).join('');}
+function renderStats(){
+  // Update bounced count badge in sidebar
+  const bc2 = leads.filter(l=>l.stage==='Bounced').length;
+  const bcEl = document.getElementById('bounced-count');
+  if (bcEl) { bcEl.textContent = bc2 > 0 ? bc2 : ''; bcEl.style.display = bc2 > 0 ? 'inline' : 'none'; }document.getElementById('stats-row').innerHTML=STAGES.map(s=>`<div class="sc" onclick="filterStage('${s}',null)"><div class="sn">${leads.filter(l=>l.stage===s).length}</div><div class="sl"><span class="sdot" style="background:${SCOL[s]}"></span>${s}</div></div>`).join('');}
 function renderSectorFilter(){const sel=document.getElementById('filter-sector');const secs=[...new Set(leads.map(l=>l.sector).filter(Boolean))].sort();const cur=sel.value;sel.innerHTML='<option value="">All sectors</option>'+secs.map(s=>`<option${s===cur?' selected':''}>${esc(s)}</option>`).join('');}
 function getFiltered(){
   const q=(document.getElementById('search').value||'').toLowerCase();
@@ -576,7 +580,13 @@ window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')re
 function renderList(){
   const list=getFiltered(),el=document.getElementById('content');
   const oc=overdueCount();
-  let banner=oc>0&&!overdueFilter?`<div class="remind-banner" onclick="filterOverdue(document.getElementById('nav-ov'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><strong>${oc} lead${oc>1?'s':''}  with overdue reminders</strong> <span style="color:var(--mu)">— click to view</span></div></div>`:'';
+  const bc=leads.filter(l=>l.stage==='Bounced').length;
+  let banner=bc>0?`<div style="display:flex;align-items:center;gap:10px;background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin-bottom:10px;cursor:pointer" onclick="filterStage('Bounced',document.querySelector('[onclick*=Bounced]'))">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    <span style="font-size:13px;color:#dc2626;font-weight:600">${bc} bounced email${bc>1?'s':''} — blocked from future sends</span>
+    <span style="font-size:11px;color:#dc2626;margin-left:auto">View →</span>
+  </div>`:''
+  banner+=oc>0&&!overdueFilter?`<div class="remind-banner" onclick="filterOverdue(document.getElementById('nav-ov'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><strong>${oc} lead${oc>1?'s':''}  with overdue reminders</strong> <span style="color:var(--mu)">— click to view</span></div></div>`:'';
   const sc=selectedIds.size;
   const bbar=sc>0?`<div class="bulk-bar"><strong>${sc}</strong><span>lead${sc>1?'s':''} selected</span><button class="bulk-clear" onclick="clearSel()">Clear</button><button class="bulk-del" onclick="deleteSel()">🗑 Delete selected</button></div>`:'';
   if(!list.length){el.innerHTML=banner+`<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>No leads found</p><small>Add your first lead or import CSV</small></div>`;return;}
@@ -595,7 +605,7 @@ function renderList(){
         <td style="white-space:nowrap;color:var(--hn);font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis" title="${esc(l.designation||'')}">${esc(l.designation||'')}</td>
         <td style="white-space:nowrap">${esc(l.company)}</td>
         <td><span class="spill">${esc(l.sector)}</span></td>
-        <td>${pill(l.stage)}</td>
+        <td>${pill(l.stage)}${l.stage==='Bounced'?'<span style="font-size:9px;background:#fee2e2;color:#dc2626;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:600">BLOCKED</span>':''}</td>
         <td class="dc">${l.lc?new Date(l.lc).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—'}</td>
         <td>${(l.opens||0)>0?'<span style="font-size:11px;color:var(--gn)"><span class="open-dot"></span>'+(l.opens||0)+'</span>':''}</td>
         <td>${nd2?`<span class="rb ${nd2.cls}">${nd2.label}</span>`:'<span style="color:var(--hn);font-size:11px">—</span>'}</td>
@@ -837,6 +847,7 @@ function renderDashboard() {
   const replied   = leads.filter(l => l.stage === 'Replied').length;
   const bounced   = leads.filter(l => l.stage === 'Bounced').length;
   const opened    = leads.filter(l => (l.opens||0) > 0).length;
+  const totalOpens = leads.reduce((s,l) => s + (l.opens||0), 0);
   const snoozed   = leads.filter(l => l.snooze_until && l.snooze_until >= new Date().toISOString().slice(0,10)).length;
   const replyRate = contacted > 0 ? Math.round((replied / contacted) * 100) : 0;
   const openRate  = contacted > 0 ? Math.round((opened / Math.max(contacted,1)) * 100) : 0;
@@ -899,13 +910,15 @@ function renderDashboard() {
       <div class="dash-card">
         <div class="dash-num" style="color:var(--bl)">${openRate}%</div>
         <div class="dash-label">Open rate</div>
-        <div class="dash-sub">${opened} of ${contacted} opened</div>
+        <div class="dash-sub">${opened} contacts opened</div>
+        <div class="dash-sub">${totalOpens} total opens</div>
         
       </div>
       <div class="dash-card">
         <div class="dash-num" style="color:${bounced>0?'var(--rd)':'var(--mu)'}">${bounceRate}%</div>
         <div class="dash-label">Bounce rate</div>
         <div class="dash-sub">${bounced} of ${totalSent} bounced</div>
+        <div class="dash-sub" style="color:#dc2626">${bounced > 0 ? bounced+' emails permanently blocked' : 'No bounces'}</div>
       </div>
     </div>
 
