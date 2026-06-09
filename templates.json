@@ -102,7 +102,7 @@
     "name": "Banking, Follow-up 2 (Day 10)",
     "sector": "Banking",
     "subject": "A quick observation about {company}",
-    "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nUnder the RBI's KFS mandate, Key Fact Statements and loan documents need to be in a language the borrower understands. For a bank with branches across Tier 2/3 districts, English-only or formal Hindi KFS documents don't meet this requirement for a significant portion of your borrower base.\n\nWe've helped AU Small Finance Bank and Jana Small Finance Bank localise exactly this, compliant KFS documents and borrower communication across Tamil, Kannada, Telugu, Marathi, and Bengali.\n\nHappy to walk through what this looks like in practice.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nUnder the RBI's KFS mandate, Key Fact Statements and loan documents need to be in a language the borrower understands. For a bank with branches across Tier 2/3 districts, English-only or formal Hindi KFS documents don't meet this requirement for a significant portion of your borrower base.\n\nWe've helped AU Small Finance Bank and Jana Small Finance Bank localise KFS documents and borrower communication across Tamil, Kannada, Telugu, Marathi, and Bengali.\n\nHappy to walk through what this looks like in practice.\n\nBest,\n{sender}"
   },
   {
     "id": "t4f3",
@@ -186,7 +186,7 @@
     "name": "Finance, Follow-up 2 (Day 10)",
     "sector": "Finance",
     "subject": "A quick observation about {company}",
-    "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nA significant portion of onboarding, product, and customer service content appears to be in English or formal Hindi. For customers across Tier 2/3 markets, this creates friction in understanding products, completing onboarding, and resolving queries, all of which affect conversion and retention.\n\nWe've helped financial services organisations localise across Tamil, Telugu, Kannada, Marathi, and other regional languages with measurable impact on customer engagement.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nA significant portion of onboarding, product, and customer service content appears to be in English or formal Hindi. For customers across Tier 2/3 markets, this creates friction in understanding products, completing onboarding, and resolving queries.\n\nWe've helped financial services organisations localise across Tamil, Telugu, Kannada, Marathi, and other regional languages with measurable impact on customer engagement.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f3",
@@ -270,7 +270,7 @@
     "name": "Health, Follow-up 2 (Day 10)",
     "sector": "Health",
     "subject": "A quick observation about {company}",
-    "body": "Hi {name},\n\nI had a quick look at {company}'s health content and community outreach material.\n\nA significant portion of health awareness and user-facing content appears to be in English or formal Hindi. For communities across rural and semi-urban India, language is often the primary barrier to health behaviour change, and content that doesn't reach people in their own language simply doesn't work.\n\nWe've helped health organisations localise awareness campaigns and community outreach across regional languages with measurable impact.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nI had a quick look at {company}'s health content and community outreach material.\n\nA significant portion of health awareness and user-facing content appears to be in English or formal Hindi. For communities across rural and semi-urban India, language is often the primary barrier to health behaviour change.\n\nWe've helped health organisations localise awareness campaigns and community outreach across regional languages with measurable impact.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
   },
   {
     "id": "t10f3",
@@ -522,7 +522,7 @@
     "name": "Pharma, Follow-up 2 (Day 10)",
     "sector": "Pharma",
     "subject": "A quick observation about {company}",
-    "body": "Hi {name},\n\nI had a quick look at {company}'s patient communication and HCP-facing content.\n\nMost patient information material and field force content appears to be in English or formal Hindi. For a pharmaceutical organisation across Tier 2/3 and rural markets, this creates a gap in product understanding, prescription confidence, and treatment adherence.\n\nWe've helped healthcare and pharma-adjacent organisations localise patient communication and HCP content across Tamil, Telugu, Kannada, Marathi, Bengali, and other regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
+    "body": "Hi {name},\n\nI had a quick look at {company}'s patient communication and HCP-facing content.\n\nMost of the patient information material and field force content appears to be in English or formal Hindi. For a pharmaceutical organisation across Tier 2/3 and rural markets, this creates a gap in product understanding, prescription confidence, and treatment adherence.\n\nHappy to share a specific example if useful.\n\n[COMPARISON_BLOCK]\n\nBest,\n{sender}"
   },
   {
     "id": "t19f3",
@@ -530,5 +530,89 @@
     "sector": "Pharma",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual patient communication, HCP engagement, or regional language localisation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t20",
+    "name": "Telecom — Intro (Day 0)",
+    "sector": "Telecom",
+    "subject": "Multilingual Communication for {company}",
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help telecom organisations localise customer communication, product content, and support experiences across Indian languages, enabling stronger subscriber acquisition and retention across diverse markets.\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t20f1",
+    "name": "Telecom — Follow-up 1 (Day 5)",
+    "sector": "Telecom",
+    "subject": "Re: Multilingual Communication for {company}",
+    "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For telecom operators expanding across Tier 2/3 India, regional language subscriber communication often makes a direct difference to acquisition, activation rates, and churn. Subscribers who receive tariff and service information in their own language show significantly higher plan uptake and longer tenure.]]\n\n[COMPARISON_BLOCK]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t20f2",
+    "name": "Telecom — Follow-up 2 (Day 10)",
+    "sector": "Telecom",
+    "subject": "A quick observation about {company}",
+    "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nA significant portion of subscriber-facing content, including tariff plans, offers, and support communication, appears to be in English or standard Hindi. For subscribers across Tier 2/3 and rural markets, this creates friction in understanding plans and resolving queries, which directly affects satisfaction and churn.\n\nWe've helped consumer-facing organisations localise across Hindi, Tamil, Telugu, Kannada, Marathi, Bengali, and other regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}\\`"
+  },
+  {
+    "id": "t20f3",
+    "name": "Telecom — Follow-up 3 (Day 28)",
+    "sector": "Telecom",
+    "subject": "Closing the loop, Shabd AI and {company}",
+    "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual subscriber communication or regional language localisation becomes relevant for {company}.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t21",
+    "name": "Fintech — Intro (Day 0)",
+    "sector": "Fintech",
+    "subject": "Multilingual Customer Communication for {company}",
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help fintech organisations localise product experiences, customer communication, and compliance content across Indian languages, enabling stronger user acquisition, onboarding completion, and retention.\n\nFor fintech companies, language is often the primary barrier to adoption in Tier 2/3 India, where the next 300 million financial services users are.\n\nWe support with:\n- Localisation of onboarding flows, KYC, and product UI\n- Multilingual communication across WhatsApp, SMS, and push notifications\n- Translation of financial literacy and product education content\n- Regional language customer support and grievance redress\n\nWe currently work with AU Small Finance Bank, Jana Small Finance Bank, and other financial services organisations on exactly this.\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t21f1",
+    "name": "Fintech — Follow-up 1 (Day 5)",
+    "sector": "Fintech",
+    "subject": "Re: Multilingual Customer Communication for {company}",
+    "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For fintech companies targeting growth in Tier 2/3 India, regional language product experiences often make the single biggest difference to onboarding completion. Users who complete KYC and onboarding in their own language convert at significantly higher rates and show better long-term retention.]]\n\n[COMPARISON_BLOCK]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t21f2",
+    "name": "Fintech — Follow-up 2 (Day 10)",
+    "sector": "Fintech",
+    "subject": "A quick observation about {company}",
+    "body": "Hi {name},\n\nI had a quick look at {company}'s onboarding flow and customer-facing product experience.\n\nThe onboarding, KYC, and product communication appears to be primarily in English. For users from Tier 2/3 cities and non-English-speaking segments, this creates a meaningful drop-off at every step of the funnel. In a market where the next wave of fintech users speaks Tamil, Telugu, Kannada, Marathi, and Bengali first, this is a real growth gap.\n\nWe've helped fintech and financial services organisations localise across regional languages with measurable improvement in onboarding completion and user retention.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}\\`"
+  },
+  {
+    "id": "t21f3",
+    "name": "Fintech — Follow-up 3 (Day 28)",
+    "sector": "Fintech",
+    "subject": "Closing the loop, Shabd AI and {company}",
+    "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual product localisation, regional language onboarding, or user communication becomes relevant for {company}.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t22",
+    "name": "Insurance — Intro (Day 0)",
+    "sector": "Insurance",
+    "subject": "Multilingual Policyholder Communication for {company}",
+    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI (IIM-incubated; Top 30 at the India AI Impact Summit 2026).\n\nWe help insurance organisations localise policyholder communication, product content, and claims documentation across Indian languages, enabling clearer understanding and stronger policyholder trust.\n\nFor insurance companies, language is directly linked to policyholder understanding, claims behaviour, and renewal rates. When policy terms and claims communication happen in the policyholder's own language, comprehension improves and disputes reduce.\n\nWe support with:\n- Localisation of policy documents, terms, and product brochures\n- Multilingual premium notices, renewal reminders, and claims communication\n- Translation of agent training and product selling material\n- Regional language customer service and grievance redress\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t22f1",
+    "name": "Insurance — Follow-up 1 (Day 5)",
+    "sector": "Insurance",
+    "subject": "Re: Multilingual Policyholder Communication for {company}",
+    "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For insurance organisations operating across India, policyholder communication in regional languages often makes a measurable difference to renewal rates, claims disputes, and customer trust. When policyholders fully understand their coverage and claims process, grievance escalations drop and long-term retention improves.]]\n\n[COMPARISON_BLOCK]\n\nHappy to share a few relevant examples if helpful.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t22f2",
+    "name": "Insurance — Follow-up 2 (Day 10)",
+    "sector": "Insurance",
+    "subject": "A quick observation about {company}",
+    "body": "Hi {name},\n\nI had a quick look at {company}'s policyholder communication and product content.\n\nMost of the customer-facing content, including policy terms, premium notices, and claims communication, appears to be in English or formal Hindi. For policyholders across Tier 2/3 and rural markets, this creates a real comprehension gap that leads to disputes, grievance escalations, and poor renewal behaviour.\n\nWe've helped insurance-adjacent and financial services organisations localise policyholder communication across Tamil, Telugu, Kannada, Marathi, Bengali, and other regional languages.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}\\`"
+  },
+  {
+    "id": "t22f3",
+    "name": "Insurance — Follow-up 3 (Day 28)",
+    "sector": "Insurance",
+    "subject": "Closing the loop, Shabd AI and {company}",
+    "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual policyholder communication or regional language product content becomes relevant for {company}.\n\nBest,\n{sender}"
   }
 ]
