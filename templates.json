@@ -614,5 +614,89 @@
     "sector": "Insurance",
     "subject": "Closing the loop, Shabd AI and {company}",
     "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual policyholder communication or regional language product content becomes relevant for {company}.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t23",
+    "name": "HFC, Intro (Day 0)",
+    "sector": "HFC",
+    "subject": "Multilingual content reliability for {company}",
+    "body": "Dear {name},\n\nI'm reaching out from **Shabd AI**, an IIM-incubated (NSRCEL) language technology company and a Top 30 finalist at the **India AI Impact Summit 2026**.\n\nAs housing finance companies serve first-time home buyers across Tier 2 and 3 markets, the language of loan documentation directly affects borrower comprehension and trust. AI translation can cut costs and turnaround, but content reliability remains a critical challenge, sharpened by the **RBI's KFS mandate** requiring loan documents in a language the borrower understands.\n\nA few examples of what typically goes wrong:\n- An interest rate of 6.5% becomes 6.75%, or a tenure of 24 months becomes 36 months. The sentence reads fine, but the number is wrong.\n- A product name like \"Suraksha\" gets translated to the generic word \"safety,\" losing brand identity.\n- Key terms like \"nominee,\" \"collateral,\" \"EMI,\" or \"tenure\" are translated differently across documents, creating ambiguity.\n- Formal borrower communication shifts to informal language, affecting trust with first-time home buyers.\n\nOur platform, **ShabdLens**, developed with **IIT Patna**, delivers three outcomes: reliable content, faster turnaround, and lower costs. By combining AI-powered workflows with expert linguists, we deliver high-quality multilingual content at scale across **22 Indian languages** and dialects.\n\nWe currently support 42+ organisations including **AU Small Finance Bank**, **Jana Small Finance Bank**, **Si creva**, **TrustPaisa**, **Kissht**, **PNB MetLife**, **IndiaFirst Life**, and **JSW Group**.\n\nBeyond translation, we also offer **terminology management and glossary building**, **quality assurance**, and **Translation Certificates** on request, ensuring consistency, accuracy, and trust across every piece of content we deliver.\n\nWould you be open to a brief discussion on how this could support {company}'s multilingual borrower and loan documentation? We can showcase relevant use cases in an in-person meeting.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t23f1",
+    "name": "HFC, Follow-up 1 (Day 5)",
+    "sector": "HFC",
+    "subject": "Re: Multilingual content reliability for {company}",
+    "body": "Hi {name},\n\nJust following up on my note about multilingual content reliability for {company}.\n\nOne thing worth seeing is the difference between raw machine translation and what we deliver. Here's a quick side-by-side for a typical home loan message:\n\n[COMPARISON_BLOCK]\n\nThe gap is small on the surface but it's exactly where compliance and customer trust break down.\n\nWould a brief call this week or next work?\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t23f2",
+    "name": "HFC, Follow-up 2 (Day 10)",
+    "sector": "HFC",
+    "subject": "A few BFSI use cases for {company}",
+    "body": "Hi {name},\n\nI wanted to share a few use cases we've delivered for our BFSI clients:\n\n**1. End-to-end multilingual training content**: We built and localised a 21-hour Hindi training programme based on the IRDAI IC-38 syllabus, including video modules with voice-overs, character creation, WhatsApp-based reinforcement journeys, and terminology standardisation. It's now being scaled into multiple Indian languages.\n\n**2. Multilingual customer communication**: Product brochures, application and customer information forms, policy and regulatory communication, marketing collateral, email campaigns, and video explainers, all with glossary adherence, regulatory accuracy, and customer comprehension across languages.\n\n**3. Website localisation**: Making digital properties accessible to wider audiences with consistent brand messaging, accurate terminology, and cultural relevance.\n\nOn commercials, our indicative pricing typically ranges between Rs 1.5 and Rs 2 per word, depending on the annual volume commitment. Higher volumes move the rate towards the lower end, and we are happy to work out a structure that fits your requirement.\n\nIt would be great to showcase the platform and walk through these in person.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t23f3",
+    "name": "HFC, Follow-up 3 (Day 28)",
+    "sector": "HFC",
+    "subject": "Closing the loop, Shabd AI and {company}",
+    "body": "Hi {name},\n\nI'll close the loop here for now. If multilingual content reliability becomes a priority for {company}, particularly around KFS compliance and borrower documentation, I'd be glad to reconnect.\n\nWe're continuing to support 42+ organisations including **AU Small Finance Bank**, **Jana Small Finance Bank**, and **Si creva** on exactly this.\n\nWishing you the best.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t24",
+    "name": "P2P Lending, Intro (Day 0)",
+    "sector": "P2P Lending",
+    "subject": "Multilingual content reliability for {company}",
+    "body": "Dear {name},\n\nI'm reaching out from **Shabd AI**, an IIM-incubated (NSRCEL) language technology company and a Top 30 finalist at the **India AI Impact Summit 2026**.\n\nAs P2P lending platforms serve both lenders and borrowers across diverse language geographies, clear disclosure is not optional. RBI's Master Directions require explicit risk disclosures to be understood by participants, and the **KFS mandate** requires loan documents in a language the borrower understands. AI translation can cut costs and turnaround, but content reliability remains a critical challenge.\n\nA few examples of what typically goes wrong:\n- An interest rate of 6.5% becomes 6.75%, or a tenure of 24 months becomes 36 months. The sentence reads fine, but the number is wrong.\n- A product name like \"Suraksha\" gets translated to the generic word \"safety,\" losing brand identity.\n- Key terms like \"principal,\" \"default,\" \"escrow,\" or \"returns\" are translated differently across documents, creating ambiguity.\n- Formal risk disclosures shift to informal language, weakening the disclosure itself.\n\nOur platform, **ShabdLens**, developed with **IIT Patna**, delivers three outcomes: reliable content, faster turnaround, and lower costs. By combining AI-powered workflows with expert linguists, we deliver high-quality multilingual content at scale across **22 Indian languages** and dialects.\n\nWe currently support 42+ organisations including **Si creva**, **TrustPaisa**, **Kissht**, **AU Small Finance Bank**, **Jana Small Finance Bank**, **PNB MetLife**, **IndiaFirst Life**, and **JSW Group**.\n\nBeyond translation, we also offer **terminology management and glossary building**, **quality assurance**, and **Translation Certificates** on request, ensuring consistency, accuracy, and trust across every piece of content we deliver.\n\nWould you be open to a brief discussion on how this could support {company}'s multilingual lender and borrower communication? We can showcase relevant use cases in an in-person meeting.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t24f1",
+    "name": "P2P Lending, Follow-up 1 (Day 5)",
+    "sector": "P2P Lending",
+    "subject": "Re: Multilingual content reliability for {company}",
+    "body": "Hi {name},\n\nJust following up on my note about multilingual content reliability for {company}.\n\nOne thing worth seeing is the difference between raw machine translation and what we deliver. Here's a quick side-by-side for a typical lending platform message:\n\n[COMPARISON_BLOCK]\n\nThe gap is small on the surface but it's exactly where compliance and customer trust break down.\n\nWould a brief call this week or next work?\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t24f2",
+    "name": "P2P Lending, Follow-up 2 (Day 10)",
+    "sector": "P2P Lending",
+    "subject": "A few BFSI use cases for {company}",
+    "body": "Hi {name},\n\nI wanted to share a few use cases we've delivered for our BFSI clients:\n\n**1. End-to-end multilingual training content**: We built and localised a 21-hour Hindi training programme based on the IRDAI IC-38 syllabus, including video modules with voice-overs, character creation, WhatsApp-based reinforcement journeys, and terminology standardisation. It's now being scaled into multiple Indian languages.\n\n**2. Multilingual customer communication**: Product brochures, application and customer information forms, policy and regulatory communication, marketing collateral, email campaigns, and video explainers, all with glossary adherence, regulatory accuracy, and customer comprehension across languages.\n\n**3. Website localisation**: Making digital properties accessible to wider audiences with consistent brand messaging, accurate terminology, and cultural relevance.\n\nOn commercials, our indicative pricing typically ranges between Rs 1.5 and Rs 2 per word, depending on the annual volume commitment. Higher volumes move the rate towards the lower end, and we are happy to work out a structure that fits your requirement.\n\nIt would be great to showcase the platform and walk through these in person.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t24f3",
+    "name": "P2P Lending, Follow-up 3 (Day 28)",
+    "sector": "P2P Lending",
+    "subject": "Closing the loop, Shabd AI and {company}",
+    "body": "Hi {name},\n\nI'll close the loop here for now. If multilingual content reliability becomes a priority for {company}, particularly around KFS compliance and risk disclosure, I'd be glad to reconnect.\n\nWe're continuing to support 42+ organisations including **Si creva**, **TrustPaisa**, and **Kissht** on exactly this.\n\nWishing you the best.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t25",
+    "name": "CIC, Intro (Day 0)",
+    "sector": "CIC",
+    "subject": "Multilingual content reliability for {company}",
+    "body": "Dear {name},\n\nI'm reaching out from **Shabd AI**, an IIM-incubated (NSRCEL) language technology company and a Top 30 finalist at the **India AI Impact Summit 2026**.\n\nAs Core Investment Companies communicate across group entities, investors, and regulators, precision in financial and regulatory language is non-negotiable. AI translation can cut costs and turnaround significantly, but content reliability remains a critical challenge, particularly where a single mistranslated figure or term can carry regulatory consequences.\n\nA few examples of what typically goes wrong:\n- An interest rate of 6.5% becomes 6.75%, or a tenure of 24 months becomes 36 months. The sentence reads fine, but the number is wrong.\n- A product name like \"Suraksha\" gets translated to the generic word \"safety,\" losing brand identity.\n- Key terms like \"subsidiary,\" \"exposure,\" \"net owned fund,\" or \"leverage\" are translated differently across documents, creating ambiguity.\n- Formal regulatory and investor communication shifts to informal language, affecting credibility.\n\nOur platform, **ShabdLens**, developed with **IIT Patna**, delivers three outcomes: reliable content, faster turnaround, and lower costs. By combining AI-powered workflows with expert linguists, we deliver high-quality multilingual content at scale across **22 Indian languages** and dialects.\n\nWe currently support 42+ organisations including **JSW Group**, **AU Small Finance Bank**, **Jana Small Finance Bank**, **PNB MetLife**, **IndiaFirst Life**, **Si creva**, **TrustPaisa**, and **Titan Taneira**.\n\nBeyond translation, we also offer **terminology management and glossary building**, **quality assurance**, and **Translation Certificates** on request, ensuring consistency, accuracy, and trust across every piece of content we deliver.\n\nWould you be open to a brief discussion on how this could support {company}'s multilingual investor, group, and regulatory communication? We can showcase relevant use cases in an in-person meeting.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t25f1",
+    "name": "CIC, Follow-up 1 (Day 5)",
+    "sector": "CIC",
+    "subject": "Re: Multilingual content reliability for {company}",
+    "body": "Hi {name},\n\nJust following up on my note about multilingual content reliability for {company}.\n\nOne thing worth seeing is the difference between raw machine translation and what we deliver. Here's a quick side-by-side for a typical financial communication:\n\n[COMPARISON_BLOCK]\n\nThe gap is small on the surface but it's exactly where compliance and customer trust break down.\n\nWould a brief call this week or next work?\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t25f2",
+    "name": "CIC, Follow-up 2 (Day 10)",
+    "sector": "CIC",
+    "subject": "A few BFSI use cases for {company}",
+    "body": "Hi {name},\n\nI wanted to share a few use cases we've delivered for our BFSI clients:\n\n**1. End-to-end multilingual training content**: We built and localised a 21-hour Hindi training programme based on the IRDAI IC-38 syllabus, including video modules with voice-overs, character creation, WhatsApp-based reinforcement journeys, and terminology standardisation. It's now being scaled into multiple Indian languages.\n\n**2. Multilingual customer communication**: Product brochures, application and customer information forms, policy and regulatory communication, marketing collateral, email campaigns, and video explainers, all with glossary adherence, regulatory accuracy, and customer comprehension across languages.\n\n**3. Website localisation**: Making digital properties accessible to wider audiences with consistent brand messaging, accurate terminology, and cultural relevance.\n\nOn commercials, our indicative pricing typically ranges between Rs 1.5 and Rs 2 per word, depending on the annual volume commitment. Higher volumes move the rate towards the lower end, and we are happy to work out a structure that fits your requirement.\n\nIt would be great to showcase the platform and walk through these in person.\n\nBest,\n{sender}"
+  },
+  {
+    "id": "t25f3",
+    "name": "CIC, Follow-up 3 (Day 28)",
+    "sector": "CIC",
+    "subject": "Closing the loop, Shabd AI and {company}",
+    "body": "Hi {name},\n\nI'll close the loop here for now. If multilingual content reliability becomes a priority for {company}, particularly around regulatory and investor communication, I'd be glad to reconnect.\n\nWe're continuing to support 42+ organisations including **JSW Group**, **AU Small Finance Bank**, and **PNB MetLife** on exactly this.\n\nWishing you the best.\n\nBest,\n{sender}"
   }
 ]
