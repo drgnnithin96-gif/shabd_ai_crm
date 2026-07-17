@@ -232,6 +232,7 @@ input[type=checkbox]{width:14px;height:14px;accent-color:var(--ac);cursor:pointe
     <button class="ni" id="nav-pipe" onclick="switchView('pipeline',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="5" height="18" rx="1.5"/><rect x="9.5" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="5" height="8" rx="1.5"/></svg>Pipeline</button>
     <button class="ni" id="nav-tmpl" onclick="switchView('templates',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Email templates</button>
     <button class="ni" id="nav-compose" onclick="switchView('compose',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Compose email</button>
+    <button class="ni" id="nav-findleads" onclick="switchView('findleads',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Find Leads</button>
     <button class="ni" id="nav-dashboard" onclick="switchView('dashboard',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/></svg>Dashboard</button>
     <div class="nlbl" style="margin-top:6px">By stage</div>
     <button class="ni" onclick="filterStage('New',this)"><span class="sdot" style="background:var(--bl)"></span>New</button>
@@ -573,10 +574,172 @@ function getFiltered(){
     return true;
   });
 }
-window.switchView=function(v,el){currentView=v;stageFilter='';overdueFilter=false;document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent={list:'All leads',pipeline:'Pipeline',templates:'Email templates',compose:'Compose email',dashboard:'Dashboard'}[v]||v;renderView();};
+window.switchView=function(v,el){currentView=v;stageFilter='';overdueFilter=false;document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent={list:'All leads',pipeline:'Pipeline',templates:'Email templates',compose:'Compose email',dashboard:'Dashboard',findleads:'Find Leads (RocketReach)'}[v]||v;renderView();};
 window.filterStage=function(stage,el){stageFilter=stageFilter===stage?'':stage;overdueFilter=false;currentView='list';document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.getElementById('nav-list').classList.add('active');document.getElementById('page-title').textContent=stageFilter||'All leads';renderView();};
 window.filterOverdue=function(el){overdueFilter=true;stageFilter='';currentView='list';document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('page-title').textContent='Overdue reminders';renderView();};
-window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')renderPipeline();else if(currentView==='templates')renderTemplatesView();else if(currentView==='compose')renderComposeView();else if(currentView==='dashboard')renderDashboard();else renderList();};
+window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')renderPipeline();else if(currentView==='templates')renderTemplatesView();else if(currentView==='compose')renderComposeView();else if(currentView==='dashboard')renderDashboard();else if(currentView==='findleads')renderFindLeads();else renderList();};
+
+
+// ═══════════════════════════════════════════════════════════
+// LEAD INTELLIGENCE — RocketReach integration
+// ═══════════════════════════════════════════════════════════
+const RR_API = 'http://localhost:3456';
+let rrResults = [];
+let rrAutoReveal = false;
+
+async function renderFindLeads(){
+  const el = document.getElementById('content');
+  const sectorOpts = ['','NGO & Social Impact','Education','Healthcare','SaaS','E-commerce','Finance','Banking','NBFC','Microfinance','Health','Fashion','Legal','Government','Manufacturing','Media & Publishing','Travel & Hospitality','FMCG','Energy','Pharma','Telecom','Fintech','Insurance','HFC','P2P Lending','CIC']
+    .map(s=>`<option value="${s}">${s||'— select sector —'}</option>`).join('');
+
+  el.innerHTML = `
+  <div style="max-width:1100px">
+    <div style="background:#f8fff4;border:1px solid #c8f06e;border-radius:10px;padding:14px 18px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:#1a1a1a">Lead Intelligence, powered by RocketReach</div>
+        <div style="font-size:12px;color:#666" id="rr-credits">Checking credits...</div>
+      </div>
+      <button onclick="rrLoadCredits()" style="font-size:12px;padding:6px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer">Refresh credits</button>
+    </div>
+
+    <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin-bottom:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Company</label><input id="rr-company" placeholder="e.g. AU Small Finance Bank" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Job Title / Role</label><input id="rr-title" placeholder="e.g. Head of Marketing" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Location</label><input id="rr-location" placeholder="e.g. Mumbai, India" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:end">
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Industry / Keyword</label><input id="rr-keyword" placeholder="e.g. fintech" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector (on import)</label><select id="rr-sector" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onclick="rrSearch()" style="flex:1;padding:9px 16px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Search</button>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;align-items:center;gap:8px">
+        <label style="font-size:12px;color:#666;display:flex;align-items:center;gap:6px;cursor:pointer">
+          <input type="checkbox" id="rr-autoreveal" onchange="rrAutoReveal=this.checked" style="cursor:pointer">
+          Auto-reveal emails on search (uses 1 credit per result)
+        </label>
+        <span style="font-size:11px;color:#999;margin-left:auto">Off = preview first, reveal individually (saves credits)</span>
+      </div>
+    </div>
+
+    <div id="rr-results"></div>
+  </div>`;
+
+  rrLoadCredits();
+}
+
+async function rrLoadCredits(){
+  const el = document.getElementById('rr-credits');
+  try {
+    const r = await fetch(RR_API + '/rr/account');
+    const d = await r.json();
+    if (d.error) { el.textContent = 'Could not load credits (is START.bat running?)'; return; }
+    const cu = (d.credit_usage||[]).find(c=>c.credit_type==='premium_lookup') || {};
+    el.innerHTML = `Email reveals remaining: <b style="color:#2d7a2d">${cu.remaining!=null?cu.remaining.toLocaleString():'?'}</b> of ${cu.allocated!=null?cu.allocated.toLocaleString():'?'}`;
+  } catch(e) {
+    el.textContent = 'Backend not reachable — make sure START.bat is running';
+  }
+}
+
+async function rrSearch(){
+  const filters = {
+    company:  document.getElementById('rr-company').value.trim(),
+    title:    document.getElementById('rr-title').value.trim(),
+    location: document.getElementById('rr-location').value.trim(),
+    keyword:  document.getElementById('rr-keyword').value.trim(),
+  };
+  if (!filters.company && !filters.title && !filters.keyword) {
+    showToast('Enter at least a company, title, or keyword'); return;
+  }
+  const rd = document.getElementById('rr-results');
+  rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">Searching RocketReach...</div>';
+  try {
+    const r = await fetch(RR_API + '/rr/search', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ filters, page:1, pageSize:15 })
+    });
+    const d = await r.json();
+    if (d.error) { rd.innerHTML = `<div style="padding:20px;color:#dc2626">Search error: ${JSON.stringify(d.error)}</div>`; return; }
+    rrResults = d.profiles || d.results || [];
+    if (!rrResults.length) { rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">No results. Try broader filters.</div>'; return; }
+    rrRenderResults();
+    if (rrAutoReveal) { for (let i=0;i<rrResults.length;i++){ await rrReveal(i, true); } }
+  } catch(e) {
+    rd.innerHTML = `<div style="padding:20px;color:#dc2626">Backend not reachable. Is START.bat running?</div>`;
+  }
+}
+
+function rrRenderResults(){
+  const rd = document.getElementById('rr-results');
+  const sector = document.getElementById('rr-sector').value;
+  rd.innerHTML = `
+  <div style="background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden">
+    <div style="padding:10px 16px;background:#fafafa;border-bottom:1px solid #eee;font-size:12px;color:#666;display:flex;justify-content:space-between">
+      <span>${rrResults.length} results</span>
+      <span>Reveal an email to enable import</span>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead><tr style="background:#fafafa;color:#888;font-size:11px;text-align:left">
+        <th style="padding:8px 16px">Name</th><th style="padding:8px">Title</th><th style="padding:8px">Company</th><th style="padding:8px">Email</th><th style="padding:8px">Action</th>
+      </tr></thead>
+      <tbody>
+        ${rrResults.map((p,i)=>{
+          const name = p.name || [p.first_name,p.last_name].filter(Boolean).join(' ');
+          const revealed = p._email;
+          return `<tr style="border-top:1px solid #f0f0f0">
+            <td style="padding:8px 16px;font-weight:500">${name||'—'}</td>
+            <td style="padding:8px;color:#666">${p.current_title||p.title||'—'}</td>
+            <td style="padding:8px;color:#666">${p.current_employer||p.employer||'—'}</td>
+            <td style="padding:8px">${revealed?`<span style="color:#2d7a2d">${revealed}</span>`:'<span style="color:#bbb">hidden</span>'}</td>
+            <td style="padding:8px">${revealed
+              ? `<button onclick="rrImport(${i})" style="font-size:11px;padding:4px 10px;background:#2d7a2d;color:#fff;border:none;border-radius:5px;cursor:pointer">Add to pipeline</button>`
+              : `<button onclick="rrReveal(${i})" style="font-size:11px;padding:4px 10px;background:#fff;color:#2d7a2d;border:1px solid #2d7a2d;border-radius:5px;cursor:pointer">Reveal email</button>`}
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+async function rrReveal(i, silent){
+  const p = rrResults[i];
+  if (p._email) return;
+  const sector = document.getElementById('rr-sector').value;
+  try {
+    const r = await fetch(RR_API + '/rr/reveal', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ id: p.id, name: p.name || [p.first_name,p.last_name].filter(Boolean).join(' '), current_employer: p.current_employer || p.employer, linkedin_url: p.linkedin_url, sector })
+    });
+    const d = await r.json();
+    if (d.error) { if(!silent) showToast('Reveal failed: '+JSON.stringify(d.error)); return; }
+    rrResults[i]._email = d.lead.email;
+    rrResults[i]._lead = d.lead;
+    rrRenderResults();
+    rrLoadCredits();
+  } catch(e) { if(!silent) showToast('Reveal failed — backend not reachable'); }
+}
+
+async function rrImport(i){
+  const p = rrResults[i];
+  const lead = p._lead;
+  if (!lead || !lead.email) { showToast('Reveal the email first'); return; }
+  if (!lead.sector) lead.sector = document.getElementById('rr-sector').value;
+  try {
+    const r = await fetch(RR_API + '/rr/import', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ lead })
+    });
+    const d = await r.json();
+    if (d.error) { showToast('Import failed: '+d.error); return; }
+    if (d.status === 'duplicate') { showToast('Already in pipeline: '+lead.email); }
+    else { showToast('Added: '+lead.name+' ('+lead.email+')'); await loadLeads(); }
+  } catch(e) { showToast('Import failed — backend not reachable'); }
+}
+window.renderFindLeads=renderFindLeads; window.rrSearch=rrSearch; window.rrReveal=rrReveal; window.rrImport=rrImport; window.rrLoadCredits=rrLoadCredits;
+
 
 function renderList(){
   const list=getFiltered(),el=document.getElementById('content');
