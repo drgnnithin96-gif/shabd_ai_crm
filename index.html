@@ -602,7 +602,39 @@ async function renderFindLeads(){
       <button onclick="rrLoadCredits()" style="font-size:12px;padding:6px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer">Refresh credits</button>
     </div>
 
-    <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin-bottom:16px">
+    <!-- Mode tabs -->
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button id="rrtab-smart" onclick="rrSetMode('smart')" style="padding:8px 16px;border:1px solid #2d7a2d;background:#2d7a2d;color:#fff;border-radius:6px;font-size:13px;cursor:pointer">AI Smart Search</button>
+      <button id="rrtab-manual" onclick="rrSetMode('manual')" style="padding:8px 16px;border:1px solid #ddd;background:#fff;color:#555;border-radius:6px;font-size:13px;cursor:pointer">Manual Search</button>
+      <button id="rrtab-sheet" onclick="rrSetMode('sheet')" style="padding:8px 16px;border:1px solid #ddd;background:#fff;color:#555;border-radius:6px;font-size:13px;cursor:pointer">Upload Company Sheet</button>
+    </div>
+
+    <!-- AI Smart Search panel -->
+    <div id="rrpanel-smart" style="background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin-bottom:16px">
+      <label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Describe who you want to find</label>
+      <input id="rr-smartquery" placeholder="e.g. top NBFCs approved by RBI in 2025 in India" style="width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;margin-bottom:12px">
+      <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end">
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (comma-separated)</label><input id="rr-smarttitles" value="Marketing, Compliance, Head, VP, Manager, Director" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector</label><select id="rr-sector-smart" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
+        <button onclick="rrSmartSearch()" style="padding:9px 18px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Find</button>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:8px">Claude builds the company list, then RocketReach finds people in those roles. Emails stay hidden until you reveal them.</div>
+    </div>
+
+    <!-- Sheet upload panel -->
+    <div id="rrpanel-sheet" style="display:none;background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin-bottom:16px">
+      <label style="font-size:11px;color:#888;display:block;margin-bottom:8px">Paste company names (one per line) or upload a CSV with a company column</label>
+      <textarea id="rr-sheettext" rows="5" placeholder="AU Small Finance Bank&#10;Jana Small Finance Bank&#10;Kissht" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:10px"></textarea>
+      <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end">
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles</label><input id="rr-sheettitles" value="Marketing, Compliance, Head, VP, Manager" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector</label><select id="rr-sector-sheet" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
+        <button onclick="rrSheetSearch()" style="padding:9px 18px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Find People</button>
+      </div>
+      <input type="file" id="rr-csvfile" accept=".csv" onchange="rrLoadCsv(event)" style="margin-top:10px;font-size:12px">
+    </div>
+
+    <!-- Manual Search panel -->
+    <div id="rrpanel-manual" style="display:none;background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin-bottom:16px">
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
         <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Company</label><input id="rr-company" placeholder="e.g. AU Small Finance Bank" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
         <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Job Title / Role</label><input id="rr-title" placeholder="e.g. Head of Marketing" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
@@ -707,7 +739,7 @@ function rrRenderResults(){
 async function rrReveal(i, silent){
   const p = rrResults[i];
   if (p._email) return;
-  const sector = document.getElementById('rr-sector').value;
+  const sector = rrActiveSector();
   try {
     const r = await fetch(RR_API + '/rr/reveal', {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -726,7 +758,7 @@ async function rrImport(i){
   const p = rrResults[i];
   const lead = p._lead;
   if (!lead || !lead.email) { showToast('Reveal the email first'); return; }
-  if (!lead.sector) lead.sector = document.getElementById('rr-sector').value;
+  if (!lead.sector) lead.sector = rrActiveSector();
   try {
     const r = await fetch(RR_API + '/rr/import', {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -738,6 +770,84 @@ async function rrImport(i){
     else { showToast('Added: '+lead.name+' ('+lead.email+')'); await loadLeads(); }
   } catch(e) { showToast('Import failed — backend not reachable'); }
 }
+
+function rrActiveSector(){
+  for(const id of ['rr-sector-smart','rr-sector-sheet','rr-sector']){
+    const el=document.getElementById(id);
+    if(el && el.offsetParent!==null && el.value) return el.value;
+  }
+  const any=document.getElementById('rr-sector-smart')||document.getElementById('rr-sector');
+  return any?any.value:'';
+}
+
+function rrSetMode(mode){
+  ['smart','manual','sheet'].forEach(m=>{
+    const panel=document.getElementById('rrpanel-'+m);
+    const tab=document.getElementById('rrtab-'+m);
+    if(panel) panel.style.display = (m===mode)?'block':'none';
+    if(tab){ tab.style.background=(m===mode)?'#2d7a2d':'#fff'; tab.style.color=(m===mode)?'#fff':'#555'; tab.style.borderColor=(m===mode)?'#2d7a2d':'#ddd'; }
+  });
+}
+
+async function rrSmartSearch(){
+  const query = document.getElementById('rr-smartquery').value.trim();
+  const titles = document.getElementById('rr-smarttitles').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const sector = document.getElementById('rr-sector-smart').value;
+  if(!query){ showToast('Describe who you want to find'); return; }
+  const rd = document.getElementById('rr-results');
+  rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">Claude is building the company list, then searching RocketReach... this can take 20-40s</div>';
+  try{
+    const r = await fetch(RR_API+'/rr/smart-search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query,titles,sector})});
+    const d = await r.json();
+    if(d.error){ rd.innerHTML='<div style="padding:20px;color:#dc2626">Error: '+JSON.stringify(d.error)+'</div>'; return; }
+    if(d.companies && d.companies.length){
+      rd.insertAdjacentHTML && (rd.innerHTML='');
+    }
+    rrResults = d.people || [];
+    if(!rrResults.length){ rd.innerHTML='<div style="padding:20px;color:#888">Claude suggested: '+(d.companies||[]).join(', ')+'<br><br>But no people found on RocketReach for those roles. Try different roles.</div>'; return; }
+    const companyNote = d.companies && d.companies.length ? `<div style="padding:10px 16px;background:#f8fff4;border:1px solid #c8f06e;border-radius:8px;margin-bottom:12px;font-size:12px;color:#2d7a2d">Claude found ${d.companies.length} companies: ${d.companies.join(', ')}</div>` : '';
+    rrRenderResults();
+    document.getElementById('rr-results').insertAdjacentHTML('afterbegin', companyNote);
+  }catch(e){ rd.innerHTML='<div style="padding:20px;color:#dc2626">Backend not reachable. Is FIND_LEADS.bat running?</div>'; }
+}
+
+function rrLoadCsv(ev){
+  const file = ev.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const text = e.target.result;
+    // Extract first column (company names), skip header if it looks like one
+    const lines = text.split(/\r?\n/).map(l=>l.split(',')[0].trim()).filter(Boolean);
+    if(lines.length && /company|name|organisation/i.test(lines[0])) lines.shift();
+    document.getElementById('rr-sheettext').value = lines.join('\n');
+    showToast(lines.length+' companies loaded from CSV');
+  };
+  reader.readAsText(file);
+}
+
+async function rrSheetSearch(){
+  const companies = document.getElementById('rr-sheettext').value.split(/\r?\n/).map(c=>c.trim()).filter(Boolean);
+  const titles = document.getElementById('rr-sheettitles').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const sector = document.getElementById('rr-sector-sheet').value;
+  if(!companies.length){ showToast('Paste or upload company names first'); return; }
+  const rd = document.getElementById('rr-results');
+  rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">Searching '+companies.length+' companies on RocketReach...</div>';
+  const all = [];
+  for(const company of companies.slice(0,25)){
+    try{
+      const r = await fetch(RR_API+'/rr/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filters:{company,title:titles.join(' OR ')},page:1,pageSize:5})});
+      const d = await r.json();
+      const profiles = d.profiles || d.results || [];
+      profiles.forEach(p=>{ p._company_source=company; all.push(p); });
+    }catch(_){}
+  }
+  rrResults = all;
+  if(!all.length){ rd.innerHTML='<div style="padding:20px;color:#888">No people found for those companies/roles on RocketReach.</div>'; return; }
+  rrRenderResults();
+}
+window.rrSetMode=rrSetMode; window.rrSmartSearch=rrSmartSearch; window.rrSheetSearch=rrSheetSearch; window.rrLoadCsv=rrLoadCsv;
+
 window.renderFindLeads=renderFindLeads; window.rrSearch=rrSearch; window.rrReveal=rrReveal; window.rrImport=rrImport; window.rrLoadCredits=rrLoadCredits;
 
 
