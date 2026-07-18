@@ -586,6 +586,8 @@ window.renderView=function(){renderSectorFilter();if(currentView==='pipeline')re
 const RR_API = 'http://localhost:3456';
 let rrResults = [];
 let rrAutoReveal = false;
+let rrPage = 1;
+let rrLastFilters = null;
 
 async function renderFindLeads(){
   const el = document.getElementById('content');
@@ -614,7 +616,7 @@ async function renderFindLeads(){
       <label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Describe who you want to find</label>
       <input id="rr-smartquery" placeholder="e.g. top NBFCs approved by RBI in 2025 in India" style="width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;margin-bottom:12px">
       <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end">
-        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (comma-separated)</label><input id="rr-smarttitles" value="Marketing, Compliance, Head, VP, Manager, Director" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (pick up to 3)</label>${rrRoleDropdown('rrsm')}</div>
         <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector</label><select id="rr-sector-smart" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
         <button onclick="rrSmartSearch()" style="padding:9px 18px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Find</button>
       </div>
@@ -626,7 +628,7 @@ async function renderFindLeads(){
       <label style="font-size:11px;color:#888;display:block;margin-bottom:8px">Paste company names (one per line) or upload a CSV with a company column</label>
       <textarea id="rr-sheettext" rows="5" placeholder="AU Small Finance Bank&#10;Jana Small Finance Bank&#10;Kissht" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:10px"></textarea>
       <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end">
-        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles</label><input id="rr-sheettitles" value="Marketing, Compliance, Head, VP, Manager" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px"></div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (pick up to 3)</label>${rrRoleDropdown('rrsh')}</div>
         <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector</label><select id="rr-sector-sheet" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
         <button onclick="rrSheetSearch()" style="padding:9px 18px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Find People</button>
       </div>
@@ -675,8 +677,8 @@ async function rrLoadCredits(){
   }
 }
 
-async function rrSearch(){
-  const filters = {
+async function rrSearch(keepPage){
+  const filters = rrLastFilters && keepPage ? rrLastFilters : {
     company:  document.getElementById('rr-company').value.trim(),
     title:    document.getElementById('rr-title').value.trim(),
     location: document.getElementById('rr-location').value.trim(),
@@ -685,16 +687,18 @@ async function rrSearch(){
   if (!filters.company && !filters.title && !filters.keyword) {
     showToast('Enter at least a company, title, or keyword'); return;
   }
+  if(!keepPage){ rrPage = 1; } rrLastFilters = filters;
   const rd = document.getElementById('rr-results');
   rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">Searching RocketReach...</div>';
   try {
     const r = await fetch(RR_API + '/rr/search', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ filters, page:1, pageSize:15 })
+      body: JSON.stringify({ filters, page: rrPage, pageSize: 15 })
     });
     const d = await r.json();
     if (d.error) { rd.innerHTML = `<div style="padding:20px;color:#dc2626">Search error: ${JSON.stringify(d.error)}</div>`; return; }
-    rrResults = d.profiles || d.results || [];
+    const newProfiles = d.profiles || d.results || [];
+    rrResults = rrPage === 1 ? newProfiles : rrResults.concat(newProfiles);
     if (!rrResults.length) { rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">No results. Try broader filters.</div>'; return; }
     rrRenderResults();
     if (rrAutoReveal) { for (let i=0;i<rrResults.length;i++){ await rrReveal(i, true); } }
@@ -733,6 +737,9 @@ function rrRenderResults(){
         }).join('')}
       </tbody>
     </table>
+    <div style="padding:10px 16px;border-top:1px solid #f0f0f0;text-align:center">
+      <button onclick="rrLoadMore()" style="font-size:12px;padding:6px 18px;background:#fff;color:#2d7a2d;border:1px solid #2d7a2d;border-radius:6px;cursor:pointer">Load more results</button>
+    </div>
   </div>`;
 }
 
@@ -771,6 +778,47 @@ async function rrImport(i){
   } catch(e) { showToast('Import failed — backend not reachable'); }
 }
 
+
+// ── Role taxonomy (RocketReach-style) ────────────────────────
+const RR_ROLES = {
+  'Marketing': ['Marketing Head','Chief Marketing Officer','VP Marketing','Marketing Manager','Brand Management','Content Marketing','Product Marketing','Digital Marketing','Demand Generation','Advertising','Customer Experience','SEO'],
+  'Compliance & Legal': ['Compliance Head','Chief Compliance Officer','Compliance Manager','Legal Counsel','General Counsel','Company Secretary','Corporate Secretary','Contracts','Privacy Officer','Risk Manager'],
+  'Leadership': ['CEO','Managing Director','Founder','Co-Founder','President','Chief Operating Officer','Chief Financial Officer','Executive Director','General Manager'],
+  'Communication & Training': ['Corporate Communications','Internal Communications','Public Relations','Learning and Development','Training Head','HR Head','Chief Human Resources Officer'],
+  'Product & Operations': ['Product Head','VP Product','Product Manager','Operations Head','VP Operations','Customer Success','Customer Support Head'],
+};
+
+function rrRoleDropdown(id){
+  const groups = Object.entries(RR_ROLES).map(([grp, roles]) => `
+    <div style="padding:6px 10px 2px;font-size:11px;font-weight:700;color:#888;text-transform:uppercase">${grp}</div>
+    ${roles.map(r=>`<label style="display:flex;align-items:center;gap:8px;padding:4px 14px;font-size:13px;cursor:pointer;color:#333">
+      <input type="checkbox" class="${id}-cb" value="${r}" onchange="rrRoleChanged('${id}')" style="cursor:pointer">${r}</label>`).join('')}
+  `).join('');
+  return `
+  <div style="position:relative">
+    <div id="${id}-display" onclick="document.getElementById('${id}-menu').style.display=document.getElementById('${id}-menu').style.display==='block'?'none':'block'"
+      style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;background:#fff;cursor:pointer;color:#888;min-height:20px">
+      Select roles (up to 3)...</div>
+    <div id="${id}-menu" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:50;background:#fff;border:1px solid #ddd;border-radius:8px;max-height:280px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.12);margin-top:4px">
+      ${groups}
+    </div>
+  </div>`;
+}
+
+function rrRoleChanged(id){
+  const checked = [...document.querySelectorAll('.'+id+'-cb:checked')];
+  if (checked.length > 3) { checked[checked.length-1].checked = false; showToast('Maximum 3 roles'); return; }
+  const vals = [...document.querySelectorAll('.'+id+'-cb:checked')].map(c=>c.value);
+  const disp = document.getElementById(id+'-display');
+  disp.textContent = vals.length ? vals.join(', ') : 'Select roles (up to 3)...';
+  disp.style.color = vals.length ? '#1a1a1a' : '#888';
+}
+
+function rrSelectedRoles(id){
+  return [...document.querySelectorAll('.'+id+'-cb:checked')].map(c=>c.value);
+}
+window.rrRoleChanged=rrRoleChanged; window.rrRoleDropdown=rrRoleDropdown; window.rrSelectedRoles=rrSelectedRoles;
+
 function rrActiveSector(){
   for(const id of ['rr-sector-smart','rr-sector-sheet','rr-sector']){
     const el=document.getElementById(id);
@@ -791,7 +839,7 @@ function rrSetMode(mode){
 
 async function rrSmartSearch(){
   const query = document.getElementById('rr-smartquery').value.trim();
-  const titles = document.getElementById('rr-smarttitles').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const titles = rrSelectedRoles('rrsm'); if(!titles.length){ showToast('Pick at least one role'); return; }
   const sector = document.getElementById('rr-sector-smart').value;
   if(!query){ showToast('Describe who you want to find'); return; }
   const rd = document.getElementById('rr-results');
@@ -828,7 +876,7 @@ function rrLoadCsv(ev){
 
 async function rrSheetSearch(){
   const companies = document.getElementById('rr-sheettext').value.split(/\r?\n/).map(c=>c.trim()).filter(Boolean);
-  const titles = document.getElementById('rr-sheettitles').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const titles = rrSelectedRoles('rrsh'); if(!titles.length){ showToast('Pick at least one role'); return; }
   const sector = document.getElementById('rr-sector-sheet').value;
   if(!companies.length){ showToast('Paste or upload company names first'); return; }
   const rd = document.getElementById('rr-results');
@@ -836,7 +884,7 @@ async function rrSheetSearch(){
   const all = [];
   for(const company of companies.slice(0,25)){
     try{
-      const r = await fetch(RR_API+'/rr/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filters:{company,title:titles.join(' OR ')},page:1,pageSize:5})});
+      const r = await fetch(RR_API+'/rr/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filters:{company,titles},page:1,pageSize:8})});
       const d = await r.json();
       const profiles = d.profiles || d.results || [];
       profiles.forEach(p=>{ p._company_source=company; all.push(p); });
@@ -846,6 +894,12 @@ async function rrSheetSearch(){
   if(!all.length){ rd.innerHTML='<div style="padding:20px;color:#888">No people found for those companies/roles on RocketReach.</div>'; return; }
   rrRenderResults();
 }
+async function rrLoadMore(){
+  if(!rrLastFilters){ showToast('Run a search first'); return; }
+  rrPage += 1;
+  await rrSearch(true);
+}
+window.rrLoadMore=rrLoadMore;
 window.rrSetMode=rrSetMode; window.rrSmartSearch=rrSmartSearch; window.rrSheetSearch=rrSheetSearch; window.rrLoadCsv=rrLoadCsv;
 
 window.renderFindLeads=renderFindLeads; window.rrSearch=rrSearch; window.rrReveal=rrReveal; window.rrImport=rrImport; window.rrLoadCredits=rrLoadCredits;
