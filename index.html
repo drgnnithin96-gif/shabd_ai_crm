@@ -588,6 +588,7 @@ let rrResults = [];
 let rrAutoReveal = false;
 let rrPage = 1;
 let rrLastFilters = null;
+let rrState = { mode:'smart', smartQuery:'', sheetText:'', smartRoles:[], sheetRoles:[], companyNote:'' };
 
 async function renderFindLeads(){
   const el = document.getElementById('content');
@@ -662,6 +663,23 @@ async function renderFindLeads(){
   </div>`;
 
   rrLoadCredits();
+
+  // ── Restore previous session state (inputs, mode, results) ──
+  try {
+    if (rrState.smartQuery) document.getElementById('rr-smartquery').value = rrState.smartQuery;
+    if (rrState.sheetText)  document.getElementById('rr-sheettext').value  = rrState.sheetText;
+    // Re-check role checkboxes
+    rrState.smartRoles.forEach(v => { const cb=[...document.querySelectorAll('.rrsm-cb')].find(c=>c.value===v); if(cb){cb.checked=true;} });
+    rrState.sheetRoles.forEach(v => { const cb=[...document.querySelectorAll('.rrsh-cb')].find(c=>c.value===v); if(cb){cb.checked=true;} });
+    if (rrState.smartRoles.length) rrRoleChanged('rrsm');
+    if (rrState.sheetRoles.length) rrRoleChanged('rrsh');
+    rrSetMode(rrState.mode || 'smart');
+    // Re-render previous results if any
+    if (rrResults && rrResults.length) {
+      rrRenderResults();
+      if (rrState.companyNote) document.getElementById('rr-results').insertAdjacentHTML('afterbegin', rrState.companyNote);
+    }
+  } catch(_) {}
 }
 
 async function rrLoadCredits(){
@@ -729,7 +747,9 @@ function rrRenderResults(){
             <td style="padding:8px;color:#666">${p.current_title||p.title||'—'}</td>
             <td style="padding:8px;color:#666">${p.current_employer||p.employer||'—'}</td>
             <td style="padding:8px">${revealed?`<span style="color:#2d7a2d">${revealed}</span>`:'<span style="color:#bbb">hidden</span>'}</td>
-            <td style="padding:8px">${revealed
+            <td style="padding:8px">${p._imported
+              ? `<span style="font-size:11px;padding:4px 10px;color:#2d7a2d;font-weight:600">✓ In pipeline</span>`
+              : revealed
               ? `<button onclick="rrImport(${i})" style="font-size:11px;padding:4px 10px;background:#2d7a2d;color:#fff;border:none;border-radius:5px;cursor:pointer">Add to pipeline</button>`
               : `<button onclick="rrReveal(${i})" style="font-size:11px;padding:4px 10px;background:#fff;color:#2d7a2d;border:1px solid #2d7a2d;border-radius:5px;cursor:pointer">Reveal email</button>`}
             </td>
@@ -772,10 +792,22 @@ async function rrImport(i){
       body: JSON.stringify({ lead })
     });
     const d = await r.json();
-    if (d.error) { showToast('Import failed: '+d.error); return; }
-    if (d.status === 'duplicate') { showToast('Already in pipeline: '+lead.email); }
-    else { showToast('Added: '+lead.name+' ('+lead.email+')'); await loadLeads(); }
-  } catch(e) { showToast('Import failed — backend not reachable'); }
+    if (d.error) { showToast('Import failed: ' + (typeof d.error === 'string' ? d.error : JSON.stringify(d.error))); return; }
+    if (d.status === 'duplicate') {
+      p._imported = true;
+      showToast('Already in pipeline: ' + lead.email);
+    } else {
+      p._imported = true;
+      // Add to the local leads array so it shows in All Leads / Pipeline immediately
+      const newRow = d.row || { id: 'tmp'+Date.now(), name: lead.name, company: lead.company,
+        designation: lead.designation||'', email: lead.email, sector: lead.sector||'',
+        stage: 'New', created: new Date().toISOString() };
+      leads.unshift(newRow);
+      try { renderStats(); } catch(_){}
+      showToast('Added to pipeline: ' + lead.name + ' (' + lead.email + ')');
+    }
+    rrRenderResults();
+  } catch(e) { showToast('Import error: ' + e.message); }
 }
 
 
@@ -829,6 +861,7 @@ function rrActiveSector(){
 }
 
 function rrSetMode(mode){
+  rrState.mode = mode;
   ['smart','manual','sheet'].forEach(m=>{
     const panel=document.getElementById('rrpanel-'+m);
     const tab=document.getElementById('rrtab-'+m);
@@ -839,7 +872,9 @@ function rrSetMode(mode){
 
 async function rrSmartSearch(){
   const query = document.getElementById('rr-smartquery').value.trim();
-  const titles = rrSelectedRoles('rrsm'); if(!titles.length){ showToast('Pick at least one role'); return; }
+  rrState.smartQuery = query;
+  const titles = rrSelectedRoles('rrsm');
+  rrState.smartRoles = titles; if(!titles.length){ showToast('Pick at least one role'); return; }
   const sector = document.getElementById('rr-sector-smart').value;
   if(!query){ showToast('Describe who you want to find'); return; }
   const rd = document.getElementById('rr-results');
@@ -855,6 +890,7 @@ async function rrSmartSearch(){
     if(!rrResults.length){ rd.innerHTML='<div style="padding:20px;color:#888">Claude suggested: '+(d.companies||[]).join(', ')+'<br><br>But no people found on RocketReach for those roles. Try different roles.</div>'; return; }
     const companyNote = d.companies && d.companies.length ? `<div style="padding:10px 16px;background:#f8fff4;border:1px solid #c8f06e;border-radius:8px;margin-bottom:12px;font-size:12px;color:#2d7a2d">Claude found ${d.companies.length} companies: ${d.companies.join(', ')}</div>` : '';
     rrRenderResults();
+    rrState.companyNote = companyNote;
     document.getElementById('rr-results').insertAdjacentHTML('afterbegin', companyNote);
   }catch(e){ rd.innerHTML='<div style="padding:20px;color:#dc2626">Backend not reachable. Is FIND_LEADS.bat running?</div>'; }
 }
@@ -865,34 +901,46 @@ function rrLoadCsv(ev){
   const reader = new FileReader();
   reader.onload = e=>{
     const text = e.target.result;
-    // Extract first column (company names), skip header if it looks like one
-    const lines = text.split(/\r?\n/).map(l=>l.split(',')[0].trim()).filter(Boolean);
-    if(lines.length && /company|name|organisation/i.test(lines[0])) lines.shift();
-    document.getElementById('rr-sheettext').value = lines.join('\n');
-    showToast(lines.length+' companies loaded from CSV');
+    // First column = company names; strip surrounding quotes; skip header row
+    const lines = text.split(/\r?\n/)
+      .map(l => l.split(',')[0].trim().replace(/^["']+|["']+$/g,'').trim())
+      .filter(Boolean);
+    if(lines.length && /company|name|organisation|organization/i.test(lines[0])) lines.shift();
+    // De-duplicate
+    const uniq = [...new Set(lines)];
+    document.getElementById('rr-sheettext').value = uniq.join('\n');
+    showToast(uniq.length+' companies loaded from CSV');
   };
   reader.readAsText(file);
+  ev.target.value = '';   // allow re-uploading the same file
 }
 
 async function rrSheetSearch(){
   const companies = document.getElementById('rr-sheettext').value.split(/\r?\n/).map(c=>c.trim()).filter(Boolean);
-  const titles = rrSelectedRoles('rrsh'); if(!titles.length){ showToast('Pick at least one role'); return; }
+  rrState.sheetText = document.getElementById('rr-sheettext').value;
+  const titles = rrSelectedRoles('rrsh');
+  rrState.sheetRoles = titles; if(!titles.length){ showToast('Pick at least one role'); return; }
   const sector = document.getElementById('rr-sector-sheet').value;
   if(!companies.length){ showToast('Paste or upload company names first'); return; }
   const rd = document.getElementById('rr-results');
-  rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">Searching '+companies.length+' companies on RocketReach...</div>';
   const all = [];
-  for(const company of companies.slice(0,25)){
+  let done = 0, misses = 0;
+  for(const company of companies){
+    rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">Searching '+(done+1)+' of '+companies.length+': <b>'+company+'</b><br><span style="font-size:12px">'+all.length+' people found so far</span></div>';
     try{
       const r = await fetch(RR_API+'/rr/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filters:{company,titles},page:1,pageSize:8})});
       const d = await r.json();
       const profiles = d.profiles || d.results || [];
+      if(!profiles.length) misses++;
       profiles.forEach(p=>{ p._company_source=company; all.push(p); });
-    }catch(_){}
+    }catch(_){ misses++; }
+    done++;
   }
   rrResults = all;
   if(!all.length){ rd.innerHTML='<div style="padding:20px;color:#888">No people found for those companies/roles on RocketReach.</div>'; return; }
   rrRenderResults();
+  if(misses>0){ document.getElementById('rr-results').insertAdjacentHTML('afterbegin',
+    '<div style="padding:8px 16px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;margin-bottom:12px;font-size:12px;color:#92400e">'+misses+' of '+companies.length+' companies had no matches for these roles</div>'); }
 }
 async function rrLoadMore(){
   if(!rrLastFilters){ showToast('Run a search first'); return; }
