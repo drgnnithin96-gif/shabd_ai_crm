@@ -617,7 +617,7 @@ async function renderFindLeads(){
       <label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Describe who you want to find</label>
       <input id="rr-smartquery" placeholder="e.g. top NBFCs approved by RBI in 2025 in India" style="width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;margin-bottom:12px">
       <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end">
-        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (pick up to 3)</label>${rrRoleDropdown('rrsm')}</div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (pick up to 6)</label>${rrRoleDropdown('rrsm')}</div>
         <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector</label><select id="rr-sector-smart" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
         <button onclick="rrSmartSearch()" style="padding:9px 18px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Find</button>
       </div>
@@ -629,7 +629,7 @@ async function renderFindLeads(){
       <label style="font-size:11px;color:#888;display:block;margin-bottom:8px">Paste company names (one per line) or upload a CSV with a company column</label>
       <textarea id="rr-sheettext" rows="5" placeholder="AU Small Finance Bank&#10;Jana Small Finance Bank&#10;Kissht" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:10px"></textarea>
       <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end">
-        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (pick up to 3)</label>${rrRoleDropdown('rrsh')}</div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (pick up to 6)</label>${rrRoleDropdown('rrsh')}</div>
         <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector</label><select id="rr-sector-sheet" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
         <button onclick="rrSheetSearch()" style="padding:9px 18px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Find People</button>
       </div>
@@ -715,11 +715,11 @@ async function rrSearch(keepPage){
     });
     const d = await r.json();
     if (d.error) { rd.innerHTML = `<div style="padding:20px;color:#dc2626">Search error: ${JSON.stringify(d.error)}</div>`; return; }
-    const newProfiles = d.profiles || d.results || [];
+    const newProfiles = rrFilterNew(d.profiles || d.results || []);
     rrResults = rrPage === 1 ? newProfiles : rrResults.concat(newProfiles);
     if (!rrResults.length) { rd.innerHTML = '<div style="padding:30px;text-align:center;color:#888">No results. Try broader filters.</div>'; return; }
     rrRenderResults();
-    if (rrAutoReveal) { for (let i=0;i<rrResults.length;i++){ await rrReveal(i, true); } }
+    if (rrAutoReveal) { for (let i=0;i<rrResults.length;i++){ await rrReveal(i, true); await new Promise(r=>setTimeout(r,1500)); } }
   } catch(e) {
     rd.innerHTML = `<div style="padding:20px;color:#dc2626">Backend not reachable. Is START.bat running?</div>`;
   }
@@ -763,7 +763,7 @@ function rrRenderResults(){
   </div>`;
 }
 
-async function rrReveal(i, silent){
+async function rrReveal(i, silent, attempt){
   const p = rrResults[i];
   if (p._email) return;
   const sector = rrActiveSector();
@@ -773,9 +773,21 @@ async function rrReveal(i, silent){
       body: JSON.stringify({ id: p.id, name: p.name || [p.first_name,p.last_name].filter(Boolean).join(' '), current_employer: p.current_employer || p.employer, linkedin_url: p.linkedin_url, sector })
     });
     const d = await r.json();
-    if (d.error) { if(!silent) showToast('Reveal failed: '+JSON.stringify(d.error)); return; }
+    if (d.error) {
+      // Throttled? RocketReach tells us how long to wait — honor it and retry once
+      const errStr = typeof d.error === 'string' ? d.error : JSON.stringify(d.error);
+      const waitMatch = errStr.match(/"wait"\s*:\s*"?([0-9.]+)/);
+      if (/throttl/i.test(errStr) && waitMatch && (attempt||0) < 2) {
+        const waitSec = Math.ceil(parseFloat(waitMatch[1])) + 1;
+        if(!silent) showToast('Rate limit hit — retrying in '+waitSec+'s...');
+        await new Promise(res=>setTimeout(res, waitSec*1000));
+        return rrReveal(i, silent, (attempt||0)+1);
+      }
+      if(!silent) showToast('Reveal failed: '+errStr); return;
+    }
     rrResults[i]._email = d.lead.email;
     rrResults[i]._lead = d.lead;
+    rrMarkSeen(p);
     rrRenderResults();
     rrLoadCredits();
   } catch(e) { if(!silent) showToast('Reveal failed — backend not reachable'); }
@@ -794,10 +806,10 @@ async function rrImport(i){
     const d = await r.json();
     if (d.error) { showToast('Import failed: ' + (typeof d.error === 'string' ? d.error : JSON.stringify(d.error))); return; }
     if (d.status === 'duplicate') {
-      p._imported = true;
+      p._imported = true; rrMarkSeen(p);
       showToast('Already in pipeline: ' + lead.email);
     } else {
-      p._imported = true;
+      p._imported = true; rrMarkSeen(p);
       // Add to the local leads array so it shows in All Leads / Pipeline immediately
       const newRow = d.row || { id: 'tmp'+Date.now(), name: lead.name, company: lead.company,
         designation: lead.designation||'', email: lead.email, sector: lead.sector||'',
@@ -830,7 +842,7 @@ function rrRoleDropdown(id){
   <div style="position:relative">
     <div id="${id}-display" onclick="document.getElementById('${id}-menu').style.display=document.getElementById('${id}-menu').style.display==='block'?'none':'block'"
       style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px;background:#fff;cursor:pointer;color:#888;min-height:20px">
-      Select roles (up to 3)...</div>
+      Select roles (up to 6)...</div>
     <div id="${id}-menu" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:50;background:#fff;border:1px solid #ddd;border-radius:8px;max-height:280px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.12);margin-top:4px">
       ${groups}
     </div>
@@ -839,10 +851,10 @@ function rrRoleDropdown(id){
 
 function rrRoleChanged(id){
   const checked = [...document.querySelectorAll('.'+id+'-cb:checked')];
-  if (checked.length > 3) { checked[checked.length-1].checked = false; showToast('Maximum 3 roles'); return; }
+  if (checked.length > 6) { checked[checked.length-1].checked = false; showToast('Maximum 6 roles'); return; }
   const vals = [...document.querySelectorAll('.'+id+'-cb:checked')].map(c=>c.value);
   const disp = document.getElementById(id+'-display');
-  disp.textContent = vals.length ? vals.join(', ') : 'Select roles (up to 3)...';
+  disp.textContent = vals.length ? vals.join(', ') : 'Select roles (up to 6)...';
   disp.style.color = vals.length ? '#1a1a1a' : '#888';
 }
 
@@ -850,6 +862,29 @@ function rrSelectedRoles(id){
   return [...document.querySelectorAll('.'+id+'-cb:checked')].map(c=>c.value);
 }
 window.rrRoleChanged=rrRoleChanged; window.rrRoleDropdown=rrRoleDropdown; window.rrSelectedRoles=rrSelectedRoles;
+
+
+// ── Seen tracking: exclude already-handled contacts from new searches ──
+function rrGetSeen(){ return new Set(lsG('rr_seen_ids')||[]); }
+function rrMarkSeen(p){
+  const seen = lsG('rr_seen_ids')||[];
+  if (p.id && !seen.includes(p.id)) { seen.push(p.id); lsS('rr_seen_ids', seen); }
+}
+function rrFilterNew(profiles){
+  const seen = rrGetSeen();
+  const existingEmails = new Set((leads||[]).map(l=>(l.email||'').toLowerCase()).filter(Boolean));
+  const existingNameCo = new Set((leads||[]).map(l=>((l.name||'')+'|'+(l.company||'')).toLowerCase()));
+  return profiles.filter(p=>{
+    if (p.id && seen.has(p.id)) return false;
+    const nm = (p.name || [p.first_name,p.last_name].filter(Boolean).join(' ') || '').toLowerCase();
+    const co = (p.current_employer || p.employer || '').toLowerCase();
+    if (existingNameCo.has(nm+'|'+co)) return false;
+    const em = (p.current_work_email || p.recommended_email || '').toLowerCase();
+    if (em && existingEmails.has(em)) return false;
+    return true;
+  });
+}
+window.rrMarkSeen=rrMarkSeen;
 
 function rrActiveSector(){
   for(const id of ['rr-sector-smart','rr-sector-sheet','rr-sector']){
@@ -886,7 +921,7 @@ async function rrSmartSearch(){
     if(d.companies && d.companies.length){
       rd.insertAdjacentHTML && (rd.innerHTML='');
     }
-    rrResults = d.people || [];
+    rrResults = rrFilterNew(d.people || []);
     if(!rrResults.length){ rd.innerHTML='<div style="padding:20px;color:#888">Claude suggested: '+(d.companies||[]).join(', ')+'<br><br>But no people found on RocketReach for those roles. Try different roles.</div>'; return; }
     const companyNote = d.companies && d.companies.length ? `<div style="padding:10px 16px;background:#f8fff4;border:1px solid #c8f06e;border-radius:8px;margin-bottom:12px;font-size:12px;color:#2d7a2d">Claude found ${d.companies.length} companies: ${d.companies.join(', ')}</div>` : '';
     rrRenderResults();
@@ -930,7 +965,7 @@ async function rrSheetSearch(){
     try{
       const r = await fetch(RR_API+'/rr/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filters:{company,titles},page:1,pageSize:8})});
       const d = await r.json();
-      const profiles = d.profiles || d.results || [];
+      const profiles = rrFilterNew(d.profiles || d.results || []);
       if(!profiles.length) misses++;
       profiles.forEach(p=>{ p._company_source=company; all.push(p); });
     }catch(_){ misses++; }
