@@ -588,7 +588,7 @@ let rrResults = [];
 let rrAutoReveal = false;
 let rrPage = 1;
 let rrLastFilters = null;
-let rrState = { mode:'smart', smartQuery:'', sheetText:'', smartRoles:[], sheetRoles:[], companyNote:'' };
+let rrState = { mode:'smart', smartQuery:'', sheetText:'', smartRoles:[], sheetRoles:[], companyNote:'', bulkText:'', bulkRoles:[] };
 
 async function renderFindLeads(){
   const el = document.getElementById('content');
@@ -610,6 +610,7 @@ async function renderFindLeads(){
       <button id="rrtab-smart" onclick="rrSetMode('smart')" style="padding:8px 16px;border:1px solid #2d7a2d;background:#2d7a2d;color:#fff;border-radius:6px;font-size:13px;cursor:pointer">AI Smart Search</button>
       <button id="rrtab-manual" onclick="rrSetMode('manual')" style="padding:8px 16px;border:1px solid #ddd;background:#fff;color:#555;border-radius:6px;font-size:13px;cursor:pointer">Manual Search</button>
       <button id="rrtab-sheet" onclick="rrSetMode('sheet')" style="padding:8px 16px;border:1px solid #ddd;background:#fff;color:#555;border-radius:6px;font-size:13px;cursor:pointer">Upload Company Sheet</button>
+      <button id="rrtab-bulk" onclick="rrSetMode('bulk')" style="padding:8px 16px;border:1px solid #ddd;background:#fff;color:#555;border-radius:6px;font-size:13px;cursor:pointer">Bulk Scan (free)</button>
     </div>
 
     <!-- AI Smart Search panel -->
@@ -634,6 +635,23 @@ async function renderFindLeads(){
         <button onclick="rrSheetSearch()" style="padding:9px 18px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Find People</button>
       </div>
       <input type="file" id="rr-csvfile" accept=".csv" onchange="rrLoadCsv(event)" style="margin-top:10px;font-size:12px">
+    </div>
+
+    <!-- Bulk Scan panel -->
+    <div id="rrpanel-bulk" style="display:none;background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin-bottom:16px">
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#1e40af">
+        Scans your whole list against RocketReach and reports which companies have contacts. <b>No credits are spent</b> — you reveal emails afterwards, only for the companies worth it.
+      </div>
+      <label style="font-size:11px;color:#888;display:block;margin-bottom:6px">Upload CSV (company name in column 1, website/domain in column 2 if you have it)</label>
+      <input type="file" id="rr-bulkcsv" accept=".csv" onchange="rrLoadBulkCsv(event)" style="margin-bottom:10px;font-size:12px;display:block">
+      <label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Or paste: one per line, as <code>Company Name, domain.com</code></label>
+      <textarea id="rr-bulktext" rows="6" placeholder="Bajaj Finance, bajajfinserv.in&#10;Muthoot Finance, muthootfinance.com&#10;L&amp;T Finance, ltfs.com" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:10px"></textarea>
+      <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:12px;align-items:end">
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Target roles (pick up to 6)</label>${rrRoleDropdown('rrbk')}</div>
+        <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px">Tag as sector</label><select id="rr-sector-bulk" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">${sectorOpts}</select></div>
+        <button onclick="rrBulkScan()" style="padding:9px 18px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Scan list</button>
+      </div>
+      <div id="rr-bulkprogress" style="margin-top:12px"></div>
     </div>
 
     <!-- Manual Search panel -->
@@ -668,11 +686,15 @@ async function renderFindLeads(){
   try {
     if (rrState.smartQuery) document.getElementById('rr-smartquery').value = rrState.smartQuery;
     if (rrState.sheetText)  document.getElementById('rr-sheettext').value  = rrState.sheetText;
+    if (rrState.bulkText)   document.getElementById('rr-bulktext').value   = rrState.bulkText;
     // Re-check role checkboxes
     rrState.smartRoles.forEach(v => { const cb=[...document.querySelectorAll('.rrsm-cb')].find(c=>c.value===v); if(cb){cb.checked=true;} });
     rrState.sheetRoles.forEach(v => { const cb=[...document.querySelectorAll('.rrsh-cb')].find(c=>c.value===v); if(cb){cb.checked=true;} });
+    (rrState.bulkRoles||[]).forEach(v => { const cb=[...document.querySelectorAll('.rrbk-cb')].find(c=>c.value===v); if(cb){cb.checked=true;} });
     if (rrState.smartRoles.length) rrRoleChanged('rrsm');
     if (rrState.sheetRoles.length) rrRoleChanged('rrsh');
+    if ((rrState.bulkRoles||[]).length) rrRoleChanged('rrbk');
+    if (rrBulkReport) rrRenderBulkReport();
     rrSetMode(rrState.mode || 'smart');
     // Re-render previous results if any
     if (rrResults && rrResults.length) {
@@ -886,6 +908,115 @@ function rrFilterNew(profiles){
 }
 window.rrMarkSeen=rrMarkSeen;
 
+
+// ── BULK SCAN: free hit/miss report across a company list ────
+let rrBulkReport = null;
+
+function rrParseBulkLines(text){
+  return text.split(/\r?\n/).map(l=>{
+    const parts = l.split(',').map(s=>s.trim().replace(/^["']+|["']+$/g,''));
+    const name = parts[0] || '';
+    let domain = parts[1] || '';
+    domain = domain.replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/.*$/,'');
+    return name ? { name, domain } : null;
+  }).filter(Boolean);
+}
+
+function rrLoadBulkCsv(ev){
+  const file = ev.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const lines = e.target.result.split(/\r?\n/).filter(l=>l.trim());
+    if(lines.length && /company|name|organisation|organization/i.test(lines[0].split(',')[0])) lines.shift();
+    document.getElementById('rr-bulktext').value = lines.join('\n');
+    const parsed = rrParseBulkLines(lines.join('\n'));
+    const withDomain = parsed.filter(p=>p.domain).length;
+    showToast(parsed.length+' companies loaded ('+withDomain+' with domains)');
+  };
+  reader.readAsText(file);
+  ev.target.value = '';
+}
+
+async function rrBulkScan(){
+  const companies = rrParseBulkLines(document.getElementById('rr-bulktext').value);
+  const titles = rrSelectedRoles('rrbk');
+  if(!companies.length){ showToast('Upload or paste your company list first'); return; }
+  if(!titles.length){ showToast('Pick at least one role'); return; }
+
+  rrState.bulkText = document.getElementById('rr-bulktext').value;
+  rrState.bulkRoles = titles;
+
+  const prog = document.getElementById('rr-bulkprogress');
+  const rd = document.getElementById('rr-results');
+  rd.innerHTML = '';
+  prog.innerHTML = '<div style="padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;text-align:center;color:#475569;font-size:13px">Scanning '+companies.length+' companies... this takes about '+Math.ceil(companies.length*1.2/60)+' min. No credits are being spent.</div>';
+
+  try{
+    const r = await fetch(RR_API+'/rr/bulk-scan',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ companies, titles })
+    });
+    const d = await r.json();
+    if(d.error){ prog.innerHTML='<div style="padding:16px;color:#dc2626">Scan failed: '+JSON.stringify(d.error)+'</div>'; return; }
+    rrBulkReport = d;
+    rrRenderBulkReport();
+  }catch(e){
+    prog.innerHTML='<div style="padding:16px;color:#dc2626">Backend not reachable. Is FIND_LEADS.bat running?</div>';
+  }
+}
+
+function rrRenderBulkReport(){
+  const d = rrBulkReport; if(!d) return;
+  const s = d.summary;
+  const prog = document.getElementById('rr-bulkprogress');
+  prog.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px">
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:22px;font-weight:700;color:#15803d">${s.hits}</div><div style="font-size:11px;color:#166534">companies found</div></div>
+      <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:22px;font-weight:700;color:#b91c1c">${s.misses}</div><div style="font-size:11px;color:#991b1b">not on RocketReach</div></div>
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:22px;font-weight:700;color:#1d4ed8">${s.totalPeople}</div><div style="font-size:11px;color:#1e40af">people available</div></div>
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:22px;font-weight:700;color:#b45309">${s.hitRate}%</div><div style="font-size:11px;color:#92400e">hit rate</div></div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button onclick="rrLoadBulkResults()" style="padding:8px 16px;background:#2d7a2d;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Load ${s.totalPeople} people into results</button>
+      <button onclick="rrExportMisses()" style="padding:8px 16px;background:#fff;color:#b91c1c;border:1px solid #fca5a5;border-radius:6px;font-size:13px;cursor:pointer">Download ${s.misses} missing companies (CSV)</button>
+    </div>`;
+}
+
+function rrLoadBulkResults(){
+  if(!rrBulkReport) return;
+  const people = [];
+  rrBulkReport.report.forEach(row=>{
+    row.people.forEach(p=>{
+      people.push({ id:p.id, name:p.name, current_title:p.title,
+        current_employer:p.employer || row.company, linkedin_url:p.linkedin_url,
+        _company_source: row.company });
+    });
+  });
+  rrResults = rrFilterNew(people);
+  if(!rrResults.length){ showToast('All these contacts are already in your pipeline'); return; }
+  rrRenderResults();
+  showToast(rrResults.length+' new contacts loaded. Reveal only the ones you want.');
+}
+
+function rrExportMisses(){
+  if(!rrBulkReport) return;
+  const misses = rrBulkReport.report.filter(r=>r.found===0);
+  const csv = 'Company,Domain\n' + misses.map(r=>`"${r.company}","${r.domain||''}"`).join('\n');
+  const blob = new Blob([csv],{type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'rocketreach-missing-companies.csv';
+  a.click();
+  showToast(misses.length+' missing companies exported');
+}
+window.rrBulkScan=rrBulkScan; window.rrLoadBulkCsv=rrLoadBulkCsv;
+window.rrLoadBulkResults=rrLoadBulkResults; window.rrExportMisses=rrExportMisses;
+
 function rrActiveSector(){
   for(const id of ['rr-sector-smart','rr-sector-sheet','rr-sector']){
     const el=document.getElementById(id);
@@ -897,7 +1028,7 @@ function rrActiveSector(){
 
 function rrSetMode(mode){
   rrState.mode = mode;
-  ['smart','manual','sheet'].forEach(m=>{
+  ['smart','manual','sheet','bulk'].forEach(m=>{
     const panel=document.getElementById('rrpanel-'+m);
     const tab=document.getElementById('rrtab-'+m);
     if(panel) panel.style.display = (m===mode)?'block':'none';
