@@ -115,85 +115,85 @@
     "id": "t5",
     "name": "NBFC, Intro (Day 0)",
     "sector": "NBFC",
-    "subject": "Multilingual content reliability for {company}",
-    "body": "Dear {name},\n\nI'm reaching out from **Shabd AI**, an IIM-incubated (NSRCEL) language technology company and a Top 30 finalist at the **India AI Impact Summit 2026**.\n\nAs NBFCs scale multilingual communication, AI translation can cut costs and turnaround significantly, but content reliability remains a critical challenge, especially under the **RBI's KFS mandate** requiring loan documents in a language the borrower understands.\n\nA few examples of what typically goes wrong:\n- An interest rate of 6.5% becomes 6.75%, or a tenure of 24 months becomes 36 months. The sentence reads fine, but the number is wrong.\n- A product name like \"Suraksha\" gets translated to the generic word \"safety,\" losing brand identity.\n- Key terms like \"nominee,\" \"collateral,\" or \"EMI\" are translated differently across documents, creating ambiguity.\n- Formal customer communication shifts to informal language, affecting trust.\n\nOur platform, **ShabdLens**, developed with **IIT Patna**, delivers three outcomes: reliable content, faster turnaround, and lower costs. By combining AI-powered workflows with expert linguists, we deliver high-quality multilingual content at scale across **22 Indian languages** and dialects.\n\nWe currently support 42+ organisations including **Si creva**, **TrustPaisa**, **Kissht**, **AU Small Finance Bank**, **Jana Small Finance Bank**, **PNB MetLife**, **IndiaFirst Life**, and **JSW Group**.\n\nBeyond translation, we also offer **terminology management and glossary building**, **quality assurance**, and **Translation Certificates** on request, ensuring consistency, accuracy, and trust across every piece of content we deliver.\n\nWould you be open to a brief discussion on how this could support {company}'s borrower communication? We can showcase relevant use cases in an in-person meeting.\n\nBest,\n{sender}"
+    "subject": "KFS translations for {company}",
+    "body": "Hi {name},\n\nQuick question about how {company} handles KFS documents in regional languages.\n\nThe RBI requirement is that borrowers receive the Key Fact Statement in a language they understand. Most lenders we speak to manage this through vendors or in-house teams, and the recurring problem is accuracy: an interest rate that reads 6.5% in English becomes 6.75% in Hindi, or \"collateral\" gets translated three different ways across three documents.\n\nWe work with **AU Small Finance Bank**, **Jana Small Finance Bank**, and **Si creva** on exactly this. Our review layer, built with **IIT Patna**, catches number and terminology errors before documents reach the borrower, across **22 Indian languages**.\n\nOne client cut their document turnaround from three weeks to four days after moving to us.\n\nWorth a 15-minute call to see if this is a problem worth solving at {company}?\n\nBest,\n{sender}"
   },
   {
     "id": "t5f1",
     "name": "NBFC, Follow-up 1 (Day 5)",
     "sector": "NBFC",
-    "subject": "Re: Multilingual content reliability for {company}",
-    "body": "Hi {name},\n\nJust following up on my note about multilingual content reliability for {company}.\n\nOne thing worth seeing is the difference between raw machine translation and what we deliver. Here's a quick side-by-side for a typical banking message:\n\n[COMPARISON_BLOCK]\n\nThe gap is small on the surface but it's exactly where compliance and customer trust break down.\n\nWould a brief call this week or next work?\n\nBest,\n{sender}"
+    "subject": "Re: KFS translations for {company}",
+    "body": "Hi {name},\n\nFollowing up on my note about KFS documents.\n\nHere is what the difference looks like in practice for a typical loan communication:\n\n[COMPARISON_BLOCK]\n\nThe machine version is grammatically fine. It is also the kind of output that creates disputes when a borrower reads a different number than what was sanctioned.\n\nStill worth 15 minutes?\n\nBest,\n{sender}"
   },
   {
     "id": "t5f2",
     "name": "NBFC, Follow-up 2 (Day 10)",
     "sector": "NBFC",
-    "subject": "A few BFSI use cases for {company}",
-    "body": "Hi {name},\n\nI wanted to share a few use cases we've delivered for our BFSI clients:\n\n**1. End-to-end multilingual training content**: We built and localised a 21-hour Hindi training programme based on the IRDAI IC-38 syllabus, including video modules with voice-overs, character creation, WhatsApp-based reinforcement journeys, and terminology standardisation. It's now being scaled into multiple Indian languages.\n\n**2. Multilingual customer communication**: Product brochures, application and customer information forms, policy and regulatory communication, marketing collateral, email campaigns, and video explainers, all with glossary adherence, regulatory accuracy, and customer comprehension across languages.\n\n**3. Website localisation**: Making digital properties accessible to wider audiences with consistent brand messaging, accurate terminology, and cultural relevance.\n\nOn commercials, our indicative pricing typically ranges between Rs 1.5 and Rs 2 per word, depending on the annual volume commitment. Higher volumes move the rate towards the lower end, and we are happy to work out a structure that fits your requirement.\n\nIt would be great to showcase the platform and walk through these in person.\n\nBest,\n{sender}"
+    "subject": "How other lenders handle this",
+    "body": "Hi {name},\n\nThree things we have delivered for lenders, in case any of it is relevant to {company}:\n\n**Loan documentation at scale.** KFS, sanction letters, and repayment schedules across **22 Indian languages**, with a terminology glossary so the same term never gets translated two different ways.\n\n**Field and training content.** A 21-hour training programme built to the IRDAI IC-38 syllabus, including video modules and WhatsApp reinforcement journeys, now scaling into multiple languages.\n\n**Customer communication.** Product brochures, application forms, regulatory notices, and campaign content, all reviewed for regulatory accuracy before release.\n\nIf none of this is a priority right now, I understand. If it is, I am happy to walk through how it works.\n\nBest,\n{sender}"
   },
   {
     "id": "t5f3",
     "name": "NBFC, Follow-up 3 (Day 28)",
     "sector": "NBFC",
-    "subject": "Closing the loop, Shabd AI and {company}",
-    "body": "Hi {name},\n\nI'll close the loop here for now. If multilingual content reliability becomes a priority for {company}, particularly around KFS compliance and borrower communication, I'd be glad to reconnect.\n\nWe're continuing to support 42+ organisations including **Si creva**, **TrustPaisa**, and **Kissht** on exactly this.\n\nWishing you the best.\n\nBest,\n{sender}"
+    "subject": "Closing the loop, {company}",
+    "body": "Hi {name},\n\nI will stop here so I am not cluttering your inbox.\n\nIf regional language documentation becomes a priority at {company}, particularly around KFS compliance, I would be glad to reconnect.\n\nWishing you the best.\n\nBest,\n{sender}"
   },
   {
     "id": "t6",
     "name": "Microfinance, Intro (Day 0)",
     "sector": "Microfinance",
-    "subject": "Multilingual content reliability for {company}",
-    "body": "Dear {name},\n\nI'm reaching out from **Shabd AI**, an IIM-incubated (NSRCEL) language technology company and a Top 30 finalist at the **India AI Impact Summit 2026**.\n\nAs microfinance institutions work across deeply multilingual field geographies, the language of borrower communication directly affects comprehension, trust, and repayment. AI translation can cut costs and turnaround, but content reliability remains a critical challenge, now sharpened by the **RBI's KFS mandate** requiring documents in a language the borrower understands.\n\nA few examples of what typically goes wrong:\n- An interest rate of 6.5% becomes 6.75%, or a tenure of 24 months becomes 36 months. The sentence reads fine, but the number is wrong.\n- A product name like \"Suraksha\" gets translated to the generic word \"safety,\" losing brand identity.\n- Key terms like \"nominee,\" \"instalment,\" or \"group loan\" are translated differently across documents, creating ambiguity.\n- Formal communication shifts to informal language, affecting trust with first-time borrowers.\n\nOur platform, **ShabdLens**, developed with **IIT Patna**, delivers three outcomes: reliable content, faster turnaround, and lower costs. By combining AI-powered workflows with expert linguists, we deliver high-quality multilingual content at scale across **22 Indian languages** and dialects.\n\nWe currently support 42+ organisations including **AU Small Finance Bank**, **Jana Small Finance Bank**, **Si creva**, **TrustPaisa**, **Kissht**, **PNB MetLife**, **IndiaFirst Life**, and **JSW Group**.\n\nBeyond translation, we also offer **terminology management and glossary building**, **quality assurance**, and **Translation Certificates** on request, ensuring consistency, accuracy, and trust across every piece of content we deliver.\n\nWould you be open to a brief discussion on how this could support {company}'s borrower and field communication? We can showcase relevant use cases in an in-person meeting.\n\nBest,\n{sender}"
+    "subject": "When borrowers do not understand the terms",
+    "body": "Hi {name},\n\nA question about {company}'s borrower communication.\n\nIn microfinance, most borrowers are reading loan terms in their second or third language, or having them read aloud by a field officer. When translated documents use formal register instead of everyday language, comprehension drops, and so does repayment discipline.\n\nThe specific failure we see: \"समान मासिक किश्त\" instead of \"EMI\", or a penalty clause phrased so formally that borrowers do not register it as a penalty at all.\n\nWe work with **AU Small Finance Bank**, **Jana Small Finance Bank**, and **Si creva** on borrower-facing content across **22 Indian languages**, with a review layer built with **IIT Patna** that checks for plain language, not just correct grammar.\n\nOne lender saw a measurable drop in first-cycle queries to their call centre after we reworked their borrower documents.\n\nWould 15 minutes be useful to see whether this applies at {company}?\n\nBest,\n{sender}"
   },
   {
     "id": "t6f1",
     "name": "Microfinance, Follow-up 1 (Day 5)",
     "sector": "Microfinance",
-    "subject": "Re: Multilingual content reliability for {company}",
-    "body": "Hi {name},\n\nJust following up on my note about multilingual content reliability for {company}.\n\nOne thing worth seeing is the difference between raw machine translation and what we deliver. Here's a quick side-by-side for a typical banking message:\n\n[COMPARISON_BLOCK]\n\nThe gap is small on the surface but it's exactly where compliance and customer trust break down.\n\nWould a brief call this week or next work?\n\nBest,\n{sender}"
+    "subject": "Re: When borrowers do not understand the terms",
+    "body": "Hi {name},\n\nFollowing up on borrower comprehension.\n\nHere is the difference between a machine translation and what we deliver:\n\n[COMPARISON_BLOCK]\n\nBoth are correct Hindi. Only one gets read and understood by a first-time borrower.\n\nWorth a short call?\n\nBest,\n{sender}"
   },
   {
     "id": "t6f2",
     "name": "Microfinance, Follow-up 2 (Day 10)",
     "sector": "Microfinance",
-    "subject": "A few BFSI use cases for {company}",
-    "body": "Hi {name},\n\nI wanted to share a few use cases we've delivered for our BFSI clients:\n\n**1. End-to-end multilingual training content**: We built and localised a 21-hour Hindi training programme based on the IRDAI IC-38 syllabus, including video modules with voice-overs, character creation, WhatsApp-based reinforcement journeys, and terminology standardisation. It's now being scaled into multiple Indian languages.\n\n**2. Multilingual customer communication**: Product brochures, application and customer information forms, policy and regulatory communication, marketing collateral, email campaigns, and video explainers, all with glossary adherence, regulatory accuracy, and customer comprehension across languages.\n\n**3. Website localisation**: Making digital properties accessible to wider audiences with consistent brand messaging, accurate terminology, and cultural relevance.\n\nOn commercials, our indicative pricing typically ranges between Rs 1.5 and Rs 2 per word, depending on the annual volume commitment. Higher volumes move the rate towards the lower end, and we are happy to work out a structure that fits your requirement.\n\nIt would be great to showcase the platform and walk through these in person.\n\nBest,\n{sender}"
+    "subject": "How other lenders handle this",
+    "body": "Hi {name},\n\nThree things we have delivered for lenders, in case any of it fits {company}:\n\n**Borrower documentation.** Loan agreements, KFS, and repayment schedules in plain regional language across **22 Indian languages**, with a glossary so terms stay consistent across every document.\n\n**Field staff training.** A 21-hour programme built to the IRDAI IC-38 syllabus, with video modules and WhatsApp reinforcement journeys, designed for staff who work in the field rather than at a desk.\n\n**Customer awareness content.** Product explainers, application forms, and regulatory notices written to be understood, not just to be technically accurate.\n\nIf this is not a priority right now, no problem at all. If it is, happy to show you how it works.\n\nBest,\n{sender}"
   },
   {
     "id": "t6f3",
     "name": "Microfinance, Follow-up 3 (Day 28)",
     "sector": "Microfinance",
-    "subject": "Closing the loop, Shabd AI and {company}",
-    "body": "Hi {name},\n\nI'll close the loop here for now. If multilingual content reliability becomes a priority for {company}, particularly around KFS compliance and borrower communication, I'd be glad to reconnect.\n\nWe're continuing to support 42+ organisations including **AU Small Finance Bank**, **Jana Small Finance Bank**, and **Si creva** on exactly this.\n\nWishing you the best.\n\nBest,\n{sender}"
+    "subject": "Closing the loop, {company}",
+    "body": "Hi {name},\n\nI will stop here rather than keep filling your inbox.\n\nIf borrower communication in regional languages becomes a priority at {company}, I would be glad to pick this up again.\n\nWishing you the best.\n\nBest,\n{sender}"
   },
   {
     "id": "t7",
     "name": "Finance, Intro (Day 0)",
     "sector": "Finance",
-    "subject": "Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\n{personal_line}\n\nI'm reaching out from Shabd AI, **IIM Bangalore** incubated, Top 30 at the **India AI Impact Summit 2026**. Our proprietary translation quality platform, **ShabdLens**, built in collaboration with **IIT Patna** on a 40 lakh+ word dataset, ensures every localisation we deliver meets the highest accuracy and contextual standards.\n\nWe help financial services organisations localise customer communication, product content, and compliance material across **22 Indic languages**, enabling stronger engagement and trust across diverse markets.\n\nWe support with:\n- Multilingual customer onboarding, KYC, and product communication\n- Localisation of financial literacy and awareness content\n- Regional language collections and repayment communication\n- Translation of customer-facing apps, websites, and digital interfaces\n- Multilingual customer service and grievance redress communication\n\nBeyond translation, we also offer **terminology management and glossary building**, **quality assurance**, and **Translation Certificates** on request, ensuring consistency, accuracy, and trust across every piece of content we deliver.\n\nWe currently work with AU Small Finance Bank, Jana Small Finance Bank, Kissht, TrustPaisa, and other financial services organisations on exactly this.\n\nWould it make sense to connect briefly?\n\nBest,\n{sender}"
+    "subject": "Three weeks to four days on document turnaround",
+    "body": "Hi {name},\n\nA question about how {company} handles regional language content.\n\nMost financial services teams we speak to are managing translation through agencies, which typically means two to three weeks per batch and a per-word cost that climbs with volume. The slow part is usually not translation. It is the review cycle, catching errors in numbers, product names, and regulatory terms before anything goes out.\n\nWe built that review layer with **IIT Patna** so it runs alongside the translation rather than after it. Same accuracy checks, far less waiting.\n\nWe work with **AU Small Finance Bank**, **Jana Small Finance Bank**, **PNB MetLife**, and **Si creva** across **22 Indian languages**. One client moved from a three-week cycle to four days.\n\nWould a 15-minute call be worth it to compare against what {company} runs today?\n\nBest,\n{sender}"
   },
   {
     "id": "t7f1",
     "name": "Finance, Follow-up 1 (Day 5)",
     "sector": "Finance",
-    "subject": "Re: Multilingual Customer Communication for {company}",
-    "body": "Hi {name},\n\nJust following up on my earlier note.\n\n[[For financial services organisations operating across India, multilingual customer communication often plays a critical role in improving conversion, reducing drop-off, and building the trust that drives long-term retention, especially in Tier 2/3 markets where regional language is the primary touchpoint for financial decision-making.]]\n\nHappy to share a few relevant examples if useful.\n\nBest,\n{sender}"
+    "subject": "Re: Three weeks to four days",
+    "body": "Hi {name},\n\nFollowing up on turnaround times.\n\nThe reason speed usually costs accuracy is visible here:\n\n[COMPARISON_BLOCK]\n\nFast machine output looks fine until you check the numbers and product names. That checking step is what we automated.\n\nWorth a short call?\n\nBest,\n{sender}"
   },
   {
     "id": "t7f2",
     "name": "Finance, Follow-up 2 (Day 10)",
     "sector": "Finance",
-    "subject": "A quick observation about {company}",
-    "body": "Hi {name},\n\nI had a quick look at {company}'s customer-facing communication and digital touchpoints.\n\nA significant portion of onboarding, product, and customer service content appears to be in English or formal Hindi. For customers across Tier 2/3 markets, this creates friction in understanding products, completing onboarding, and resolving queries.\n\nWe've helped financial services organisations localise across Tamil, Telugu, Kannada, Marathi, and other regional languages with measurable impact on customer engagement.\n\nOn commercials, our indicative pricing typically ranges between Rs 1.5 and Rs 2 per word, depending on the annual volume commitment. Higher volumes move the rate towards the lower end, and we are happy to work out a structure that fits your requirement.\n\nHappy to share a specific example if useful.\n\nBest,\n{sender}"
+    "subject": "How other financial teams handle this",
+    "body": "Hi {name},\n\nThree things we have delivered, in case any of it is relevant to {company}:\n\n**High-volume documentation.** Regulatory and customer documents across **22 Indian languages**, with a terminology glossary so the same term is never rendered two ways across a document set.\n\n**Training and enablement.** A 21-hour programme built to the IRDAI IC-38 syllabus, including video modules and WhatsApp reinforcement journeys, now scaling across languages.\n\n**Campaign and web content.** Brochures, email campaigns, and website localisation, reviewed for regulatory accuracy before release.\n\nIf this is not a priority, that is completely fine. If it is, happy to walk you through it.\n\nBest,\n{sender}"
   },
   {
     "id": "t7f3",
     "name": "Finance, Follow-up 3 (Day 28)",
     "sector": "Finance",
-    "subject": "Closing the loop, Shabd AI and {company}",
-    "body": "Hi {name},\n\nJust wanted to close the loop on this thread.\n\nWould be happy to reconnect whenever multilingual customer communication, regional language localisation, or financial content translation becomes relevant for {company}.\n\nWishing you and the team the very best ahead.\n\nBest,\n{sender}"
+    "subject": "Closing the loop, {company}",
+    "body": "Hi {name},\n\nI will leave it here so I am not adding noise to your inbox.\n\nIf regional language content becomes a priority at {company}, I would be glad to reconnect.\n\nWishing you the best.\n\nBest,\n{sender}"
   },
   {
     "id": "t8",
