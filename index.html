@@ -819,7 +819,9 @@ async function rrImport(i){
   const p = rrResults[i];
   const lead = p._lead;
   if (!lead || !lead.email) { showToast('Reveal the email first'); return; }
-  if (!lead.sector) lead.sector = rrActiveSector();
+  const chosen = lead.sector || rrActiveSector();
+  if (!chosen) { showToast('Pick a sector in the "Tag as sector" dropdown first'); return; }
+  lead.sector = chosen;
   try {
     const r = await fetch(RR_API + '/rr/import', {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -1018,7 +1020,7 @@ window.rrBulkScan=rrBulkScan; window.rrLoadBulkCsv=rrLoadBulkCsv;
 window.rrLoadBulkResults=rrLoadBulkResults; window.rrExportMisses=rrExportMisses;
 
 function rrActiveSector(){
-  for(const id of ['rr-sector-smart','rr-sector-sheet','rr-sector']){
+  for(const id of ['rr-sector-smart','rr-sector-sheet','rr-sector-bulk','rr-sector']){
     const el=document.getElementById(id);
     if(el && el.offsetParent!==null && el.value) return el.value;
   }
