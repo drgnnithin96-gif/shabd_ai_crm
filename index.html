@@ -1533,6 +1533,15 @@ Or load a saved template from the panel on the right."></textarea>
         <div id="compose-status" style="display:none;margin-top:8px;font-size:13px;padding:8px 12px;border-radius:var(--r)"></div>
       </div>
       <div class="compose-sidebar">
+        <div class="compose-panel" style="border:1px solid var(--ac,#8fb840);background:linear-gradient(to bottom,rgba(200,240,110,.08),transparent)">
+          <div class="compose-panel-title">Curate &amp; Send</div>
+          <div style="font-size:11px;color:var(--hn);margin-bottom:8px;line-height:1.6">Type a company and sector, find the person on RocketReach, then paste the subject and body Claude curated for you.</div>
+          <input id="cs-company" placeholder="Company name (e.g. Bajaj Finance)" style="width:100%;margin-bottom:6px;padding:7px 9px;border:1px solid var(--bd,#ddd);border-radius:var(--r);font-size:13px;box-sizing:border-box">
+          <input id="cs-title" placeholder="Title / role (e.g. Head of Digital)" style="width:100%;margin-bottom:6px;padding:7px 9px;border:1px solid var(--bd,#ddd);border-radius:var(--r);font-size:13px;box-sizing:border-box">
+          <input id="cs-sector" placeholder="Sector (e.g. NBFC)" style="width:100%;margin-bottom:6px;padding:7px 9px;border:1px solid var(--bd,#ddd);border-radius:var(--r);font-size:13px;box-sizing:border-box">
+          <button class="bs" style="width:100%;font-size:13px;padding:8px" onclick="csFind()">Find contacts</button>
+          <div id="cs-results" style="margin-top:8px"></div>
+        </div>
         <div class="compose-panel">
           <div class="compose-panel-title">Load a template</div>
           <select class="lead-pick" id="c-tmpl" onchange="loadComposeTemplate(this.value)">
@@ -1595,6 +1604,61 @@ window.clearCompose=function(){
   const li=document.getElementById('compose-lead-info');if(li)li.innerHTML='<span style="color:var(--hn)">Pick a lead above.</span>';
   composeLeadId=null;
 };
+
+// ── Curate & Send: company+sector -> RocketReach find -> reveal -> load into compose ──
+let csProfiles=[];
+window.csFind=async function(){
+  const company=document.getElementById('cs-company').value.trim();
+  const title=document.getElementById('cs-title').value.trim();
+  const rd=document.getElementById('cs-results');
+  if(!company){showToast('Enter a company name');return;}
+  rd.innerHTML='<div style="padding:14px;text-align:center;color:var(--hn);font-size:12px">Searching RocketReach...</div>';
+  const filters={};
+  if(company)filters.company=company;
+  if(title)filters.title=title;
+  try{
+    const r=await fetch(RR_API+'/rr/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filters,page:1,pageSize:10})});
+    const d=await r.json();
+    if(d.error){rd.innerHTML='<div style="padding:10px;color:#dc2626;font-size:12px">Error: '+esc(JSON.stringify(d.error))+'</div>';return;}
+    csProfiles=(d.profiles||d.results||[]);
+    if(!csProfiles.length){rd.innerHTML='<div style="padding:14px;text-align:center;color:var(--hn);font-size:12px">No contacts found. Try a broader title or drop the title filter.</div>';return;}
+    rd.innerHTML=csProfiles.map((p,i)=>{
+      const nm=esc(p.name||'Unknown');
+      const rl=esc(p.current_title||p.title||'');
+      const emp=esc(p.current_employer||company);
+      return '<div style="border:1px solid var(--bd,#e5e5e5);border-radius:var(--r);padding:8px 10px;margin-bottom:6px;font-size:12px">'
+        +'<div style="font-weight:600;color:var(--tx)">'+nm+'</div>'
+        +(rl?'<div style="color:var(--mu)">'+rl+'</div>':'')
+        +'<div style="color:var(--hn);font-size:11px">'+emp+'</div>'
+        +'<button class="bg" style="font-size:11px;padding:4px 10px;margin-top:6px" onclick="csReveal('+i+')">Reveal email &amp; load</button>'
+        +'</div>';
+    }).join('');
+  }catch(e){
+    rd.innerHTML='<div style="padding:10px;color:#dc2626;font-size:12px">Backend not reachable. Is START.bat running?</div>';
+  }
+};
+window.csReveal=async function(i){
+  const p=csProfiles[i];if(!p)return;
+  const sector=document.getElementById('cs-sector').value.trim();
+  const rd=document.getElementById('cs-results');
+  const btn=rd.querySelectorAll('button')[i];
+  if(btn){btn.textContent='Revealing...';btn.disabled=true;}
+  try{
+    const r=await fetch(RR_API+'/rr/reveal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:p.id,name:p.name,current_employer:p.current_employer,linkedin_url:p.linkedin_url,sector})});
+    const d=await r.json();
+    if(d.error||!d.lead||!d.lead.email){showToast('No email found for this contact');if(btn){btn.textContent='Reveal email & load';btn.disabled=false;}return;}
+    const L=d.lead;
+    // Duplicate guard: warn if this email already exists in leads
+    const dup=leads.find(x=>x.email&&x.email.toLowerCase()===L.email.toLowerCase());
+    if(dup&&!confirm(L.email+' is already in your leads ('+(dup.stage||'')+'). Email them anyway?')){if(btn){btn.textContent='Reveal email & load';btn.disabled=false;}return;}
+    document.getElementById('c-to').value=L.email;
+    composeLeadId=L.id||dup?.id||null;
+    document.getElementById('compose-lead-info').innerHTML='<div style="color:var(--tx);font-weight:500;margin-bottom:4px">'+esc(L.name||p.name)+'</div><div>'+esc(L.company||p.current_employer||'')+'</div><div style="color:var(--mu)">'+esc(L.email)+'</div>'+(sector?'<div style="margin-top:4px"><span class="spill">'+esc(sector)+'</span></div>':'');
+    showToast('Loaded '+L.email+'. Now paste the curated subject and body.');
+    document.getElementById('c-subject').focus();
+  }catch(e){showToast('Reveal failed: '+e.message);if(btn){btn.textContent='Reveal email & load';btn.disabled=false;}}
+};
+
 window.previewCompose=function(){
   const body=document.getElementById('c-body')?.value||'';
   const subj=document.getElementById('c-subject')?.value||'';
